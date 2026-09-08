@@ -1,0 +1,388 @@
+.message-library {
+  --ml-paper: #fffdf9;
+  --ml-wash: #f7efe7;
+  --ml-blush: #eddad3;
+  --ml-sage: #e8f0ee;
+  --ml-line: #d8cbc4;
+  --ml-ink: #231f20;
+  --ml-muted: #665a54;
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+}
+.message-library > * {
+  min-width: 0;
+}
+.message-library-hero {
+  background: linear-gradient(135deg, #fffdf9, #f7efe7);
+  border: 1px solid var(--ml-line);
+  border-radius: 28px;
+  display: grid;
+  gap: 24px;
+  grid-template-columns: 1.35fr 0.65fr;
+  padding: 32px;
+  box-shadow: 0 16px 45px #713f2a0d;
+}
+.message-library-hero > div > span,
+.message-disclosure summary span {
+  color: #713f2a;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+}
+.message-library-hero h2 {
+  font:
+    400 clamp(36px, 4vw, 56px)/0.98 var(--font-kitsch-display),
+    Georgia,
+    serif;
+  letter-spacing: -0.04em;
+  margin: 14px 0;
+  max-width: 820px;
+}
+.message-library-hero > div > p {
+  color: var(--ml-muted);
+  font-size: 13px;
+  line-height: 1.6;
+  max-width: 760px;
+}
+.message-library-hero aside {
+  align-content: start;
+  background: #fff;
+  border: 1px solid var(--ml-line);
+  border-radius: 20px;
+  display: grid;
+  gap: 9px;
+  padding: 22px;
+}
+.message-library-hero aside svg {
+  color: #713f2a;
+  width: 20px;
+}
+.message-library-hero aside strong {
+  font:
+    400 21px var(--font-kitsch-display),
+    Georgia,
+    serif;
+}
+.message-library-hero aside p {
+  color: var(--ml-muted);
+  font-size: 10px;
+  line-height: 1.5;
+  margin: 0;
+}
+.message-platform-row {
+  align-items: center;
+  background: #fff;
+  border: 1px solid var(--ml-line);
+  border-radius: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  padding: 12px;
+}
+.message-platform-row > span {
+  align-items: center;
+  background: var(--ml-wash);
+  border-radius: 14px;
+  display: flex;
+  gap: 6px;
+  padding: 5px 9px 5px 5px;
+}
+.message-library a {
+  align-items: center;
+  color: #713f2a;
+  display: inline-flex;
+  font-size: 9px;
+  font-weight: 800;
+  gap: 4px;
+  text-decoration: none;
+}
+.message-library a:hover {
+  text-decoration: underline;
+}
+.message-library a svg {
+  width: 12px;
+}
+.message-platform-row > a {
+  background: var(--ml-wash);
+  border-radius: 99px;
+  padding: 10px 12px;
+}
+.message-example-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.message-example-grid > article {
+  background: #fff;
+  border: 1px solid var(--ml-line);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  min-height: 400px;
+  padding: 20px;
+  box-shadow: 0 10px 28px #713f2a0a;
+}
+.message-example-grid > article > header {
+  align-items: center;
+  display: flex;
+  gap: 8px;
+}
+.message-example-grid > article > header svg {
+  color: #713f2a;
+  width: 17px;
+}
+.message-example-grid > article > header span {
+  color: #713f2a;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+.message-example-grid blockquote {
+  font:
+    400 25px/1.15 var(--font-kitsch-display),
+    Georgia,
+    serif;
+  margin: 34px 0 18px;
+}
+.message-example-grid > article > strong {
+  font-size: 11px;
+}
+.message-example-grid > article > p {
+  color: var(--ml-muted);
+  font-size: 10px;
+  line-height: 1.5;
+}
+.message-example-grid dl {
+  border-top: 1px solid var(--ml-line);
+  display: grid;
+  gap: 5px;
+  grid-template-columns: 55px 1fr;
+  margin: 10px 0 18px;
+  padding-top: 13px;
+}
+.message-example-grid dt {
+  color: #713f2a;
+  font-size: 8px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+.message-example-grid dd {
+  color: var(--ml-muted);
+  font-size: 9px;
+  line-height: 1.4;
+  margin: 0;
+}
+.message-example-grid footer {
+  align-items: flex-end;
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  margin-top: auto;
+}
+.message-example-grid footer small {
+  color: #7b706a;
+  font-size: 8px;
+  line-height: 1.35;
+  max-width: 65%;
+}
+.message-disclosure {
+  background: #fff;
+  border: 1px solid var(--ml-line);
+  border-radius: 22px;
+  overflow: hidden;
+}
+.message-disclosure > summary {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+  list-style: none;
+  padding: 20px 23px;
+}
+.message-disclosure > summary::-webkit-details-marker {
+  display: none;
+}
+.message-disclosure summary strong {
+  display: block;
+  font:
+    400 22px/1.15 var(--font-kitsch-display),
+    Georgia,
+    serif;
+  margin-top: 5px;
+}
+.message-disclosure summary > svg {
+  color: #713f2a;
+  width: 18px;
+  transition: transform 0.2s ease;
+}
+.message-disclosure[open] summary > svg {
+  transform: rotate(90deg);
+}
+.message-disclosure-body {
+  border-top: 1px solid var(--ml-line);
+  padding: 18px;
+}
+.message-format-flow {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+.message-format-flow article,
+.message-cta-grid article {
+  background: var(--ml-wash);
+  border-radius: 17px;
+  display: flex;
+  flex-direction: column;
+  min-height: 250px;
+  padding: 17px;
+}
+.message-format-flow article > span {
+  color: #ca9a8e;
+  font:
+    21px var(--font-kitsch-display),
+    Georgia,
+    serif;
+}
+.message-format-flow h3,
+.message-cta-grid h3,
+.message-theme-grid h3,
+.message-hashtag-boundary h3 {
+  font:
+    400 18px/1.15 var(--font-kitsch-display),
+    Georgia,
+    serif;
+}
+.message-format-flow p,
+.message-cta-grid p,
+.message-theme-grid p,
+.message-hashtag-boundary p {
+  color: var(--ml-muted);
+  font-size: 9px;
+  line-height: 1.5;
+}
+.message-format-flow footer {
+  border-top: 1px solid var(--ml-line);
+  color: #713f2a;
+  font-size: 9px;
+  line-height: 1.4;
+  margin-top: auto;
+  padding-top: 10px;
+}
+.message-cta-grid {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(4, 1fr);
+}
+.message-cta-grid article {
+  background: #fffaf7;
+  border: 1px solid var(--ml-line);
+  min-height: 220px;
+}
+.message-cta-grid article > svg {
+  color: #713f2a;
+  width: 18px;
+}
+.message-cta-grid h3 {
+  font-size: 24px;
+  margin: 26px 0 3px;
+}
+.message-cta-grid article > span {
+  color: #713f2a;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+.message-cta-grid a {
+  margin-top: auto;
+}
+.message-theme-grid {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(3, 1fr);
+}
+.message-theme-grid article {
+  align-items: flex-start;
+  background: var(--ml-wash);
+  border-radius: 17px;
+  display: grid;
+  gap: 11px;
+  grid-template-columns: auto 1fr;
+  padding: 17px;
+}
+.message-theme-grid article > span {
+  color: #ca9a8e;
+  font:
+    20px var(--font-kitsch-display),
+    Georgia,
+    serif;
+}
+.message-theme-grid h3 {
+  margin: 0;
+}
+.message-theme-grid p {
+  margin: 5px 0 0;
+}
+.message-hashtag-boundary {
+  align-items: start;
+  background: var(--ml-sage);
+  border-radius: 17px;
+  display: grid;
+  gap: 16px;
+  grid-template-columns: auto repeat(3, 1fr);
+  padding: 20px;
+}
+.message-hashtag-boundary > svg {
+  color: #00426a;
+  width: 22px;
+}
+.message-hashtag-boundary h3 {
+  margin: 0;
+}
+.message-hashtag-boundary p {
+  margin-bottom: 0;
+}
+@media (max-width: 1100px) {
+  .message-example-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .message-format-flow {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .message-cta-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .message-hashtag-boundary {
+    grid-template-columns: auto 1fr;
+  }
+  .message-hashtag-boundary > div {
+    grid-column: 2;
+  }
+}
+@media (max-width: 720px) {
+  .message-library-hero,
+  .message-example-grid,
+  .message-format-flow,
+  .message-cta-grid,
+  .message-theme-grid {
+    grid-template-columns: 1fr;
+  }
+  .message-library-hero {
+    padding: 22px;
+  }
+  .message-example-grid > article {
+    min-height: 0;
+  }
+  .message-platform-row {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .message-hashtag-boundary {
+    grid-template-columns: 1fr;
+  }
+  .message-hashtag-boundary > div {
+    grid-column: 1;
+  }
+}

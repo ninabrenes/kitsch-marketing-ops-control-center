@@ -15,6 +15,14 @@ import { ExecutiveSpotlight } from './executive-spotlight';
 import { ProductVisualShowcase } from './product-visual-showcase';
 import { MetricBenchmarkLab } from './metric-benchmark-lab';
 import {
+  PlatformBrandIcon,
+  type PlatformBrandName,
+} from './platform-brand-icon';
+import { ShopifyCommerceWorkspace } from './shopify-commerce-workspace';
+import { CreatorAffiliateDashboard } from './creator-affiliate-dashboard';
+import { MessagingEvidenceLibrary } from './messaging-evidence-library';
+import './editorial-theme.css';
+import {
   ArrowUpRight,
   BrainCircuit,
   CalendarDays,
@@ -27,6 +35,7 @@ import {
   FileSearch,
   Gauge,
   Globe2,
+  Handshake,
   Lightbulb,
   ListChecks,
   LockKeyhole,
@@ -48,6 +57,7 @@ import {
 type Signal =
   | 'PUBLIC SIGNAL'
   | 'ESTIMATE'
+  | 'ILLUSTRATIVE'
   | 'HYPOTHESIS'
   | 'INTERNAL DATA REQUIRED';
 const links = {
@@ -150,7 +160,7 @@ const kpis = [
   [
     'Are we acquiring efficiently?',
     'Blended CAC',
-    'Spend ÷ new customers',
+    'Approved acquisition-spend perimeter ÷ distinct first-time customers',
     'Paid + Shopify + marketplaces',
     'Weekly',
     'Internal required',
@@ -158,7 +168,7 @@ const kpis = [
   [
     'Is growth profitable?',
     'MER',
-    'Total revenue ÷ total marketing spend',
+    'Realized net revenue in the agreed perimeter ÷ total marketing spend',
     'Finance + commerce',
     'Weekly',
     'Internal required',
@@ -166,7 +176,7 @@ const kpis = [
   [
     'Are customers coming back?',
     'Repeat purchase rate',
-    'Customers with 2+ orders ÷ customers',
+    'Mature-cohort customers with a second order in 90/180 days ÷ eligible first-order customers',
     'Shopify + CRM',
     'Monthly',
     'Internal required',
@@ -174,7 +184,7 @@ const kpis = [
   [
     'Which launches deserve scale?',
     'Launch contribution',
-    'Incremental margin by SKU/channel',
+    'Realized launch contribution vs approved plan; claim incrementality only with an approved causal method',
     'Commerce + COGS + media',
     'Launch + 30/60d',
     'Internal required',
@@ -441,7 +451,7 @@ const sources = [
     'S28',
     'Shopify conversion research',
     'https://www.shopify.com/blog/retail-conversion-rate',
-    'External conversion-rate context and measurement guidance',
+    'Two separate reference points—not a single band: 2.70% skincare and 4.94% beauty, drawn from different category datasets/methods',
     'Medium',
   ],
   [
@@ -462,7 +472,14 @@ const sources = [
     'S31',
     'Klaviyo 2025 benchmark report',
     'https://klaviyocms.wpengine.com/wp-content/uploads/2025/02/2025-Benchmark-Report_AMER.pdf',
-    'Email and SMS revenue-per-recipient and engagement reference bands',
+    'External email/SMS reference. Klaviyo uses attributed total purchase amount per delivered recipient; it is not like-for-like with an internal realized-net-revenue numerator unless the perimeter is matched',
+    'High',
+  ],
+  [
+    'S32',
+    'Kitsch-owned logo asset',
+    'https://cdn.shopify.com/s/files/1/0104/6904/8384/files/kitsch-logo.png?v=1711391814',
+    'Official Kitsch wordmark used in the persistent application chrome',
     'High',
   ],
 ];
@@ -694,6 +711,50 @@ const platformInsights = [
     confidence: 'HIGH',
   },
 ];
+const socialHistoryCoverage = [
+  [
+    'Instagram',
+    'No comparable monthly public series captured',
+    'Current profile snapshot + dated August examples',
+    'Meta Business Suite export: monthly reach, plays, engagement, profile actions, link clicks and content IDs',
+  ],
+  [
+    'Facebook',
+    'No comparable monthly public series captured',
+    'Current page snapshot; post-level performance is not public',
+    'Meta Business Suite export: monthly reach, engagement, outbound clicks, paid/organic split and content IDs',
+  ],
+  [
+    'TikTok',
+    'No comparable monthly public series captured',
+    'Current profile snapshot + visible creative themes',
+    'TikTok Analytics export/API: views, watch time, completion, shares, profile/product clicks and video IDs',
+  ],
+  [
+    'TikTok Shop',
+    'No monthly storefront history available publicly',
+    'Current displayed sold counter, catalog and creator/store snapshot',
+    'Seller Center export/API: orders, refunds, GMV, fees, affiliate cost, creator/video IDs and new-to-brand customer joins',
+  ],
+  [
+    'YouTube',
+    'Public video dates exist; comparable monthly performance was not captured',
+    'Current channel snapshot + public video library',
+    'YouTube Studio/API: monthly views, watch time, traffic source, returning viewers, clicks and video IDs',
+  ],
+  [
+    'Pinterest',
+    'No comparable monthly public series captured',
+    'Current profile snapshot + public boards/pins',
+    'Pinterest Analytics export/API: impressions, saves, outbound clicks, audience and pin IDs',
+  ],
+  [
+    'Website',
+    'Public US Google Trends demand index only—not site performance',
+    'Google Trends Jan–Aug comparison + current storefront snapshot',
+    'Shopify + GA4 + Search Console: sessions, PDP behavior, checkout, net orders, search queries, channel IDs and cohorts',
+  ],
+] as const;
 const searchYoY = [
   {
     name: 'Hair oil',
@@ -1234,15 +1295,17 @@ const smartInsights = [
   },
 ];
 
-function Label({ children }: { children: Signal | string }) {
+function Label({ children }: { children: string }) {
   const tone =
     children === 'PUBLIC SIGNAL'
       ? 'public'
       : children === 'ESTIMATE'
         ? 'estimate'
-        : children === 'HYPOTHESIS'
+        : children === 'ILLUSTRATIVE'
           ? 'hypothesis'
-          : 'internal';
+          : children === 'HYPOTHESIS'
+            ? 'hypothesis'
+            : 'internal';
   return <span className={`signal ${tone}`}>{children}</span>;
 }
 function External({
@@ -1274,25 +1337,6 @@ function Head({
       <h2>{title}</h2>
       {copy && <span>{copy}</span>}
     </div>
-  );
-}
-const platformMarks: Record<string, string> = {
-  Instagram: 'https://cdn.simpleicons.org/instagram/E4405F',
-  Facebook: 'https://cdn.simpleicons.org/facebook/1877F2',
-  TikTok: 'https://cdn.simpleicons.org/tiktok/FFFFFF',
-  'TikTok Shop': 'https://cdn.simpleicons.org/tiktok/FFFFFF',
-  YouTube: 'https://cdn.simpleicons.org/youtube/FF0000',
-  Pinterest: 'https://cdn.simpleicons.org/pinterest/BD081C',
-  Website: 'https://cdn.simpleicons.org/shopify/7AB55C',
-};
-function PlatformMark({ name }: { name: string }) {
-  return (
-    <span
-      className={`platform-mark ${name === 'TikTok' || name === 'TikTok Shop' ? 'mark-dark' : ''}`}
-    >
-      <img src={platformMarks[name]} alt="" aria-hidden="true" />
-      <b>{name}</b>
-    </span>
   );
 }
 function ValueBars({ rows }: { rows: readonly (readonly [string, number])[] }) {
@@ -1433,7 +1477,7 @@ function Intelligence() {
     <div className="page-grid">
       <Head
         eyebrow="Market + message intelligence"
-        title="Evidence becomes a decision—not a decoration"
+        title="Turn evidence into the next move"
         copy="Public search and ad-library signals are paired with an interpretation, action, confidence and the internal metric needed to validate them."
       />
       <section className="intelligence-hero">
@@ -1535,72 +1579,81 @@ function Intelligence() {
           </article>
         </div>
       </section>
-      <PaidMediaEvidence />
-      <section className="wide-card">
-        <div className="chart-heading">
-          <div>
-            <p>COMPETITIVE PAID PRESSURE</p>
-            <h3>Observable ad inventory and message architecture</h3>
-            <span>
-              Google: official US domain archive, any time · Meta: third-party
-              active-ad snapshots
-            </span>
-          </div>
-          <Label>ESTIMATE</Label>
+      <details className="editorial-disclosure">
+        <summary>
+          <span>PAID-MEDIA DEEP DIVE</span>
+          <strong>Explore the ad evidence and competitor patterns</strong>
+          <ChevronRight aria-hidden="true" />
+        </summary>
+        <div className="editorial-disclosure-body page-grid">
+          <PaidMediaEvidence />
+          <section className="wide-card">
+            <div className="chart-heading">
+              <div>
+                <p>COMPETITIVE PAID PRESSURE</p>
+                <h3>Observable ad inventory and message architecture</h3>
+                <span>
+                  Google: official US domain archive, any time · Meta:
+                  third-party active-ad snapshots
+                </span>
+              </div>
+              <Label>ESTIMATE</Label>
+            </div>
+            <div className="ad-bars">
+              {paidBrands.map((b, i) => {
+                const value = [700, 200, 300, 57, 83, 700][i];
+                return (
+                  <article key={b[0]}>
+                    <div>
+                      <strong>{b[0]}</strong>
+                      <span>{b[1]} Google ads</span>
+                    </div>
+                    <div className="bar-track">
+                      <i style={{ width: `${Math.max(8, value / 7)}%` }} />
+                    </div>
+                    <small>Meta: {b[2]}</small>
+                  </article>
+                );
+              })}
+            </div>
+            <div className="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Brand</th>
+                    <th>Dominant communication</th>
+                    <th>Relative strength</th>
+                    <th>Kitsch decision</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {paidBrands.map((b) => (
+                    <tr key={b[0]}>
+                      <td>
+                        <strong>{b[0]}</strong>
+                      </td>
+                      <td>{b[3]}</td>
+                      <td>{b[4]}</td>
+                      <td>{b[5]}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <div className="method-note">
+              <ShieldCheck />
+              <p>
+                Inventory, creative recurrence and longevity are pressure
+                signals—not spend, targeting, conversion or ROAS. Facebook
+                Marketplace placement delivery is not publicly available; this
+                view uses Meta Ad Library signals instead.
+              </p>
+              <External href={links.googleAds}>Google archive</External>
+              <External href={links.metaAds}>Meta library</External>
+            </div>
+          </section>
         </div>
-        <div className="ad-bars">
-          {paidBrands.map((b, i) => {
-            const value = [700, 200, 300, 57, 83, 700][i];
-            return (
-              <article key={b[0]}>
-                <div>
-                  <strong>{b[0]}</strong>
-                  <span>{b[1]} Google ads</span>
-                </div>
-                <div className="bar-track">
-                  <i style={{ width: `${Math.max(8, value / 7)}%` }} />
-                </div>
-                <small>Meta: {b[2]}</small>
-              </article>
-            );
-          })}
-        </div>
-        <div className="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Brand</th>
-                <th>Dominant communication</th>
-                <th>Relative strength</th>
-                <th>Kitsch decision</th>
-              </tr>
-            </thead>
-            <tbody>
-              {paidBrands.map((b) => (
-                <tr key={b[0]}>
-                  <td>
-                    <strong>{b[0]}</strong>
-                  </td>
-                  <td>{b[3]}</td>
-                  <td>{b[4]}</td>
-                  <td>{b[5]}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <div className="method-note">
-          <ShieldCheck />
-          <p>
-            Inventory, creative recurrence and longevity are pressure
-            signals—not spend, targeting, conversion or ROAS. Facebook
-            Marketplace placement delivery is not publicly available; this view
-            uses Meta Ad Library signals instead.
-          </p>
-          <External href={links.googleAds}>Google archive</External>
-          <External href={links.metaAds}>Meta library</External>
-        </div>
-      </section>
+      </details>
       <section className="two-col">
         <article className="wide-card">
           <Head
@@ -1742,7 +1795,7 @@ function Overview() {
           <div className="hero-chips">
             <span>13 decision views</span>
             <span>{sources.length} sourced references</span>
-            <span>0 invented KPIs</span>
+            <span>0 fabricated Kitsch actuals</span>
           </div>
         </div>
         <div
@@ -1857,7 +1910,7 @@ function Ecommerce() {
     <div className="page-grid">
       <Head
         eyebrow="E-commerce intelligence"
-        title="A portfolio built for discovery, proof and repeat"
+        title="See what sells—and what to connect next"
         copy="A public-data view of products, channel roles and commercial signals—designed to show what to connect internally before calling anything revenue."
       />
       <section className="commerce-hero">
@@ -1911,227 +1964,245 @@ function Ecommerce() {
           <small>Independent strategy synthesis</small>
         </article>
       </section>
-      <section className="two-col commerce-charts">
-        <article className="wide-card">
-          <div className="chart-heading">
-            <div>
-              <p>TIKTOK SHOP · LIFETIME DISPLAY</p>
-              <h3>
-                ${(tikTokTotal / 1e6).toFixed(2)}M top-nine retail-value proxy
-              </h3>
-              <span>Rounded displayed units × price observed Sep. 8, 2026</span>
-            </div>
-            <Label>ESTIMATE</Label>
-          </div>
-          <ValueBars rows={tiktokValue} />
-          <div className="method-note">
-            <CircleAlert />
-            <p>
-              This is not revenue or GMV. Current price is multiplied by a
-              rounded lifetime unit counter; historical price, discounts,
-              returns, taxes and fees are unknown.
-            </p>
-            <External href={links.tiktok}>Storefront evidence</External>
-          </div>
-        </article>
-        <article className="wide-card">
-          <div className="chart-heading">
-            <div>
-              <p>TARGET · “BOUGHT LAST MONTH” BADGES</p>
-              <h3>
-                ${(targetTotal / 1e6).toFixed(2)}M+ top-eight monthly floor
-              </h3>
-              <span>
-                Minimum displayed badge threshold × current observed price
-              </span>
-            </div>
-            <Label>ESTIMATE</Label>
-          </div>
-          <ValueBars rows={targetValue} />
-          <div className="method-note">
-            <CircleAlert />
-            <p>
-              This is a minimum retail sales-value proxy for eight visible
-              SKUs—not Kitsch revenue. Badges are rounded, the period is
-              retailer-defined, and wholesale economics are unavailable.
-            </p>
-            <External href={links.target}>Retailer evidence</External>
-          </div>
-        </article>
-      </section>
-      <section className="wide-card">
-        <div className="chart-heading">
-          <div>
-            <p>PUBLISHED COMMERCE CASE</p>
-            <h3>Mobile acquisition is only the first move</h3>
-            <span>
-              Shopify attributes faster app repurchase and a 28% ROAS
-              improvement to Shop Campaigns optimizations.
-            </span>
-          </div>
-          <Label>PUBLIC SIGNAL</Label>
-        </div>
-        <div className="shopify-story">
-          <article>
-            <span>01 · ACQUIRE</span>
-            <strong>Design for the 80% mobile mix</strong>
-            <p>
-              Fast product understanding, creator proof and frictionless
-              checkout matter most on the dominant traffic surface.
-            </p>
-          </article>
-          <ChevronRight />
-          <article>
-            <span>02 · INCREASE QUALITY</span>
-            <strong>Use thresholds intentionally</strong>
-            <p>
-              Minimum order value can protect economics and encourage
-              bundles—but should be read against conversion and contribution.
-            </p>
-          </article>
-          <ChevronRight />
-          <article>
-            <span>03 · RETAIN</span>
-            <strong>Measure the second category</strong>
-            <p>
-              The strategic test is whether a first TikTok or Shop order creates
-              profitable 30/60/90-day migration across franchises.
-            </p>
-          </article>
-        </div>
-        <External href={links.shopifyCase}>Read Shopify case study</External>
-      </section>
-      <section className="wide-card">
-        <Head
-          eyebrow="Product architecture"
-          title="Five franchises, distinct jobs"
-          copy="A strategy hypothesis based on visible assortment and public demand proof."
-        />
-        <div className="commerce-franchises">
-          {commerceFranchises.map((f, i) => (
-            <article key={f[0]}>
-              <span>0{i + 1}</span>
-              <small>{f[0]}</small>
-              <h3>{f[1]}</h3>
-              <p>{f[2]}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-      <ProductVisualShowcase />
-      <section className="wide-card">
-        <Head
-          eyebrow="Representative product intelligence"
-          title="What sells, where it appears, and the role it plays"
-          copy="Twelve visible hero products—not a complete SKU census. Prices, counters and result counts are snapshots that can change."
-        />
-        <div className="product-card-grid">
-          {commerceProducts.map((p) => (
-            <article key={p.name}>
-              <div>
-                <span>{p.franchise}</span>
-                <Label>
-                  {p.proxy === 'Not estimable' ? 'PUBLIC SIGNAL' : 'ESTIMATE'}
-                </Label>
+      <ShopifyCommerceWorkspace />
+      <details className="editorial-disclosure commerce-deep-dive">
+        <summary>
+          <span>PRODUCT + CHANNEL EVIDENCE</span>
+          <strong>Explore the complete commerce research</strong>
+          <ChevronRight aria-hidden="true" />
+        </summary>
+        <div className="editorial-disclosure-body page-grid">
+          <section className="two-col commerce-charts">
+            <article className="wide-card">
+              <div className="chart-heading">
+                <div>
+                  <p>TIKTOK SHOP · LIFETIME DISPLAY</p>
+                  <h3>
+                    ${(tikTokTotal / 1e6).toFixed(2)}M top-nine retail-value
+                    proxy
+                  </h3>
+                  <span>
+                    Rounded displayed units × price observed Sep. 8, 2026
+                  </span>
+                </div>
+                <Label>ESTIMATE</Label>
               </div>
-              <h3>{p.name}</h3>
-              <p>{p.description}</p>
-              <dl>
-                <dt>Visible channels</dt>
-                <dd>{p.channels}</dd>
-                <dt>Price signal</dt>
-                <dd>{p.price}</dd>
-                <dt>Public proof</dt>
-                <dd>{p.proof}</dd>
-                <dt>Retail-value proxy</dt>
-                <dd>
-                  {p.proxy} <small>{p.window}</small>
-                </dd>
-                <dt>Portfolio role</dt>
-                <dd>{p.role}</dd>
-              </dl>
-            </article>
-          ))}
-        </div>
-      </section>
-      <section className="two-col">
-        <article className="wide-card">
-          <Head
-            eyebrow="What appears to work"
-            title="Utility earns scale; novelty extends it"
-          />
-          <ul className="commerce-list">
-            {[
-              'Low-ticket, easy-to-understand functional heroes travel well across mass retail and TikTok Shop.',
-              'Short-form-friendly demonstrations make styling, shower and heatless products naturally discoverable.',
-              'Discovery sets and bundles reduce trial friction and create a path into higher-value routines.',
-              'Variants, scent launches and licensed drops refresh proven formats without rebuilding the product engine.',
-              'Retail review proof and social-commerce velocity reinforce one another across the portfolio.',
-            ].map((x) => (
-              <li key={x}>
-                <CheckCircle2 />
-                {x}
-              </li>
-            ))}
-          </ul>
-          <Label>HYPOTHESIS</Label>
-        </article>
-        <article className="wide-card">
-          <Head
-            eyebrow="Highest-value questions"
-            title="Where the operating system should go next"
-          />
-          <ul className="commerce-list risk">
-            {[
-              'Is promo depth creating incremental demand or training cross-channel price waiting?',
-              'Which first product drives the best contribution-adjusted 90-day repeat—not simply the most units?',
-              'Do fragrance buyers migrate into replenishable hair care, and do bar buyers expand into styling?',
-              'Which creator, retailer and SKU combinations remain profitable after fees, returns and fulfillment?',
-              'Where do stockouts, variant proliferation and channel conflict suppress full-price demand?',
-            ].map((x) => (
-              <li key={x}>
+              <ValueBars rows={tiktokValue} />
+              <div className="method-note">
                 <CircleAlert />
-                {x}
-              </li>
-            ))}
-          </ul>
-          <Label>INTERNAL DATA REQUIRED</Label>
-        </article>
-      </section>
-      <section className="formula-card">
-        <div>
-          <DollarSign />
-          <span>PUBLIC PROXY</span>
-          <strong>displayed units × observed price</strong>
+                <p>
+                  This is not revenue or GMV. Current price is multiplied by a
+                  rounded lifetime unit counter; historical price, discounts,
+                  returns, taxes and fees are unknown.
+                </p>
+                <External href={links.tiktok}>Storefront evidence</External>
+              </div>
+            </article>
+            <article className="wide-card">
+              <div className="chart-heading">
+                <div>
+                  <p>TARGET · “BOUGHT LAST MONTH” BADGES</p>
+                  <h3>
+                    ${(targetTotal / 1e6).toFixed(2)}M+ top-eight monthly floor
+                  </h3>
+                  <span>
+                    Minimum displayed badge threshold × current observed price
+                  </span>
+                </div>
+                <Label>ESTIMATE</Label>
+              </div>
+              <ValueBars rows={targetValue} />
+              <div className="method-note">
+                <CircleAlert />
+                <p>
+                  This is a minimum retail sales-value proxy for eight visible
+                  SKUs—not Kitsch revenue. Badges are rounded, the period is
+                  retailer-defined, and wholesale economics are unavailable.
+                </p>
+                <External href={links.target}>Retailer evidence</External>
+              </div>
+            </article>
+          </section>
+          <section className="wide-card">
+            <div className="chart-heading">
+              <div>
+                <p>PUBLISHED COMMERCE CASE</p>
+                <h3>Mobile acquisition is only the first move</h3>
+                <span>
+                  Shopify attributes faster app repurchase and a 28% ROAS
+                  improvement to Shop Campaigns optimizations.
+                </span>
+              </div>
+              <Label>PUBLIC SIGNAL</Label>
+            </div>
+            <div className="shopify-story">
+              <article>
+                <span>01 · ACQUIRE</span>
+                <strong>Design for the 80% mobile mix</strong>
+                <p>
+                  Fast product understanding, creator proof and frictionless
+                  checkout matter most on the dominant traffic surface.
+                </p>
+              </article>
+              <ChevronRight />
+              <article>
+                <span>02 · INCREASE QUALITY</span>
+                <strong>Use thresholds intentionally</strong>
+                <p>
+                  Minimum order value can protect economics and encourage
+                  bundles—but should be read against conversion and
+                  contribution.
+                </p>
+              </article>
+              <ChevronRight />
+              <article>
+                <span>03 · RETAIN</span>
+                <strong>Measure the second category</strong>
+                <p>
+                  The strategic test is whether a first TikTok or Shop order
+                  creates profitable 30/60/90-day migration across franchises.
+                </p>
+              </article>
+            </div>
+            <External href={links.shopifyCase}>
+              Read Shopify case study
+            </External>
+          </section>
+          <section className="wide-card">
+            <Head
+              eyebrow="Product architecture"
+              title="Five franchises, distinct jobs"
+              copy="A strategy hypothesis based on visible assortment and public demand proof."
+            />
+            <div className="commerce-franchises">
+              {commerceFranchises.map((f, i) => (
+                <article key={f[0]}>
+                  <span>0{i + 1}</span>
+                  <small>{f[0]}</small>
+                  <h3>{f[1]}</h3>
+                  <p>{f[2]}</p>
+                </article>
+              ))}
+            </div>
+          </section>
+          <ProductVisualShowcase />
+          <section className="wide-card">
+            <Head
+              eyebrow="Representative product intelligence"
+              title="What sells, where it appears, and the role it plays"
+              copy="Twelve visible hero products—not a complete SKU census. Prices, counters and result counts are snapshots that can change."
+            />
+            <div className="product-card-grid">
+              {commerceProducts.map((p) => (
+                <article key={p.name}>
+                  <div>
+                    <span>{p.franchise}</span>
+                    <Label>
+                      {p.proxy === 'Not estimable'
+                        ? 'PUBLIC SIGNAL'
+                        : 'ESTIMATE'}
+                    </Label>
+                  </div>
+                  <h3>{p.name}</h3>
+                  <p>{p.description}</p>
+                  <dl>
+                    <dt>Visible channels</dt>
+                    <dd>{p.channels}</dd>
+                    <dt>Price signal</dt>
+                    <dd>{p.price}</dd>
+                    <dt>Public proof</dt>
+                    <dd>{p.proof}</dd>
+                    <dt>Retail-value proxy</dt>
+                    <dd>
+                      {p.proxy} <small>{p.window}</small>
+                    </dd>
+                    <dt>Portfolio role</dt>
+                    <dd>{p.role}</dd>
+                  </dl>
+                </article>
+              ))}
+            </div>
+          </section>
+          <section className="two-col">
+            <article className="wide-card">
+              <Head
+                eyebrow="What appears to work"
+                title="Utility earns scale; novelty extends it"
+              />
+              <ul className="commerce-list">
+                {[
+                  'Low-ticket, easy-to-understand functional heroes travel well across mass retail and TikTok Shop.',
+                  'Short-form-friendly demonstrations make styling, shower and heatless products naturally discoverable.',
+                  'Discovery sets and bundles reduce trial friction and create a path into higher-value routines.',
+                  'Variants, scent launches and licensed drops refresh proven formats without rebuilding the product engine.',
+                  'Retail review proof and social-commerce velocity reinforce one another across the portfolio.',
+                ].map((x) => (
+                  <li key={x}>
+                    <CheckCircle2 />
+                    {x}
+                  </li>
+                ))}
+              </ul>
+              <Label>HYPOTHESIS</Label>
+            </article>
+            <article className="wide-card">
+              <Head
+                eyebrow="Highest-value questions"
+                title="Where the operating system should go next"
+              />
+              <ul className="commerce-list risk">
+                {[
+                  'Is promo depth creating incremental demand or training cross-channel price waiting?',
+                  'Which first product drives the best contribution-adjusted 90-day repeat—not simply the most units?',
+                  'Do fragrance buyers migrate into replenishable hair care, and do bar buyers expand into styling?',
+                  'Which creator, retailer and SKU combinations remain profitable after fees, returns and fulfillment?',
+                  'Where do stockouts, variant proliferation and channel conflict suppress full-price demand?',
+                ].map((x) => (
+                  <li key={x}>
+                    <CircleAlert />
+                    {x}
+                  </li>
+                ))}
+              </ul>
+              <Label>INTERNAL DATA REQUIRED</Label>
+            </article>
+          </section>
+          <section className="formula-card">
+            <div>
+              <DollarSign />
+              <span>PUBLIC PROXY</span>
+              <strong>displayed units × observed price</strong>
+            </div>
+            <ChevronRight />
+            <div>
+              <Database />
+              <span>COMMERCIAL TRUTH</span>
+              <strong>
+                realized net sales − returns − channel fees − COGS − fulfillment
+                − media
+              </strong>
+            </div>
+            <ChevronRight />
+            <div>
+              <Target />
+              <span>DECISION</span>
+              <strong>
+                contribution + new-to-brand quality + 30/60/90-day repeat
+              </strong>
+            </div>
+          </section>
+          <section className="dark-card commerce-data">
+            <Database />
+            <h3>The internal commerce grain</h3>
+            <p>
+              SKU × channel × date × list price × realized price × units × gross
+              sales × net sales × contribution × new-to-brand × return rate ×
+              30/60/90-day repeat.
+            </p>
+            <Label>INTERNAL DATA REQUIRED</Label>
+          </section>
         </div>
-        <ChevronRight />
-        <div>
-          <Database />
-          <span>COMMERCIAL TRUTH</span>
-          <strong>
-            realized net sales − returns − channel fees − COGS − fulfillment −
-            media
-          </strong>
-        </div>
-        <ChevronRight />
-        <div>
-          <Target />
-          <span>DECISION</span>
-          <strong>
-            contribution + new-to-brand quality + 30/60/90-day repeat
-          </strong>
-        </div>
-      </section>
-      <section className="dark-card commerce-data">
-        <Database />
-        <h3>The internal commerce grain</h3>
-        <p>
-          SKU × channel × date × list price × realized price × units × gross
-          sales × net sales × contribution × new-to-brand × return rate ×
-          30/60/90-day repeat.
-        </p>
-        <Label>INTERNAL DATA REQUIRED</Label>
-      </section>
+      </details>
     </div>
   );
 }
@@ -2219,71 +2290,78 @@ function Launches() {
   return (
     <div className="page-grid">
       <Head
-        eyebrow="Launch tracker"
-        title="Is every team ready—and what happens after launch?"
-        copy="The launch names are public examples. The percentages only demonstrate how a shared tracker could work; they are not actual Kitsch readiness scores."
+        eyebrow="Launch control"
+        title="See what is ready, blocked and due"
+        copy="This is the shared command center for a product launch: one owner, due date and status for every cross-functional dependency, followed by a 30-day learning review. All records below are illustrative."
       />
       <section className="launch-explainer">
         <article>
           <span>01 · BEFORE LAUNCH</span>
-          <strong>Confirm the plan</strong>
+          <strong>Assign the work</strong>
           <p>
-            Assign an owner and due date to inventory, creative, retailer,
-            website, customer-care, and measurement work.
+            Put inventory, creative, retailer, website, customer-care and
+            measurement dependencies in one record with owners and due dates.
           </p>
         </article>
         <ChevronRight />
         <article>
           <span>02 · LAUNCH WEEK</span>
-          <strong>Resolve blockers</strong>
+          <strong>Close the blockers</strong>
           <p>
-            Show what is complete, what is at risk, and which decision must be
-            made before the next milestone.
+            Use the weekly launch meeting only for at-risk work, missing
+            approvals and decisions that could move the date or scope.
           </p>
         </article>
         <ChevronRight />
         <article>
           <span>03 · 30 DAYS LATER</span>
-          <strong>Review the results</strong>
+          <strong>Keep the learning</strong>
           <p>
-            Compare actual sales, contribution, customer acquisition, and repeat
-            signals with the original goal. Record what to repeat or change.
+            Compare actual sales, contribution, acquisition and repeat signals
+            with the launch goal. Turn the result into the next playbook update.
           </p>
         </article>
       </section>
-      <section className="launch-grid">
-        {launches.map((l, i) => (
-          <article className="launch-card" key={l[0]}>
-            <div className="launch-top">
-              <span>0{i + 1}</span>
-              <Label>
-                {i === 3 ? 'INTERNAL DATA REQUIRED' : 'PUBLIC SIGNAL'}
-              </Label>
-            </div>
-            <h3>{l[0]}</h3>
-            <p className="date">
-              <CalendarDays /> {l[1]}
-            </p>
-            <Progress value={Number(l[2])} />
-            <div className="ready">
-              <span>Example completion</span>
-              <strong>{l[2]}%</strong>
-            </div>
-            <p className="risk">{l[3]}</p>
-            <div className="chips">
-              {String(l[4])
-                .split(' · ')
-                .map((w) => (
-                  <span key={w}>{w}</span>
-                ))}
-            </div>
-          </article>
-        ))}
-      </section>
+      <details className="editorial-disclosure">
+        <summary>
+          <span>ILLUSTRATIVE RECORDS</span>
+          <strong>See how three launches would appear in the tracker</strong>
+          <ChevronRight />
+        </summary>
+        <div className="editorial-disclosure-body">
+          <section className="launch-grid">
+            {launches.map((l, i) => (
+              <article className="launch-card" key={l[0]}>
+                <div className="launch-top">
+                  <span>0{i + 1}</span>
+                  <Label>ILLUSTRATIVE</Label>
+                </div>
+                <h3>{l[0]}</h3>
+                <p className="date">
+                  <CalendarDays /> {l[1]}
+                </p>
+                <Progress value={Number(l[2])} />
+                <div className="ready">
+                  <span>Example completion</span>
+                  <strong>{l[2]}%</strong>
+                </div>
+                <p className="risk">{l[3]}</p>
+                <div className="chips">
+                  {String(l[4])
+                    .split(' · ')
+                    .map((w) => (
+                      <span key={w}>{w}</span>
+                    ))}
+                </div>
+              </article>
+            ))}
+          </section>
+        </div>
+      </details>
       <section className="wide-card">
         <Head
-          eyebrow="Launch checklist"
-          title="Ten things that must have an owner"
+          eyebrow="The working checklist"
+          title="Every launch needs these ten owners"
           copy="A launch is ready only when these inputs are complete or a named decision-maker accepts the risk."
         />
         <div className="gate-grid">
@@ -2765,12 +2843,77 @@ function YoYMiniChart({ item }: { item: (typeof searchYoY)[number] }) {
   );
 }
 
+function PublicYoYComparison() {
+  const average = (values: readonly number[]) =>
+    values.reduce((sum, value) => sum + value, 0) / values.length;
+  return (
+    <section className="wide-card yoy-scoreboard">
+      <Head
+        eyebrow="Comparable public year-over-year view"
+        title="The 2026 demand mix expanded—but not evenly"
+        copy="US Google Trends monthly index averages for the same January–August window in both years. This compares relative search interest, not sales, traffic or marketing effectiveness."
+      />
+      <div className="yoy-score-grid">
+        {searchYoY.map((item) => {
+          const prior = average(item.prior);
+          const current = average(item.current);
+          const scale = Math.max(prior, current, 1);
+          return (
+            <article key={item.name}>
+              <header>
+                <TrendingUp aria-hidden="true" />
+                <div>
+                  <span>JAN–AUG AVERAGE</span>
+                  <h3>{item.name}</h3>
+                </div>
+                <strong>{item.change}</strong>
+              </header>
+              <div
+                className="yoy-pair"
+                role="img"
+                aria-label={`${item.name}: 2025 average ${prior.toFixed(1)}, 2026 average ${current.toFixed(1)}`}
+              >
+                <div>
+                  <span>2025</span>
+                  <i style={{ width: `${(prior / scale) * 100}%` }} />
+                  <b>{prior.toFixed(1)}</b>
+                </div>
+                <div>
+                  <span>2026</span>
+                  <i style={{ width: `${(current / scale) * 100}%` }} />
+                  <b>{current.toFixed(1)}</b>
+                </div>
+              </div>
+              <p>{item.read}</p>
+            </article>
+          );
+        })}
+      </div>
+      <div className="yoy-context-note">
+        <CircleAlert />
+        <div>
+          <strong>
+            Advertising archive context—not a YOY performance metric
+          </strong>
+          <p>
+            Google Ads Transparency returned roughly 400 Kitsch ads for calendar
+            2025 and roughly 600 for Jan. 1–Sep. 8, 2026. Different windows,
+            creative reuse and archive behavior make this a pressure signal—not
+            spend, reach, conversion or proof that 2026 performed better.
+          </p>
+        </div>
+        <External href={links.googleAds}>Open official archive</External>
+      </div>
+    </section>
+  );
+}
+
 function PlatformPanel({ p }: { p: (typeof platformInsights)[number] }) {
   return (
     <div className="platform-panel">
       <section className="platform-hero">
         <div>
-          <PlatformMark name={p.name} />
+          <PlatformBrandIcon name={p.name as PlatformBrandName} />
           <Label>PUBLIC SIGNAL</Label>
           <p>{p.name.toUpperCase()} INTELLIGENCE</p>
           <h2>{p.signal}</h2>
@@ -2845,7 +2988,7 @@ function Social() {
           <TabsList className="platform-tabs">
             {platformInsights.map((p) => (
               <TabsTrigger value={p.id} key={p.id}>
-                <PlatformMark name={p.name} />
+                <PlatformBrandIcon name={p.name as PlatformBrandName} />
               </TabsTrigger>
             ))}
           </TabsList>
@@ -2856,6 +2999,48 @@ function Social() {
           ))}
         </Tabs>
       </section>
+      <section className="wide-card">
+        <Head
+          eyebrow="2025–2026 platform coverage"
+          title="What is known, what is only a snapshot, and what must be connected"
+          copy="Public profiles do not expose a reliable month-by-month performance history. This matrix prevents current counters, dated examples and Google search interest from being mistaken for social results."
+        />
+        <div className="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Platform</th>
+                <th>2025 public coverage</th>
+                <th>2026 public coverage</th>
+                <th>Authorized data needed to measure performance</th>
+              </tr>
+            </thead>
+            <tbody>
+              {socialHistoryCoverage.map((row) => (
+                <tr key={row[0]}>
+                  <td>
+                    <PlatformBrandIcon name={row[0]} />
+                  </td>
+                  <td>{row[1]}</td>
+                  <td>{row[2]}</td>
+                  <td>{row[3]}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div className="method-note">
+          <ShieldCheck />
+          <p>
+            The honest baseline is “not available,” not zero. Once authorized
+            exports are connected, report each month on the same metric
+            definitions and join content IDs to commerce outcomes before calling
+            a tactic successful.
+          </p>
+          <Label>INTERNAL DATA REQUIRED</Label>
+        </div>
+      </section>
+      <PublicYoYComparison />
       <section className="wide-card">
         <Head
           eyebrow="Historical demand comparison"
@@ -3090,9 +3275,9 @@ function Brand() {
   return (
     <div className="page-grid">
       <Head
-        eyebrow="Brand guide"
-        title="Everyday essentials, made exceptional"
-        copy="Strategy and visual-system synthesis based on Kitsch’s live website and its publicly available 2023 brand book."
+        eyebrow="Messaging playbook"
+        title="Make every channel sound like Kitsch"
+        copy="A practical creative QA layer for launches, creators, CRM, retail and product pages—grounded in Kitsch’s live website and public 2023 brand book."
       />
       <section className="brand-hero">
         <div>
@@ -3109,6 +3294,40 @@ function Brand() {
           ritual across an unusually broad portfolio.
         </p>
       </section>
+      <section className="wide-card">
+        <Head
+          eyebrow="Why this view exists"
+          title="One message spine, adapted by channel"
+          copy="Use this before an asset enters production. It keeps the customer problem, promise and proof consistent while allowing each channel to do a different job."
+        />
+        <div className="message-playbook-grid">
+          <article>
+            <Megaphone />
+            <span>PRODUCT LAUNCH</span>
+            <h3>Friction → promise → proof → next step</h3>
+            <p>Make the everyday problem recognizable before introducing the product world.</p>
+          </article>
+          <article>
+            <Users />
+            <span>CREATOR BRIEF</span>
+            <h3>Situation → demonstration → reason to believe</h3>
+            <p>Preserve the creator’s voice while requiring a visible product payoff and approved claim.</p>
+          </article>
+          <article>
+            <Radio />
+            <span>EMAIL + SMS</span>
+            <h3>Occasion → useful benefit → routine expansion</h3>
+            <p>Connect launches to replenishment, cross-sell and the next customer need—not only promotion.</p>
+          </article>
+          <article>
+            <ShoppingBag />
+            <span>RETAIL + PDP</span>
+            <h3>Question → specific answer → proof → how-to</h3>
+            <p>Give shoppers the same product truth across DTC, marketplaces and retail partners.</p>
+          </article>
+        </div>
+      </section>
+      <MessagingEvidenceLibrary />
       <section className="wide-card visual-system">
         <div>
           <Head
@@ -3190,52 +3409,61 @@ function Brand() {
           <Label>INTERNAL DATA REQUIRED</Label>
         </article>
       </section>
-      <section className="wide-card">
-        <Head
-          eyebrow="Open-source enablement"
-          title="Useful building blocks—with judgment"
-          copy="Repositories were verified on September 8, 2026. None is a substitute for platform permission or first-party data."
-        />
-        <div className="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Repository</th>
-                <th>Job</th>
-                <th>Decision</th>
-                <th>Source</th>
-              </tr>
-            </thead>
-            <tbody>
-              {gitTools.map((r) => (
-                <tr key={r[0]}>
-                  <td>
-                    <strong>{r[0]}</strong>
-                  </td>
-                  <td>{r[1]}</td>
-                  <td>{r[2]}</td>
-                  <td>
-                    <External href={r[3]}>GitHub</External>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+      <details className="editorial-disclosure">
+        <summary>
+          <span>OPTIONAL TECHNICAL APPENDIX</span>
+          <strong>Open-source tools and data guardrails</strong>
+          <ChevronRight />
+        </summary>
+        <div className="editorial-disclosure-body page-grid">
+          <section className="wide-card">
+            <Head
+              eyebrow="Open-source enablement"
+              title="Useful building blocks—with judgment"
+              copy="Repositories were verified on September 8, 2026. None is a substitute for platform permission or first-party data."
+            />
+            <div className="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Repository</th>
+                    <th>Job</th>
+                    <th>Decision</th>
+                    <th>Source</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {gitTools.map((r) => (
+                    <tr key={r[0]}>
+                      <td>
+                        <strong>{r[0]}</strong>
+                      </td>
+                      <td>{r[1]}</td>
+                      <td>{r[2]}</td>
+                      <td>
+                        <External href={r[3]}>GitHub</External>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
+          <section className="principle-card">
+            <CircleAlert />
+            <div>
+              <strong>Deliberate avoid</strong>
+              <p>
+                Do not scrape private or access-controlled data for a hiring
+                artifact. Unofficial TikTok and Instagram scrapers are fragile,
+                can require session tokens or proxies, and create needless
+                platform-risk. Use public evidence now; connect authorized
+                exports later.
+              </p>
+            </div>
+          </section>
         </div>
-      </section>
-      <section className="principle-card">
-        <CircleAlert />
-        <div>
-          <strong>Deliberate avoid</strong>
-          <p>
-            Do not scrape private or access-controlled data for a hiring
-            artifact. Unofficial TikTok and Instagram scrapers are fragile, can
-            require session tokens or proxies, and create needless
-            platform-risk. Use public evidence now; connect authorized exports
-            later.
-          </p>
-        </div>
-      </section>
+      </details>
     </div>
   );
 }
@@ -3397,7 +3625,8 @@ function Demo({ close }: { close: () => void }) {
         <X />
       </button>
       <div className="demo-brand">
-        KITSCH <span>OPERATIONS DEMO</span>
+        <img src="/kitsch-official-logo.png" alt="Kitsch" />
+        <span>90-SECOND OPERATING WALKTHROUGH</span>
       </div>
       <div className="demo-body">
         <p>
@@ -3439,33 +3668,34 @@ export default function Home() {
       'LEADERSHIP',
       [
         ['overview', 'Overview', Gauge],
-        ['intelligence', 'Intelligence', BrainCircuit],
+        ['intelligence', 'Growth intelligence', BrainCircuit],
       ],
     ],
     [
       'GROWTH ENGINE',
       [
-        ['commerce', 'E-commerce', ShoppingBag],
-        ['funnel', 'Funnel + customer', Users],
-        ['website', 'Website + stack', Globe2],
-        ['performance', 'Performance', Database],
+        ['commerce', 'Commerce', ShoppingBag],
+        ['creators', 'Creator + affiliate', Handshake],
+        ['funnel', 'Customer journey', Users],
+        ['website', 'Website systems', Globe2],
+        ['performance', 'KPI lab', Database],
       ],
     ],
     [
       'MARKET + CHANNELS',
       [
-        ['launches', 'Launches', CalendarDays],
-        ['social', 'Social & creative', Users],
-        ['search', 'Search + blog', Search],
-        ['brand', 'Brand guide', Palette],
-        ['competitors', 'Competitors', Target],
+        ['launches', 'Launch control', CalendarDays],
+        ['social', 'Social channels', Users],
+        ['search', 'Search + content', Search],
+        ['brand', 'Messaging playbook', Palette],
+        ['competitors', 'Market map', Target],
       ],
     ],
     [
       'OPERATING SYSTEM',
       [
-        ['operations', 'Operations', ListChecks],
-        ['sources', 'Sources', FileSearch],
+        ['operations', 'Operating system', ListChecks],
+        ['sources', 'Evidence', FileSearch],
       ],
     ],
   ] as const;
@@ -3483,7 +3713,14 @@ export default function Home() {
     >
       <aside className={`sidebar ${mobile ? 'open' : ''}`}>
         <div className="wordmark">
-          <span>KITSCH</span>
+          <a
+            href={links.site}
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Open the official Kitsch website"
+          >
+            <img src="/kitsch-official-logo.png" alt="Kitsch" />
+          </a>
           <small>
             Marketing operations
             <br />
@@ -3507,7 +3744,7 @@ export default function Home() {
           <p>PUBLIC DATA PROTOTYPE</p>
           <span>Accessed Sep 08, 2026</span>
           <button onClick={() => setDemo(true)}>
-            <Palette /> Demo mode
+            <Palette /> 90-sec walkthrough
           </button>
         </div>
       </aside>
@@ -3521,7 +3758,11 @@ export default function Home() {
             <Menu />
           </button>
           <div>
-            <span>KITSCH</span>
+            <img
+              className="topbar-logo"
+              src="/kitsch-official-logo.png"
+              alt="Kitsch"
+            />
             <small>PUBLIC DATA PROTOTYPE</small>
           </div>
           <div className="legend">
@@ -3530,7 +3771,7 @@ export default function Home() {
             <Label>INTERNAL DATA REQUIRED</Label>
           </div>
           <button className="demo-button" onClick={() => setDemo(true)}>
-            <Palette /> Demo mode
+            <Palette /> 90-sec walkthrough
           </button>
         </header>
         <div className="content">
@@ -3543,6 +3784,9 @@ export default function Home() {
           </TabsContent>
           <TabsContent value="commerce">
             <Ecommerce />
+          </TabsContent>
+          <TabsContent value="creators">
+            <CreatorAffiliateDashboard />
           </TabsContent>
           <TabsContent value="funnel">
             <Funnel />
