@@ -1741,7 +1741,7 @@ function Overview() {
           </p>
           <div className="hero-chips">
             <span>13 decision views</span>
-            <span>{sources.length} cited sources</span>
+            <span>{sources.length} sourced references</span>
             <span>0 invented KPIs</span>
           </div>
         </div>
