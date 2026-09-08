@@ -39,7 +39,7 @@ const workflows=[
 ] as const;
 
 export function DashboardGuide({active,onNavigate}:{active:DashboardTab;onNavigate:(tab:DashboardTab)=>void}){
-  const [open,setOpen]=useState(active==='overview');
+  const [open,setOpen]=useState(false);
   const help=tabHelp[active];
   const next=tabHelp[help.next];
   return <section className={`dashboard-guide ${open?'is-open':''}`} aria-label="Dashboard interpretation guide">

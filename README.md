@@ -1,34 +1,76 @@
 # Kitsch Marketing Operations Control Center
 
-A public-data prototype for the Marketing Operations Manager opportunity at Kitsch. It demonstrates how observable marketing signals can be structured into executive questions, launch gates, KPI definitions and an operating cadence without inventing internal performance.
+An independent, public-data strategy prototype demonstrating how I would help a fast-growth beauty brand replace marketing heroics with an operating rhythm.
 
-## Architecture
+**Live private presentation:** deployed through OpenAI Sites. The repository contains the complete source and research methodology; no Kitsch first-party data is included.
 
-Vinext / React / TypeScript / Tailwind with a local structured research layer in CSV and Markdown. The interface is intentionally read-only and requires no backend, authentication or paid API.
+## The challenge
 
-## Research methodology
+Kitsch operates across DTC, retail, marketplaces, lifecycle, paid media, organic social, creators, search, and an unusually broad product portfolio. This prototype asks a practical operating question: how can leadership see what matters, know what is true, and move decisions to closure without adding another disconnected dashboard?
 
-Primary sources were preferred: Kitsch pages and public profiles, retailer pages and marketplace pages. Current editorial sources were used for search and answer-engine observations. Every public claim carries a source, access date and confidence rating. Platform counters are snapshots.
+## What the prototype demonstrates
 
-## Evidence labels
+- Executive synthesis: public observations become questions, owners, decisions, and validation metrics.
+- Marketing operations: launch cadence, decision logs, budget governance, OKRs, vendor and PO logic, and cross-functional workflows.
+- Measurement architecture: Shopify, Klaviyo, GA4, paid media, attribution, finance, BI, and project-management responsibilities.
+- Customer identity: a consent-aware spine connecting acquisition, customer, order, product, creative, and repeat behavior.
+- Growth intelligence: social, search, AEO, e-commerce, product, competitor, advertising-library, and portfolio analysis.
+- Evidence integrity: every metric is labeled as a public signal, estimate, hypothesis, illustrative model, or internal-data requirement.
 
-- PUBLIC SIGNAL: directly observable first-party or platform data.
-- ESTIMATE: third-party modeled value; none is presented as Kitsch internal truth.
-- HYPOTHESIS: an interpretation to validate.
-- INTERNAL DATA REQUIRED: a business metric that cannot be known publicly.
+## Standout strategic thesis
 
-## Run
+Kitsch may not have an activity problem. It may have a **compression problem**: many launches, variants, channels, tools, and messages competing for the same customer attention and internal operating capacity.
 
-`npm run dev`
+The control center introduces four analytical lenses to make that complexity actionable:
 
-## Refresh
+1. **Launch Collision Index** — concurrent messages, dependencies, and operational load.
+2. **Fragrance Wedge Quality** — first product to second-category expansion and profitable repeat.
+3. **Marketplace-to-Relationship Gap** — compliant movement from marketplace demand to owned relationships.
+4. **Measurement Truth Tax** — time lost reconciling competing metric definitions.
 
-Update the dated CSV rows in `research/`, preserve the original source URL, then revise only affected interface claims. Never overwrite a snapshot without changing `date_accessed`.
+## Evidence policy
 
-## Add a competitor or source
+| Label | Meaning |
+|---|---|
+| Public signal | Directly observable and linked |
+| Estimate | Calculated or third-party proxy with limitations |
+| Hypothesis | An interpretation to validate |
+| Illustrative | A simulated model, never Kitsch performance |
+| Internal data required | Intentionally blank until trusted first-party data is connected |
 
-Add a normalized row with comparable category, price, positioning, distribution and evidence fields. Prefer first-party product or retailer pages and avoid treating aesthetic similarity as competitive relevance.
+No private Kitsch data, authenticated analytics, paid API data, scraping bypasses, or fabricated performance claims are included.
 
-## Limitations
+## Technology
 
-No private Kitsch data, paid APIs, authenticated analytics, scraping bypasses or conversion claims are included. Public research is designed to create informed interview questions—not fake certainty.
+Vinext, React 19, TypeScript, Tailwind CSS, shadcn components, Recharts, and Cloudflare-compatible deployment.
+
+```bash
+npm install
+npm run dev
+```
+
+## Research architecture
+
+The project uses specialized research lanes—brand/business, social, paid creative, search/AEO, competitors, e-commerce, customer signals, marketing operations, and chief-of-staff synthesis—but normalizes conclusions into one evidence system. Structured source files live in `research/`; operating artifacts live in `operations/`, `dashboard/`, `executive/`, and `interview/`.
+
+## Refreshing the evidence
+
+Update dated rows in `research/`, preserve the original source URL and confidence, and change `date_accessed`. Never overwrite a historical snapshot without retaining its observation date. Rebuild only the interface claims affected by the refreshed evidence.
+
+## Adding a competitor or source
+
+For a competitor, add a normalized record covering strategic lane, customer/product overlap, pricing, distribution, public social scale, communication strategy, commerce footprint, ad-library links, and limitations. For a new source, add its URL, type, publication/access date, exact claim, confidence, and notes to the shared registry. Prefer first-party and official platform sources.
+
+## Responsible agent use
+
+Agents can accelerate evidence collection, UX critique, metric design, commerce research, and operations synthesis. They do not override the source hierarchy or evidence labels. Every material conclusion is reviewed for recency, alternate explanations, provenance, and whether an internal employee would consider the claim reasonable.
+
+For the full project narrative, see [portfolio/CASE_STUDY.md](portfolio/CASE_STUDY.md).
+
+## Brand and trademark note
+
+This is an independent hiring portfolio project and is not commissioned by, affiliated with, or endorsed by Kitsch or the competitors referenced. Product photography, names, platform marks, and trademarks belong to their respective owners and are used only for analytical identification. The interface applies publicly observed Kitsch brand cues; it is not a replacement for the company’s internal brand system.
+
+## License
+
+Source code is available under the MIT License. Third-party trademarks, logos, research content, and linked product imagery are excluded from that license.

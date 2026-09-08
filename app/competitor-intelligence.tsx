@@ -25,6 +25,7 @@ const sourceMap:Record<string,string>={
 };
 
 const enc=(s:string)=>encodeURIComponent(s);
+const BrandLogo=({brand,domain}:{brand:string;domain:string})=><span className="competitor-logo"><img src={`https://www.google.com/s2/favicons?sz=128&domain_url=https://${domain}`} alt="" aria-hidden="true"/><span>{brand}</span></span>;
 const Google=({domain}:{domain:string})=><a href={`https://adstransparency.google.com/?region=US&domain=${domain}`} target="_blank" rel="noopener noreferrer">Google ads <ExternalLink/></a>;
 const Meta=({query}:{query:string})=><a href={`https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=US&q=${enc(query)}&search_type=keyword_unordered`} target="_blank" rel="noopener noreferrer">Meta ads <ExternalLink/></a>;
 
@@ -38,7 +39,7 @@ export function CompetitorIntelligence(){return <div className="page-grid">
   ['PROTECTION + IP','Grace Eleyae · invisibobble','Specific hair problems solved by recognizable formats.']
  ].map((x,i)=><article key={x[0]}><span>0{i+1}</span><strong>{x[0]}</strong><h3>{x[1]}</h3><p>{x[2]}</p></article>)}</section>
  <section className="wide-card"><div className="comp-title"><div><p>COMPETITOR DIRECTORY</p><h2>Every profile connects commerce, audience and media</h2></div><span className="signal public">PUBLIC + ESTIMATED</span></div><div className="comp-grid">{brands.map(b=><article className="comp-card" key={b.name}>
-  <header><div><span>{b.lane}</span><h3>{b.name}</h3></div><a href={b.site} target="_blank" rel="noopener noreferrer" aria-label={`${b.name} website`}><ArrowUpRight/></a></header>
+  <header><div><span>{b.lane}</span><h3><BrandLogo brand={b.name} domain={b.domain}/></h3></div><a href={b.site} target="_blank" rel="noopener noreferrer" aria-label={`${b.name} website`}><ArrowUpRight/></a></header>
   <div className="comp-social"><a href={b.instagram} target="_blank" rel="noopener noreferrer"><Radio/> Instagram <b>{b.ig}</b></a><a href={b.tiktok} target="_blank" rel="noopener noreferrer">TikTok <b>{b.tt}</b></a></div>
   <dl><dt>Visible pricing</dt><dd>{b.price}</dd><dt>E-commerce footprint</dt><dd>{b.commerce}</dd><dt>Revenue signal</dt><dd><strong>{b.revenue}</strong><small>{b.revenueNote} <a href={sourceMap[b.name]} target="_blank" rel="noopener noreferrer">Evidence <ExternalLink/></a></small></dd><dt>Communication strategy</dt><dd>{b.message}</dd></dl>
   <div className="comp-ads"><div><span>GOOGLE ARCHIVE</span><strong>{b.google}</strong></div><div><span>META LIBRARY</span><strong>{b.meta}</strong></div><nav><Google domain={b.domain}/><Meta query={b.metaQuery}/></nav></div>
