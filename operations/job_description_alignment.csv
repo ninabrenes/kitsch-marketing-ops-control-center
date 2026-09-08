@@ -1,0 +1,9 @@
+role_requirement,operating_artifact,cadence,primary_owner,first_30_day_proof,internal_access_required
+Build operating cadence,"Weekly pulse; monthly business review; quarterly planning pack","Weekly; monthly; quarterly",Marketing Operations,"Pilot calendar and one completed weekly pulse","Current meetings; leadership priorities; team calendar"
+Own leadership dashboard,"KPI dictionary and exception dashboard for CAC ROAS LTV repeat and contribution",Weekly,Marketing Operations + Analytics,"Agreed metric definitions and refresh lock","Shopify; media; CRM; finance; marketplaces"
+Own launch calendar,"Cross-functional launch record with readiness dependencies risks and decisions","Twice weekly in launch windows",Marketing Operations + Launch owner,"One live launch piloted end to end","Product roadmap; inventory; creative; retail; ecommerce"
+Run quarterly planning and OKRs,"Priority and capacity plan connected to measurable outcomes",Quarterly,Marketing leader + Marketing Operations,"Draft planning template and dependency map","Company priorities; budgets; team capacity"
+Manage budget POs and vendors,"Plan actual committed forecast accrual and renewal view",Weekly / monthly,Marketing Operations + Finance,"Baseline budget and vendor inventory","Budget; contracts; POs; invoices; payment status"
+Prepare leadership meetings,"Pre-read decision queue and follow-through log",Weekly / monthly,Marketing Operations,"Meeting pack used once and actions closed","Leadership agenda; reports; decision rights"
+Create playbooks,"Trigger steps owner SLA exception path and outcome metric",As process stabilizes,Process owner + Marketing Operations,"First repeated friction mapped before documentation","Project history; team interviews; workflow data"
+Connect functions,"Shared definitions handoffs and source-of-truth records",Continuous,Marketing Operations,"RACI and handoff map for one launch","Product; ecommerce; retail; social; operations stakeholders"

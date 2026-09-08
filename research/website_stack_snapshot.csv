@@ -1,0 +1,9 @@
+capability,observable_technology,public_evidence,likely_owner,operating_question,confidence,date_accessed
+Commerce,"Shopify; Shop Pay; Afterpay","Storefront markup, Shopify CDN and checkout/payment surfaces",E-commerce,"Which storefront and checkout metrics are the leadership source of truth?",High,2026-09-08
+Lifecycle,"Klaviyo; Rivo; mobile app","Public embeds and customer-facing loyalty/app links",CRM + Retention,"How are contact policy, loyalty and app cohorts coordinated?",High,2026-09-08
+Proof and CX,"Okendo; Gladly; Loop","Review/quiz, support widget and return-portal signals",CX + E-commerce,"Which review and return themes enter the product and content roadmap?",High,2026-09-08
+Measurement,"Triple Whale; Northbeam; Microsoft Clarity","Public script and Shopify app-block signals",Growth + Analytics,"Where do attribution numbers disagree and which definition wins?",Medium,2026-09-08
+Experimentation,"Visually.io; Black Crow AI","Public script signals",CRO + Growth,"Which tools are active and where are hypotheses and outcomes logged?",Medium,2026-09-08
+Creator,LoudCrowd,"Public Shopify app-block signal and ambassador destination",Social + Partnerships,"How is creator contribution joined to first product and repeat cohort?",High,2026-09-08
+Global and consent,"Langify; Consentmo","Public localization and consent-management assets",E-commerce + Legal,"Who owns market-level content, claims, consent and release QA?",High,2026-09-08
+Technical discovery,"Shopify sitemap; agentic-discovery sitemap; hreflang; canonical metadata","Public robots.txt, XML sitemap and product-page metadata",SEO + E-commerce,"How are localized pages and AI/search discovery monitored for quality?",High,2026-09-08
