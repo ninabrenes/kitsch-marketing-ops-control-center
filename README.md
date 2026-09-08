@@ -13,8 +13,12 @@ Kitsch operates across DTC, retail, marketplaces, lifecycle, paid media, organic
 - Executive synthesis: public observations become questions, owners, decisions, and validation metrics.
 - Marketing operations: launch cadence, decision logs, budget governance, OKRs, vendor and PO logic, and cross-functional workflows.
 - Measurement architecture: Shopify, Klaviyo, GA4, paid media, attribution, finance, BI, and project-management responsibilities.
+- Commerce operations: product-level source readiness, Shopify field contracts, channel dependencies, and a governed action queue.
+- Creator + affiliate operations: roster, contracted-versus-delivered content, fully loaded cost, attribution, realized contribution, and cohort-quality requirements.
 - Customer identity: a consent-aware spine connecting acquisition, customer, order, product, creative, and repeat behavior.
-- Growth intelligence: social, search, AEO, e-commerce, product, competitor, advertising-library, and portfolio analysis.
+- Customer journey: an interactive five-stage funnel connecting media roles, customer questions, owners, handoffs, and first-party measures.
+- Growth intelligence: social, search, AEO, e-commerce, product, competitor, advertising-library, and portfolio analysis, including a like-for-like Jan–Aug 2025 versus 2026 public-demand comparison.
+- Messaging governance: source-linked website and social-language observations translated into reusable launch, creator, CRM, retail, and PDP briefs.
 - Evidence integrity: every metric is labeled as a public signal, estimate, hypothesis, illustrative model, or internal-data requirement.
 
 ## Standout strategic thesis

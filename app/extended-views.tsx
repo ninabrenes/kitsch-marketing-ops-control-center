@@ -1,37 +1,816 @@
-import { ArrowUpRight, CheckCircle2, ChevronRight, CircleAlert, Database, Globe2, Lightbulb } from 'lucide-react';
+'use client';
 
-const links={site:'https://www.mykitsch.com/',robots:'https://www.mykitsch.com/robots.txt',sitemap:'https://www.mykitsch.com/sitemap.xml'};
+import { useState } from 'react';
+import {
+  ArrowRight,
+  ArrowUpRight,
+  BadgeCheck,
+  CheckCircle2,
+  CircleAlert,
+  Database,
+  Gift,
+  Globe2,
+  HeartHandshake,
+  Lightbulb,
+  Megaphone,
+  MessageCircleQuestion,
+  PackageCheck,
+  Repeat2,
+  Search,
+  ShoppingBag,
+  Store,
+  Users,
+  Wind,
+  Workflow,
+} from 'lucide-react';
+import {
+  Funnel as RechartsFunnel,
+  FunnelChart,
+  LabelList,
+  ResponsiveContainer,
+  Tooltip,
+} from 'recharts';
 
-const stackGroups=[
-  ['COMMERCE','Shopify · Shop Pay · Afterpay','Storefront, checkout and accelerated payment signals.','E-commerce'],
-  ['LIFECYCLE','Klaviyo · Rivo · Kitsch mobile app','Email/SMS capture, loyalty, referral and app retention surfaces.','CRM + Retention'],
-  ['PROOF + CX','Okendo · Gladly · Loop','Reviews/quizzes, customer support and returns journey.','CX + E-commerce'],
-  ['MEASUREMENT','Triple Whale · Northbeam · Microsoft Clarity','Attribution and behavior-tool signals visible in the public page source.','Growth + Analytics'],
-  ['EXPERIMENTATION','Visually.io · Black Crow AI','Public personalization/experimentation script signals; configuration and activity are unknown.','CRO + Growth'],
-  ['CREATOR','LoudCrowd','Ambassador and creator-program storefront integration.','Social + Partnerships'],
-  ['GLOBAL + CONSENT','Langify · Consentmo','Localization and consent-management surfaces across a large international footprint.','E-commerce + Legal'],
+import './funnel-editorial.css';
+
+const links = {
+  site: 'https://www.mykitsch.com/',
+  robots: 'https://www.mykitsch.com/robots.txt',
+  sitemap: 'https://www.mykitsch.com/sitemap.xml',
+};
+
+const stackGroups = [
+  [
+    'COMMERCE',
+    'Shopify · Shop Pay · Afterpay',
+    'Storefront, checkout and accelerated payment signals.',
+    'E-commerce',
+  ],
+  [
+    'LIFECYCLE',
+    'Klaviyo · Rivo · Kitsch mobile app',
+    'Email/SMS capture, loyalty, referral and app retention surfaces.',
+    'CRM + Retention',
+  ],
+  [
+    'PROOF + CX',
+    'Okendo · Gladly · Loop',
+    'Reviews/quizzes, customer support and returns journey.',
+    'CX + E-commerce',
+  ],
+  [
+    'MEASUREMENT',
+    'Triple Whale · Northbeam · Microsoft Clarity',
+    'Attribution and behavior-tool signals visible in the public page source.',
+    'Growth + Analytics',
+  ],
+  [
+    'EXPERIMENTATION',
+    'Visually.io · Black Crow AI',
+    'Public personalization/experimentation script signals; configuration and activity are unknown.',
+    'CRO + Growth',
+  ],
+  [
+    'CREATOR',
+    'LoudCrowd',
+    'Ambassador and creator-program storefront integration.',
+    'Social + Partnerships',
+  ],
+  [
+    'GLOBAL + CONSENT',
+    'Langify · Consentmo',
+    'Localization and consent-management surfaces across a large international footprint.',
+    'E-commerce + Legal',
+  ],
 ] as const;
 
-const funnelStages=[
-  ['01','AWARENESS','Create category demand','TikTok · Instagram · creators · PR · retail discovery','Qualified reach · video hold · branded search lift','Creative concept → audience → product'],
-  ['02','CONSIDERATION','Prove fit and reduce uncertainty','YouTube · Pinterest · blog · reviews · quiz · PDP','Engaged visits · product-view rate · review interaction','Need state → proof → landing page'],
-  ['03','CONVERSION','Turn intent into a profitable order','DTC · TikTok Shop · Amazon · Target · Ulta','CVR · CAC · AOV · contribution · new-to-brand','Offer → checkout → source of truth'],
-  ['04','RETENTION','Create the second useful routine','Klaviyo · app · loyalty · replenishment · support','30/60/90 repeat · LTV · time to second order','First SKU → next-best franchise'],
-  ['05','ADVOCACY','Turn results into trusted proof','Reviews · referrals · UGC · affiliates · community','Review rate · referral sales · creator contribution','Experience → story → new demand'],
+const funnelStages = [
+  {
+    id: 'awareness',
+    number: '01',
+    name: 'Awareness',
+    value: 100,
+    fill: '#ca9a8e',
+    job: 'Create useful category demand',
+    channels: 'TikTok · Instagram · creators · PR · retail discovery',
+    question: 'Is this made for my hair, routine or everyday need?',
+    metric: 'Qualified reach · video hold · branded search lift',
+    owner: 'Brand + Creative',
+    handoff: 'Winning concept → relevant product or routine',
+    Icon: Megaphone,
+  },
+  {
+    id: 'consideration',
+    number: '02',
+    name: 'Consideration',
+    value: 84,
+    fill: '#dfb9af',
+    job: 'Make product fit easy to judge',
+    channels: 'YouTube · Pinterest · blog · reviews · quiz · PDP',
+    question: 'How does it work, and what proof helps me choose?',
+    metric: 'Engaged visits · product-view rate · proof interaction',
+    owner: 'E-commerce + Content',
+    handoff: 'Need state → credible proof → matched landing page',
+    Icon: Search,
+  },
+  {
+    id: 'conversion',
+    number: '03',
+    name: 'Conversion',
+    value: 68,
+    fill: '#f0d6c2',
+    job: 'Turn intent into a healthy order',
+    channels: 'DTC · TikTok Shop · Amazon · Target · Ulta',
+    question: 'Where should I buy, and is the offer worth it?',
+    metric: 'CVR · approved CAC · AOV · realized contribution',
+    owner: 'Growth + E-commerce',
+    handoff: 'Offer → checkout → finance-reconciled order',
+    Icon: ShoppingBag,
+  },
+  {
+    id: 'retention',
+    number: '04',
+    name: 'Retention',
+    value: 52,
+    fill: '#c9ded8',
+    job: 'Build the next useful routine',
+    channels: 'Klaviyo · app · loyalty · replenishment · support',
+    question: 'What should I try next, and when will it help me?',
+    metric: '30/60/90-day second-order rate · LTV · time to second order',
+    owner: 'Lifecycle + CX',
+    handoff: 'First SKU → next-best category or franchise',
+    Icon: Repeat2,
+  },
+  {
+    id: 'advocacy',
+    number: '05',
+    name: 'Advocacy',
+    value: 38,
+    fill: '#d9d9d6',
+    job: 'Turn outcomes into trusted proof',
+    channels: 'Reviews · referrals · UGC · affiliates · community',
+    question: 'Was this good enough to share or recommend?',
+    metric: 'Review rate · referral sales · verified creator contribution',
+    owner: 'Community + Partnerships',
+    handoff: 'Customer experience → reusable proof → new demand',
+    Icon: HeartHandshake,
+  },
 ] as const;
 
-const customerArchetypes=[
-  ['The Heatless Optimizer','“I want polished hair without more heat or time.”','Heatless sets · Air Dry Cream · satin pillowcase','TikTok demo → YouTube technique → DTC or retail','Hair type, visible result, ease, credible reviews','Styling or overnight-protection follow-up'],
-  ['The Bottle-Free Problem Solver','“Will a bar work as well as the liquid products I know?”','Rice water · rosemary/biotin · bar accessories','Google/Pinterest → educational article → comparison/PDP','Performance proof, transition guidance, longevity','Replenishment plus adjacent treatment'],
-  ['The Scent Explorer','“Which scent feels like me—and will it last in my hair?”','Discovery set · hair/body perfume · seasonal scents','Creator reaction → scent finder → discovery set','Notes, odor-neutralizing explanation, sampling','Full-size scent and layering behavior'],
-  ['The Everyday Accessorizer','“Can one affordable product fix this daily annoyance?”','Elastics · clips · shower caps · dermaplaners','Retail shelf/search → reviews → quick purchase','Availability, durability, price, problem/solution clarity','Basket building across utility essentials'],
-  ['The Gifter + Collector','“Is this special enough to gift or buy before it disappears?”','Licensed drops · seasonal sets · bundles','Instagram/email → collection page → bundle','Distinctiveness, urgency, gifting ease','Referral, next drop and cross-category discovery'],
+const customerArchetypes = [
+  [
+    'The Heatless Optimizer',
+    '“I want polished hair without more heat or time.”',
+    'Heatless sets · Air Dry Cream · satin pillowcase',
+    'TikTok demo → YouTube technique → DTC or retail',
+    'Hair type, visible result, ease, credible reviews',
+    'Styling or overnight-protection follow-up',
+  ],
+  [
+    'The Bottle-Free Problem Solver',
+    '“Will a bar work as well as the liquid products I know?”',
+    'Rice water · rosemary/biotin · bar accessories',
+    'Google/Pinterest → educational article → comparison/PDP',
+    'Performance proof, transition guidance, longevity',
+    'Replenishment plus adjacent treatment',
+  ],
+  [
+    'The Scent Explorer',
+    '“Which scent feels like me—and will it last in my hair?”',
+    'Discovery set · hair/body perfume · seasonal scents',
+    'Creator reaction → scent finder → discovery set',
+    'Notes, odor-neutralizing explanation, sampling',
+    'Full-size scent and layering behavior',
+  ],
+  [
+    'The Everyday Accessorizer',
+    '“Can one affordable product fix this daily annoyance?”',
+    'Elastics · clips · shower caps · dermaplaners',
+    'Retail shelf/search → reviews → quick purchase',
+    'Availability, durability, price, problem/solution clarity',
+    'Basket building across utility essentials',
+  ],
+  [
+    'The Gifter + Collector',
+    '“Is this special enough to gift or buy before it disappears?”',
+    'Licensed drops · seasonal sets · bundles',
+    'Instagram/email → collection page → bundle',
+    'Distinctiveness, urgency, gifting ease',
+    'Referral, next drop and cross-category discovery',
+  ],
 ] as const;
 
-function Head({eyebrow,title,copy}:{eyebrow:string;title:string;copy?:string}){return <div className="section-head"><p>{eyebrow}</p><h2>{title}</h2>{copy&&<span>{copy}</span>}</div>}
-function Label({children}:{children:string}){return <span className={`signal ${children==='HYPOTHESIS'?'hypothesis':'internal'}`}>{children}</span>}
-function External({href,children}:{href:string;children:React.ReactNode}){return <a className="source-link" href={href} target="_blank" rel="noreferrer">{children}<ArrowUpRight size={13}/></a>}
+function Head({
+  eyebrow,
+  title,
+  copy,
+}: {
+  eyebrow: string;
+  title: string;
+  copy?: string;
+}) {
+  return (
+    <div className="section-head">
+      <p>{eyebrow}</p>
+      <h2>{title}</h2>
+      {copy && <span>{copy}</span>}
+    </div>
+  );
+}
+function Label({ children }: { children: string }) {
+  return (
+    <span
+      className={`signal ${children === 'HYPOTHESIS' ? 'hypothesis' : 'internal'}`}
+    >
+      {children}
+    </span>
+  );
+}
+function External({
+  href,
+  children,
+}: {
+  href: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <a className="source-link" href={href} target="_blank" rel="noreferrer">
+      {children}
+      <ArrowUpRight size={13} />
+    </a>
+  );
+}
 
-export function Website(){return <div className="page-grid"><Head eyebrow="Website + martech intelligence" title="The storefront is a growth system—and a governance job" copy="Technology is identified from public page-source and customer-facing surfaces. Detection does not prove current contract status, configuration quality, adoption or business impact."/><section className="stack-hero"><div><Globe2/><p>OBSERVABLE DIGITAL FOUNDATION</p><h2>Shopify commerce connected to lifecycle, loyalty, proof, attribution, experimentation and global operations.</h2></div><div><article><strong>80%</strong><span>mobile traffic + revenue</span><small>Shopify-published Kitsch case</small></article><article><strong>7</strong><span>integration capability groups</span><small>public-source detection</small></article><article><strong>1</strong><span>agentic-discovery sitemap</span><small>observable XML index</small></article></div></section><section className="wide-card"><Head eyebrow="Observable stack" title="What appears to be connected" copy="These are public implementation signals, not a verified internal systems inventory."/><div className="stack-grid">{stackGroups.map((s,i)=><article key={s[0]}><span>0{i+1} · {s[0]}</span><h3>{s[1]}</h3><p>{s[2]}</p><small>Likely business owner · {s[3]}</small></article>)}</div><div className="method-note"><CircleAlert/><p>Vendor scripts can remain after a tool is paused or replaced. Confirm contracts, data flows, owners, privacy settings and decision use internally before consolidating anything.</p><External href={links.site}>Open storefront</External></div></section><section className="wide-card"><Head eyebrow="Customer journey architecture" title="Five handoffs the website must make measurable"/><div className="site-journey">{[['DISCOVER','Homepage · collections · creator landings','Traffic quality → product discovery'],['UNDERSTAND','PDP · reviews · quiz · blog','Need state → proof interaction'],['BUY','Offer · cart · checkout · payment','Intent → contribution-positive order'],['RETURN','Klaviyo · app · loyalty · support','First product → next useful routine'],['ADVOCATE','Review · referral · ambassador','Outcome → trusted demand']].map((x,i)=><article key={x[0]}><span>0{i+1}</span><strong>{x[0]}</strong><p>{x[1]}</p><small>{x[2]}</small></article>)}</div></section><section className="two-col"><article className="wide-card"><Head eyebrow="Search + AI readiness" title="Strong technical discovery surface"/><ul className="commerce-list"><li><CheckCircle2/>The sitemap separates products, collections, pages, blogs and metaobject pages.</li><li><CheckCircle2/>Localized sitemap sets and extensive hreflang signals support international discovery.</li><li><CheckCircle2/>Product pages expose canonical URLs and specific meta descriptions.</li><li><CheckCircle2/>An agentic-discovery sitemap is explicitly listed in the root sitemap index.</li></ul><div className="source-pair"><External href={links.sitemap}>Sitemap</External><External href={links.robots}>Robots rules</External></div></article><article className="wide-card"><Head eyebrow="Operating risk" title="More tools create more reconciliation"/><ul className="commerce-list risk"><li><CircleAlert/>Attribution tools need one agreed spend, revenue and new-customer perimeter.</li><li><CircleAlert/>Experiments need an ID, hypothesis, audience, dates and outcome—not only a winning variant.</li><li><CircleAlert/>Lifecycle, loyalty, app and referral audiences can overlap without a contact policy.</li><li><CircleAlert/>Localization multiplies merchandising, claim, price and content-governance work.</li><li><CircleAlert/>Page speed, consent and tag ownership need a release checklist.</li></ul><Label>INTERNAL DATA REQUIRED</Label></article></section><section className="wide-card"><Head eyebrow="Stack governance" title="The audit I would run in the first 30 days"/><div className="table-wrap"><table><thead><tr><th>Question</th><th>Evidence needed</th><th>Decision supported</th><th>Cadence</th></tr></thead><tbody>{[['What tools are truly active?','Contracts · admin access · tag inventory','Keep · consolidate · retire','Quarterly'],['Which numbers disagree?','Shopify · finance · attribution reconciliation','Leadership source of truth','Weekly'],['Which journeys are owned?','Lifecycle map · triggers · exclusions · SLAs','Contact and handoff governance','Monthly'],['Are tests creating learning?','Experiment log · sample · outcome · rollout','Scale, iterate or stop','Bi-weekly'],['Where does the site lose customers?','Device funnel · page speed · errors · returns','Prioritized CRO backlog','Weekly'],['Are claims globally consistent?','Market · page · owner · evidence · refresh date','Publish, localize or correct','Monthly']].map(r=><tr key={r[0]}>{r.map(v=><td key={v}>{v}</td>)}</tr>)}</tbody></table></div></section></div>}
+export function Website() {
+  return (
+    <div className="page-grid">
+      <Head
+        eyebrow="Website + martech intelligence"
+        title="The storefront is a growth system—and a governance job"
+        copy="Technology is identified from public page-source and customer-facing surfaces. Detection does not prove current contract status, configuration quality, adoption or business impact."
+      />
+      <section className="stack-hero">
+        <div>
+          <Globe2 />
+          <p>OBSERVABLE DIGITAL FOUNDATION</p>
+          <h2>
+            Shopify commerce connected to lifecycle, loyalty, proof,
+            attribution, experimentation and global operations.
+          </h2>
+        </div>
+        <div>
+          <article>
+            <strong>80%</strong>
+            <span>mobile traffic + revenue</span>
+            <small>Shopify-published Kitsch case</small>
+          </article>
+          <article>
+            <strong>7</strong>
+            <span>integration capability groups</span>
+            <small>public-source detection</small>
+          </article>
+          <article>
+            <strong>1</strong>
+            <span>agentic-discovery sitemap</span>
+            <small>observable XML index</small>
+          </article>
+        </div>
+      </section>
+      <section className="wide-card">
+        <Head
+          eyebrow="Observable stack"
+          title="What appears to be connected"
+          copy="These are public implementation signals, not a verified internal systems inventory."
+        />
+        <div className="stack-grid">
+          {stackGroups.map((s, i) => (
+            <article key={s[0]}>
+              <span>
+                0{i + 1} · {s[0]}
+              </span>
+              <h3>{s[1]}</h3>
+              <p>{s[2]}</p>
+              <small>Likely business owner · {s[3]}</small>
+            </article>
+          ))}
+        </div>
+        <div className="method-note">
+          <CircleAlert />
+          <p>
+            Vendor scripts can remain after a tool is paused or replaced.
+            Confirm contracts, data flows, owners, privacy settings and decision
+            use internally before consolidating anything.
+          </p>
+          <External href={links.site}>Open storefront</External>
+        </div>
+      </section>
+      <section className="wide-card">
+        <Head
+          eyebrow="Customer journey architecture"
+          title="Five handoffs the website must make measurable"
+        />
+        <div className="site-journey">
+          {[
+            [
+              'DISCOVER',
+              'Homepage · collections · creator landings',
+              'Traffic quality → product discovery',
+            ],
+            [
+              'UNDERSTAND',
+              'PDP · reviews · quiz · blog',
+              'Need state → proof interaction',
+            ],
+            [
+              'BUY',
+              'Offer · cart · checkout · payment',
+              'Intent → contribution-positive order',
+            ],
+            [
+              'RETURN',
+              'Klaviyo · app · loyalty · support',
+              'First product → next useful routine',
+            ],
+            [
+              'ADVOCATE',
+              'Review · referral · ambassador',
+              'Outcome → trusted demand',
+            ],
+          ].map((x, i) => (
+            <article key={x[0]}>
+              <span>0{i + 1}</span>
+              <strong>{x[0]}</strong>
+              <p>{x[1]}</p>
+              <small>{x[2]}</small>
+            </article>
+          ))}
+        </div>
+      </section>
+      <section className="two-col">
+        <article className="wide-card">
+          <Head
+            eyebrow="Search + AI readiness"
+            title="Strong technical discovery surface"
+          />
+          <ul className="commerce-list">
+            <li>
+              <CheckCircle2 />
+              The sitemap separates products, collections, pages, blogs and
+              metaobject pages.
+            </li>
+            <li>
+              <CheckCircle2 />
+              Localized sitemap sets and extensive hreflang signals support
+              international discovery.
+            </li>
+            <li>
+              <CheckCircle2 />
+              Product pages expose canonical URLs and specific meta
+              descriptions.
+            </li>
+            <li>
+              <CheckCircle2 />
+              An agentic-discovery sitemap is explicitly listed in the root
+              sitemap index.
+            </li>
+          </ul>
+          <div className="source-pair">
+            <External href={links.sitemap}>Sitemap</External>
+            <External href={links.robots}>Robots rules</External>
+          </div>
+        </article>
+        <article className="wide-card">
+          <Head
+            eyebrow="Operating risk"
+            title="More tools create more reconciliation"
+          />
+          <ul className="commerce-list risk">
+            <li>
+              <CircleAlert />
+              Attribution tools need one agreed spend, revenue and new-customer
+              perimeter.
+            </li>
+            <li>
+              <CircleAlert />
+              Experiments need an ID, hypothesis, audience, dates and
+              outcome—not only a winning variant.
+            </li>
+            <li>
+              <CircleAlert />
+              Lifecycle, loyalty, app and referral audiences can overlap without
+              a contact policy.
+            </li>
+            <li>
+              <CircleAlert />
+              Localization multiplies merchandising, claim, price and
+              content-governance work.
+            </li>
+            <li>
+              <CircleAlert />
+              Page speed, consent and tag ownership need a release checklist.
+            </li>
+          </ul>
+          <Label>INTERNAL DATA REQUIRED</Label>
+        </article>
+      </section>
+      <section className="wide-card">
+        <Head
+          eyebrow="Stack governance"
+          title="The audit I would run in the first 30 days"
+        />
+        <div className="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Question</th>
+                <th>Evidence needed</th>
+                <th>Decision supported</th>
+                <th>Cadence</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                [
+                  'What tools are truly active?',
+                  'Contracts · admin access · tag inventory',
+                  'Keep · consolidate · retire',
+                  'Quarterly',
+                ],
+                [
+                  'Which numbers disagree?',
+                  'Shopify · finance · attribution reconciliation',
+                  'Leadership source of truth',
+                  'Weekly',
+                ],
+                [
+                  'Which journeys are owned?',
+                  'Lifecycle map · triggers · exclusions · SLAs',
+                  'Contact and handoff governance',
+                  'Monthly',
+                ],
+                [
+                  'Are tests creating learning?',
+                  'Experiment log · sample · outcome · rollout',
+                  'Scale, iterate or stop',
+                  'Bi-weekly',
+                ],
+                [
+                  'Where does the site lose customers?',
+                  'Device funnel · page speed · errors · returns',
+                  'Prioritized CRO backlog',
+                  'Weekly',
+                ],
+                [
+                  'Are claims globally consistent?',
+                  'Market · page · owner · evidence · refresh date',
+                  'Publish, localize or correct',
+                  'Monthly',
+                ],
+              ].map((r) => (
+                <tr key={r[0]}>
+                  {r.map((v) => (
+                    <td key={v}>{v}</td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  );
+}
 
-export function Funnel(){return <div className="page-grid"><Head eyebrow="Marketing funnel + customer system" title="Media should move a customer—not just fill a channel calendar" copy="This view connects observable media roles to customer questions, conversion events and retention. The archetypes are testable hypotheses, not claims about Kitsch’s actual customer segments."/><section className="funnel-map">{funnelStages.map((s,i)=><article key={s[1]} style={{width:`${100-i*7}%`}}><div><span>{s[0]}</span><strong>{s[1]}</strong><small>{s[2]}</small></div><p>{s[3]}</p><dl><dt>Measure</dt><dd>{s[4]}</dd><dt>Required handoff</dt><dd>{s[5]}</dd></dl></article>)}</section><section className="wide-card"><Head eyebrow="Media architecture" title="Five jobs—not one ROAS leaderboard"/><div className="media-grid">{[['PAID','Create and capture demand','Meta · Google · TikTok paid','Incrementality · contribution · creative learning'],['OWNED','Educate and retain','Site · blog · email · SMS · app','Qualified sessions · repeat · lifecycle value'],['EARNED','Borrow trust','PR · editorial · organic mentions','Share of search · referral quality · assisted demand'],['CREATOR','Make the product believable','Affiliate · UGC · ambassador · TikTok Shop','New-to-brand · creator contribution · cohort quality'],['RETAIL','Win availability and shelf intent','Target · Ulta · Walmart · Amazon','Sell-through · in-stock · retailer incrementality']].map((m,i)=><article key={m[0]}><span>0{i+1} · {m[0]}</span><h3>{m[1]}</h3><p>{m[2]}</p><small>{m[3]}</small></article>)}</div></section><section className="wide-card"><Head eyebrow="Possible customer archetypes" title="Segment by job-to-be-done, then validate with behavior" copy="Use first-order product, creative response, search intent and second purchase to confirm whether these groups are real and commercially distinct."/><div className="avatar-grid">{customerArchetypes.map((a,i)=><article key={a[0]}><div><span>0{i+1}</span><Label>HYPOTHESIS</Label></div><h3>{a[0]}</h3><blockquote>{a[1]}</blockquote><dl><dt>Product doorway</dt><dd>{a[2]}</dd><dt>Likely journey</dt><dd>{a[3]}</dd><dt>Proof needed</dt><dd>{a[4]}</dd><dt>Retention test</dt><dd>{a[5]}</dd></dl></article>)}</div></section><section className="wide-card"><Head eyebrow="Three silent customer questions" title="The biggest message gaps to answer everywhere"/><div className="question-grid"><article><span>01 · FIT</span><h3>“Will this work for my hair, routine or need?”</h3><p><b>Patch:</b> Put hair type, use case and expected result beside the first product claim.</p><p><b>Next content:</b> Show the same hero product across distinct routines.</p><p><b>Prepared reply:</b> Route to a specific how-to, quiz or comparison.</p></article><article><span>02 · DIFFERENCE</span><h3>“Why is this better for me than what I already use?”</h3><p><b>Patch:</b> Pair the emotional promise with one concrete mechanism and proof source.</p><p><b>Next content:</b> Compare techniques or formats without unverified superiority claims.</p><p><b>Prepared reply:</b> Explain the use case, not a generic feature list.</p></article><article><span>03 · NEXT STEP</span><h3>“Which product do I start with—and what comes next?”</h3><p><b>Patch:</b> Create a single starting recommendation by need state.</p><p><b>Next content:</b> Build routine paths from hero product to adjacent franchise.</p><p><b>Prepared reply:</b> Offer one choice plus one optional add-on.</p></article></div><div className="method-note"><Lightbulb/><p><b>Biggest gap:</b> fit. Kitsch’s portfolio breadth is an advantage only when customers can quickly identify the right doorway and see themselves in the proof.</p></div></section><section className="dark-card funnel-data"><Database/><h3>Connect the funnel at customer and creative level</h3><p>Customer ID × first-touch source × creative ID × need state × first SKU × realized margin × device × market × 30/60/90-day second order × next franchise.</p><Label>INTERNAL DATA REQUIRED</Label></section></div>}
+export function Funnel() {
+  const [activeStage, setActiveStage] = useState<(typeof funnelStages)[number]>(
+    funnelStages[0],
+  );
+  const ActiveIcon = activeStage.Icon;
+
+  return (
+    <div className="page-grid funnel-editorial">
+      <Head
+        eyebrow="Customer journey"
+        title="One journey. Five measurable handoffs."
+        copy="Select a stage to see the customer question, media job, owner and first-party measure. Funnel widths illustrate the operating structure only—they are not Kitsch traffic or conversion volumes."
+      />
+
+      <section
+        className="funnel-story"
+        aria-label="Interactive customer journey funnel"
+      >
+        <div className="funnel-story__visual">
+          <div className="funnel-story__legend">
+            <span>
+              <Workflow size={15} /> Select a stage
+            </span>
+            <span className="funnel-story__disclosure">
+              Illustrative structure · no performance data
+            </span>
+          </div>
+          <div className="funnel-chart-shell">
+            <ResponsiveContainer width="100%" height="100%">
+              <FunnelChart
+                margin={{ top: 12, right: 28, bottom: 12, left: 28 }}
+              >
+                <Tooltip
+                  cursor={false}
+                  content={({ active, payload }) =>
+                    active && payload?.[0] ? (
+                      <div className="funnel-tooltip">
+                        <strong>{String(payload[0].name)}</strong>
+                        <span>Select to open the operating brief</span>
+                      </div>
+                    ) : null
+                  }
+                />
+                <RechartsFunnel
+                  dataKey="value"
+                  data={funnelStages}
+                  isAnimationActive
+                  onClick={(entry) => {
+                    const next = funnelStages.find(
+                      (stage) => stage.id === entry?.id,
+                    );
+                    if (next) setActiveStage(next);
+                  }}
+                  onMouseEnter={(entry) => {
+                    const next = funnelStages.find(
+                      (stage) => stage.id === entry?.id,
+                    );
+                    if (next) setActiveStage(next);
+                  }}
+                >
+                  <LabelList
+                    dataKey="name"
+                    position="center"
+                    fill="#231f20"
+                    fontSize={12}
+                    fontWeight={750}
+                  />
+                </RechartsFunnel>
+              </FunnelChart>
+            </ResponsiveContainer>
+          </div>
+          <nav className="funnel-stage-pills" aria-label="Journey stages">
+            {funnelStages.map((stage) => (
+              <button
+                type="button"
+                key={stage.id}
+                className={activeStage.id === stage.id ? 'active' : ''}
+                onClick={() => setActiveStage(stage)}
+                aria-pressed={activeStage.id === stage.id}
+              >
+                <stage.Icon size={16} />
+                {stage.name}
+              </button>
+            ))}
+          </nav>
+        </div>
+
+        <article className="funnel-stage-brief" aria-live="polite">
+          <div className="funnel-stage-brief__top">
+            <span className="funnel-stage-brief__icon">
+              <ActiveIcon />
+            </span>
+            <div>
+              <small>
+                {activeStage.number} · {activeStage.name}
+              </small>
+              <h3>{activeStage.job}</h3>
+            </div>
+          </div>
+          <div className="funnel-stage-question">
+            <MessageCircleQuestion />
+            <div>
+              <span>Customer asks</span>
+              <p>“{activeStage.question}”</p>
+            </div>
+          </div>
+          <dl className="funnel-stage-details">
+            <div>
+              <dt>Media + surface</dt>
+              <dd>{activeStage.channels}</dd>
+            </div>
+            <div>
+              <dt>First-party measure</dt>
+              <dd>{activeStage.metric}</dd>
+            </div>
+            <div>
+              <dt>Accountable owner</dt>
+              <dd>{activeStage.owner}</dd>
+            </div>
+            <div>
+              <dt>Required handoff</dt>
+              <dd>{activeStage.handoff}</dd>
+            </div>
+          </dl>
+        </article>
+      </section>
+
+      <section className="wide-card funnel-media-card">
+        <Head
+          eyebrow="Media roles"
+          title="Judge each channel by its job"
+          copy="A channel can create demand, explain value, close a sale—or do several jobs. Give it a role before giving it a budget."
+        />
+        <div className="media-grid editorial-media-grid">
+          {[
+            [
+              Megaphone,
+              'Paid',
+              'Create + capture demand',
+              'Meta · Google · TikTok paid',
+              'Incrementality · contribution · creative learning',
+            ],
+            [
+              BadgeCheck,
+              'Owned',
+              'Educate + retain',
+              'Site · blog · email · SMS · app',
+              'Qualified sessions · repeat · lifecycle value',
+            ],
+            [
+              Globe2,
+              'Earned',
+              'Borrow trust',
+              'PR · editorial · organic mentions',
+              'Share of search · referral quality · assisted demand',
+            ],
+            [
+              Users,
+              'Creator',
+              'Make it believable',
+              'Affiliate · UGC · ambassador · TikTok Shop',
+              'New-to-brand · creator contribution · cohort quality',
+            ],
+            [
+              Store,
+              'Retail',
+              'Win availability',
+              'Target · Ulta · Walmart · Amazon',
+              'Sell-through · in-stock · retailer incrementality',
+            ],
+          ].map(([Icon, name, job, surfaces, measure], index) => {
+            const MediaIcon = Icon as typeof Megaphone;
+            return (
+              <article key={String(name)}>
+                <div>
+                  <span className="media-icon">
+                    <MediaIcon />
+                  </span>
+                  <small>0{index + 1}</small>
+                </div>
+                <h3>{String(job)}</h3>
+                <strong>{String(name)}</strong>
+                <p>{String(surfaces)}</p>
+                <details>
+                  <summary>How to measure</summary>
+                  <span>{String(measure)}</span>
+                </details>
+              </article>
+            );
+          })}
+        </div>
+      </section>
+
+      <section className="wide-card funnel-avatar-card">
+        <Head
+          eyebrow="Possible audiences"
+          title="Start with the customer’s job"
+          copy="These are hypotheses for research and cohort analysis—not verified Kitsch segments. Open a profile to see its proposed journey and validation plan."
+        />
+        <div className="avatar-grid editorial-avatar-grid">
+          {customerArchetypes.map((archetype, index) => {
+            const icons = [Wind, PackageCheck, Search, ShoppingBag, Gift];
+            const AvatarIcon = icons[index];
+            return (
+              <details key={archetype[0]}>
+                <summary>
+                  <span className="avatar-icon">
+                    <AvatarIcon />
+                  </span>
+                  <span>
+                    <small>0{index + 1} · HYPOTHESIS</small>
+                    <strong>{archetype[0]}</strong>
+                    <em>{archetype[1]}</em>
+                  </span>
+                  <span className="avatar-open">
+                    Read more <ArrowRight />
+                  </span>
+                </summary>
+                <dl>
+                  <div>
+                    <dt>Product doorway</dt>
+                    <dd>{archetype[2]}</dd>
+                  </div>
+                  <div>
+                    <dt>Likely journey</dt>
+                    <dd>{archetype[3]}</dd>
+                  </div>
+                  <div>
+                    <dt>Proof needed</dt>
+                    <dd>{archetype[4]}</dd>
+                  </div>
+                  <div>
+                    <dt>Retention test</dt>
+                    <dd>{archetype[5]}</dd>
+                  </div>
+                </dl>
+              </details>
+            );
+          })}
+        </div>
+      </section>
+
+      <section className="wide-card funnel-question-card">
+        <Head
+          eyebrow="Message opportunities"
+          title="Answer three questions faster"
+        />
+        <div className="question-grid editorial-question-grid">
+          {[
+            [
+              BadgeCheck,
+              'Fit',
+              '“Will this work for my hair, routine or need?”',
+              'Put hair type, use case and expected result beside the first product claim.',
+              'Show one hero product across distinct routines.',
+              'Route to one specific how-to, quiz or comparison.',
+            ],
+            [
+              Search,
+              'Difference',
+              '“Why is this better for me than what I use now?”',
+              'Pair the emotional promise with one concrete mechanism and proof source.',
+              'Compare techniques or formats without unverified superiority claims.',
+              'Explain the use case—not a generic feature list.',
+            ],
+            [
+              ShoppingBag,
+              'Next step',
+              '“Where do I start—and what comes next?”',
+              'Give one starting recommendation by need state.',
+              'Build routine paths from hero product to adjacent franchise.',
+              'Offer one choice plus one optional add-on.',
+            ],
+          ].map(([Icon, label, question, pagePatch, content, reply], index) => {
+            const QuestionIcon = Icon as typeof BadgeCheck;
+            return (
+              <article key={String(label)}>
+                <div>
+                  <span>
+                    <QuestionIcon />
+                  </span>
+                  <small>
+                    0{index + 1} · {String(label)}
+                  </small>
+                </div>
+                <h3>{String(question)}</h3>
+                <details>
+                  <summary>See the response plan</summary>
+                  <p>
+                    <b>On-page:</b> {String(pagePatch)}
+                  </p>
+                  <p>
+                    <b>Content:</b> {String(content)}
+                  </p>
+                  <p>
+                    <b>Reply:</b> {String(reply)}
+                  </p>
+                </details>
+              </article>
+            );
+          })}
+        </div>
+        <div className="funnel-insight">
+          <Lightbulb />
+          <div>
+            <span>Smart insight</span>
+            <p>
+              <b>Fit is the likely leverage point.</b> Portfolio breadth becomes
+              an advantage when a customer can identify the right doorway and
+              see herself in the proof.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="funnel-data-card">
+        <span>
+          <Database />
+        </span>
+        <div>
+          <small>Measurement blueprint</small>
+          <h3>Connect the journey at customer + creative level</h3>
+          <p>
+            Customer ID × first-touch source × creative ID × need state × first
+            SKU × realized margin × device × market × 30/60/90-day second order
+            × next franchise.
+          </p>
+        </div>
+        <Label>INTERNAL DATA REQUIRED</Label>
+      </section>
+    </div>
+  );
+}

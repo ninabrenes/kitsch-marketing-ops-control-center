@@ -2,6 +2,7 @@ import {
   ArrowRight,
   Bot,
   CheckCircle2,
+  ChevronRight,
   CircleAlert,
   Database,
   DollarSign,
@@ -432,7 +433,16 @@ export function MarketingOpsSystem() {
           </ul>
         </article>
       </section>
-      <OkrChiefOfStaff />
+      <details className="editorial-disclosure ops-deep-dive">
+        <summary>
+          <span>OKRS + CHIEF OF STAFF</span>
+          <strong>Open the complete operating playbook</strong>
+          <ChevronRight aria-hidden="true" />
+        </summary>
+        <div className="editorial-disclosure-body">
+          <OkrChiefOfStaff />
+        </div>
+      </details>
       <section className="dark-card ops-system-final">
         <CheckCircle2 />
         <h3>The role’s force-multiplier promise</h3>
