@@ -1,0 +1,4 @@
+decision_id,date,signal,business_question,decision_owner,decision,rationale,due_date,outcome_metric,status
+D-001,,TikTok Shop displays 2.3M sold,"Which product cohorts create repeat purchase beyond the first viral order?",Growth + CRM,,,,Repeat purchase rate,Open
+D-002,,Hair perfume is prominent across DTC Shop and editorial,"Is fragrance an acquisition wedge a repeat engine or both?",Brand + E-commerce,,,,New-to-brand and 90-day repeat,Open
+D-003,,Bottle-free hair care leads observed DTC best-seller ordering,"Does merchandising align with contribution margin and retention?",E-commerce + Finance,,,,Contribution margin and repeat,Open

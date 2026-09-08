@@ -1,0 +1,7 @@
+business_question,metric,definition,formula,data_source,owner,cadence,decision_supported,availability
+Are we acquiring efficiently?,Blended CAC,Cost per new customer,total marketing spend/new customers,Finance plus commerce,Growth,Weekly,Reallocate acquisition budget,Internal required
+Is growth efficient?,MER,Revenue per marketing dollar,total revenue/total marketing spend,Finance plus commerce,Marketing Ops,Weekly,Set spend guardrails,Internal required
+Are customers returning?,Repeat purchase rate,Share of customers with multiple orders,customers with 2+ orders/customers,Commerce plus CRM,CRM,Monthly,Prioritize retention programs,Internal required
+Which launches deserve scale?,Launch contribution,Incremental contribution from launch,incremental revenue-incremental variable costs,Commerce plus COGS,Finance,Launch plus 30/60d,Scale stop or revise,Internal required
+Are launches ready?,Launch readiness,Completed required gates,complete gates/required gates,Project management system,Marketing Ops,Twice weekly,Go no-go or escalate,Internal required
+Where is public momentum?,Observable demand signals,Publicly displayed commerce reviews and editorial visibility,Not an internal KPI,Public platforms,Marketing Ops,Weekly,Frame questions for internal validation,Public

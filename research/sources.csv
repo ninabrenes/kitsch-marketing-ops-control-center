@@ -1,0 +1,13 @@
+source_id,brand,platform,url,source_type,date_published,date_accessed,metric_or_claim,value,context,confidence,agent,notes
+S01,Kitsch,DTC,https://www.mykitsch.com/,First-party page,,2026-09-08,Verified reviews,"152617; 4.8 average",Homepage footer,High,Brand Intelligence,Snapshot
+S02,Kitsch,DTC,https://www.mykitsch.com/pages/our-founder,First-party page,,2026-09-08,Founder story,"Founded 2010; self-funded",Founder page,High,Brand Intelligence,
+S03,Kitsch,TikTok,https://www.tiktok.com/@kitsch,First-party profile,,2026-09-08,Profile scale,"341.9K followers; 1.7M likes",Visible profile,High,Social Intelligence,Snapshot
+S04,Kitsch,TikTok Shop,https://shop.tiktok.com/us/store/kitsch-llc/7495183505163847730,Marketplace profile,,2026-09-08,Shop scale,"341.5K+ followers; 2.3M sold; 2415 videos",Official Shop,High,Social Intelligence,Platform-displayed counter
+S05,Kitsch,Instagram,https://www.instagram.com/mykitsch/,First-party profile,,2026-09-08,Profile scale,"1M followers; 4779 posts",Public profile metadata,High,Social Intelligence,Snapshot
+S06,Kitsch,YouTube,https://www.youtube.com/@mykitsch,First-party profile,,2026-09-08,Profile scale,"24.1K subscribers; 1.8K videos",Visible channel header,High,Social Intelligence,Snapshot
+S07,Kitsch,Pinterest,https://www.pinterest.com/mykitsch/,First-party profile,,2026-09-08,Profile scale,"11.5K followers; verified merchant",Visible profile,High,Social Intelligence,Snapshot
+S08,Kitsch,Target,https://www.target.com/b/kitsch/-/N-q643leatp7e,Retailer,,2026-09-08,Assortment,"144 listed results",Brand page,High,Ecommerce Intelligence,Snapshot
+S09,Kitsch,Ulta,https://www.ulta.com/brand/kitsch,Retailer,,2026-09-08,Assortment,"204 products",Brand page,High,Ecommerce Intelligence,Snapshot
+S10,Kitsch,Good Housekeeping,https://www.goodhousekeeping.com/beauty-products/g70540163/hair-perfume-2026/,Editorial,2026-03-09,Hair perfume visibility,"Warm Sugar: Best Value",2026 roundup,Medium,AEO Intelligence,Publisher judgment
+S11,Kitsch,Marie Claire,https://www.marieclaire.com/beauty/best-heatless-curlers/,Editorial,2026-05-08,Heatless visibility,Included in tested roundup,2026 roundup,Medium,AEO Intelligence,Publisher judgment
+S12,Kitsch,LinkedIn,https://www.linkedin.com/company/kitsch,First-party profile,,2026-09-08,Profile scale,43487 followers,Company page,High,Brand Intelligence,Snapshot

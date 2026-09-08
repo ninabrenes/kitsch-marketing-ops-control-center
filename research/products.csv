@@ -1,0 +1,9 @@
+brand,product,category,visible_price_usd,channel,signal,date_accessed,confidence
+Kitsch,Rice Water Shampoo Bar,Shampoo bar,16,DTC,First item in observed best-seller ordering,2026-09-08,High
+Kitsch,Rice Water Conditioner Bar,Conditioner bar,16,DTC,Second item in observed best-seller ordering,2026-09-08,High
+Kitsch,Rice Water Bar Combo,Hair care set,28,DTC,Third item in observed best-seller ordering,2026-09-08,High
+Kitsch,Smoothing Air Dry Cream,Styling,15,DTC and Target,Homepage and retailer bestseller signal,2026-09-08,High
+Kitsch,Hair & Body Perfume Discovery Set,Fragrance,18,DTC and TikTok Shop,Newness and high visible Shop sales,2026-09-08,High
+Kitsch,Adjustable Satin Shower Cap,Shower and sleep,32.50,TikTok Shop,166K visible sold,2026-09-08,High
+Kitsch,Satin Pillowcase,Sleep,20,Ulta,12955 retailer reviews,2026-09-08,High
+Kitsch,Satin Heatless Curling Set,Heatless styling,18,TikTok Shop and Ulta,30900 visible Shop sold; editorial visibility,2026-09-08,High
