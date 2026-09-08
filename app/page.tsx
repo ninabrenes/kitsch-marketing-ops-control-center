@@ -1476,9 +1476,9 @@ function Intelligence() {
   return (
     <div className="page-grid">
       <Head
-        eyebrow="Market + message intelligence"
-        title="Turn evidence into the next move"
-        copy="Public search and ad-library signals are paired with an interpretation, action, confidence and the internal metric needed to validate them."
+        eyebrow="Growth signals"
+        title="Decide what to test next"
+        copy="Use public search, ad and market evidence to frame one hypothesis, owner, validation metric and stop/scale rule."
       />
       <section className="intelligence-hero">
         <div>
@@ -1548,7 +1548,7 @@ function Intelligence() {
       <section className="wide-card">
         <Head
           eyebrow="Rising-query evidence"
-          title="Where Kitsch already enters the category language"
+          title="Where Kitsch appears in category demand"
         />
         <div className="query-grid">
           <article>
@@ -1657,8 +1657,8 @@ function Intelligence() {
       <section className="two-col">
         <article className="wide-card">
           <Head
-            eyebrow="Communication strategy"
-            title="What appears to be working"
+            eyebrow="Public communication patterns"
+            title="Patterns worth preserving and testing"
           />
           <ul className="check-list">
             <li>
@@ -1689,7 +1689,7 @@ function Intelligence() {
         <article className="wide-card">
           <Head
             eyebrow="Improvement agenda"
-            title="Make breadth feel like a system"
+            title="Turn breadth into a system"
           />
           <ol className="number-list">
             <li>
@@ -1716,7 +1716,7 @@ function Intelligence() {
       <section className="wide-card">
         <Head
           eyebrow="Expert rubric"
-          title="Brand + communication system assessment"
+          title="Communication clarity assessment"
           copy="A directional public-evidence rubric—not a performance score or consumer-research result."
         />
         <div className="score-grid">
@@ -1737,7 +1737,7 @@ function Intelligence() {
       <section className="wide-card">
         <Head
           eyebrow="Smart insight contract"
-          title="Observation → interpretation → decision → metric"
+          title="Move from observation to decision"
         />
         <div className="insight-grid">
           {smartInsights.map((s, i) => (
@@ -1782,15 +1782,15 @@ function Overview() {
     <div className="page-grid">
       <section className="hero-panel">
         <div className="hero-copy">
-          <Label>PUBLIC-SIGNAL STRATEGY PROTOTYPE</Label>
+          <Label>PUBLIC-DATA OPERATING PROTOTYPE</Label>
           <h1>
-            See the signal.
+            Know what changed.
             <br />
-            <em>Run the system.</em>
+            <em>Run what happens next.</em>
           </h1>
           <p>
-            A visual operating story for turning public evidence into sharper
-            questions, coordinated launches and measurable decisions.
+            An executive view of public signals, operating priorities and the
+            internal data needed to make trusted decisions.
           </p>
           <div className="hero-chips">
             <span>14 decision views</span>
@@ -1821,12 +1821,72 @@ function Overview() {
         </div>
       </section>
       <Metrics />
+      <section className="wide-card">
+        <Head
+          eyebrow="Role coverage"
+          title="Eight systems this role must own"
+          copy="This overview maps directly to Kitsch’s brief: create rhythm, make numbers trustworthy and keep cross-functional work moving. These are operating capabilities—not claims about current Kitsch performance."
+        />
+        <div className="pulse-grid">
+          {[
+            [
+              CalendarDays,
+              'Operating cadence',
+              'Weekly pulse, monthly review and quarterly planning with a defined input, decision and output.',
+            ],
+            [
+              Database,
+              'Trusted KPI definitions',
+              'One governed definition, source, owner and refresh rule for CAC, ROAS, LTV, repeat and contribution.',
+            ],
+            [
+              PackageSearch,
+              'Launch control',
+              'One calendar with readiness gates, dependencies, accountable owners and a 30-day learning review.',
+            ],
+            [
+              Target,
+              'OKRs + planning',
+              'Company priorities cascade into measurable marketing outcomes, key results, initiatives and work records.',
+            ],
+            [
+              DollarSign,
+              'Budget, POs + vendors',
+              'Plan, committed spend, invoices, forecast, variance, renewal dates and vendor accountability stay visible together.',
+            ],
+            [
+              CheckCircle2,
+              'Leadership follow-through',
+              'Pre-read, decision owner, deadline, rationale and outcome close the loop after every leadership meeting.',
+            ],
+            [
+              ListChecks,
+              'Playbooks',
+              'Recurring friction becomes a tested process with an owner, service level, evidence and exception path.',
+            ],
+            [
+              Users,
+              'Cross-functional integration',
+              'Product, E-commerce, Retail, Creative, Social and Ops share dependencies and acceptance criteria.',
+            ],
+          ].map(([Icon, title, copy]) => {
+            const CoverageIcon = Icon as typeof CalendarDays;
+            return (
+              <article key={String(title)}>
+                <CoverageIcon />
+                <h3>{String(title)}</h3>
+                <p>{String(copy)}</p>
+              </article>
+            );
+          })}
+        </div>
+      </section>
       <ExecutiveSpotlight />
       <section className="wide-card">
         <Head
-          eyebrow="Executive pulse"
-          title="Four signals worth a leadership conversation"
-          copy="No public signal is treated as internal performance."
+          eyebrow="Leadership signals"
+          title="Four questions worth resolving"
+          copy="Public evidence opens the discussion; internal data determines the decision."
         />
         <div className="pulse-grid">
           <article>
@@ -1871,8 +1931,9 @@ function Overview() {
       </section>
       <section className="wide-card">
         <Head
-          eyebrow="Decision queue"
-          title="Signals become questions before recommendations"
+          eyebrow="Leadership decision queue"
+          title="Questions that need an owner"
+          copy="Confirm the evidence, name the decision-maker and record the outcome."
         />
         {decisions.map((d) => (
           <article className="decision-row" key={d[2]}>
@@ -1909,9 +1970,9 @@ function Ecommerce() {
   return (
     <div className="page-grid">
       <Head
-        eyebrow="E-commerce intelligence"
-        title="See what sells—and what to connect next"
-        copy="A public-data view of products, channel roles and commercial signals—designed to show what to connect internally before calling anything revenue."
+        eyebrow="Commerce control"
+        title="Products, channels, profitable repeat"
+        copy="Inspect public product and channel signals, then connect orders, costs, returns and cohorts before making a commercial decision."
       />
       <section className="commerce-hero">
         <div>
@@ -2071,7 +2132,7 @@ function Ecommerce() {
           <section className="wide-card">
             <Head
               eyebrow="Product architecture"
-              title="Five franchises, distinct jobs"
+              title="Five franchises. Five jobs."
               copy="A strategy hypothesis based on visible assortment and public demand proof."
             />
             <div className="commerce-franchises">
@@ -2089,7 +2150,7 @@ function Ecommerce() {
           <section className="wide-card">
             <Head
               eyebrow="Representative product intelligence"
-              title="What sells, where it appears, and the role it plays"
+              title="Product, channel and portfolio role"
               copy="Twelve visible hero products—not a complete SKU census. Prices, counters and result counts are snapshots that can change."
             />
             <div className="product-card-grid">
@@ -2126,8 +2187,8 @@ function Ecommerce() {
           <section className="two-col">
             <article className="wide-card">
               <Head
-                eyebrow="What appears to work"
-                title="Utility earns scale; novelty extends it"
+                eyebrow="Public patterns to validate"
+                title="Test utility as the core and novelty as the extension"
               />
               <ul className="commerce-list">
                 {[
@@ -2148,7 +2209,7 @@ function Ecommerce() {
             <article className="wide-card">
               <Head
                 eyebrow="Highest-value questions"
-                title="Where the operating system should go next"
+                title="Questions internal data must answer"
               />
               <ul className="commerce-list risk">
                 {[
@@ -2210,9 +2271,9 @@ function Performance() {
   return (
     <div className="page-grid">
       <Head
-        eyebrow="Performance"
-        title="A definition layer before a dashboard"
-        copy="The first ops win is agreement on questions, formulas, sources, owners and cadence."
+        eyebrow="KPI definitions"
+        title="Define the KPI before reporting it"
+        copy="Agree on the business question, formula, source, owner, refresh date and decision threshold before publishing an actual."
       />
       <MetricBenchmarkLab />
       <Metrics />
@@ -2255,7 +2316,7 @@ function Performance() {
         <article className="wide-card">
           <Head
             eyebrow="Measurement contract"
-            title="What leadership must agree"
+            title="Agree the measurement contract"
           />
           <ul className="check-list">
             {[
@@ -2291,8 +2352,8 @@ function Launches() {
     <div className="page-grid">
       <Head
         eyebrow="Launch control"
-        title="See what is ready, blocked and due"
-        copy="This is the shared command center for a product launch: one owner, due date and status for every cross-functional dependency, followed by a 30-day learning review. All records below are illustrative."
+        title="See risk before the date slips"
+        copy="Use one shared record for every dependency, owner, due date and decision, then close the launch with a 30-day learning review. All records below are illustrative."
       />
       <section className="launch-explainer">
         <article>
@@ -2360,8 +2421,8 @@ function Launches() {
       </details>
       <section className="wide-card">
         <Head
-          eyebrow="The working checklist"
-          title="Every launch needs these ten owners"
+          eyebrow="Readiness gates"
+          title="Ten gates every launch must clear"
           copy="A launch is ready only when these inputs are complete or a named decision-maker accepts the risk."
         />
         <div className="gate-grid">
@@ -2428,9 +2489,9 @@ function SearchView() {
   return (
     <div className="page-grid">
       <Head
-        eyebrow="SEO + answer visibility"
-        title="Win the question, not only the keyword"
-        copy="Observable September 2026 results; not a proxy for total traffic or rank tracking."
+        eyebrow="Search + answer visibility"
+        title="Answer the question. Earn the click."
+        copy="Use the September 2026 public snapshot to prioritize customer questions; validate demand, ranking and conversion in Search Console and commerce data."
       />
       <section className="two-col">
         <article className="wide-card">
@@ -2979,9 +3040,9 @@ function Social() {
   return (
     <div className="page-grid">
       <Head
-        eyebrow="Social + owned-channel intelligence"
-        title="Seven platforms. Seven jobs. One learning system."
-        copy="Each channel has a dedicated evidence → insight → action view. The combined layer shows how they should hand demand to one another."
+        eyebrow="Social operating system"
+        title="Give every channel a job"
+        copy="Inspect each platform’s evidence, role and next action, then connect creative IDs to attention, commerce and cohort outcomes."
       />
       <section className="wide-card social-switcher">
         <Tabs defaultValue="instagram">
@@ -3002,7 +3063,7 @@ function Social() {
       <section className="wide-card">
         <Head
           eyebrow="2025–2026 platform coverage"
-          title="What is known, what is only a snapshot, and what must be connected"
+          title="Know the coverage before reading the trend"
           copy="Public profiles do not expose a reliable month-by-month performance history. This matrix prevents current counters, dated examples and Google search interest from being mistaken for social results."
         />
         <div className="table-wrap">
@@ -3066,7 +3127,7 @@ function Social() {
       <section className="wide-card">
         <Head
           eyebrow="Month-by-month public read"
-          title="What changed—and what to test next"
+          title="Monthly signals and next tests"
           copy="These are demand signals and recommended responses, not claims that a social campaign caused the movement."
         />
         <div className="monthly-read-grid">
@@ -3107,7 +3168,7 @@ function Social() {
       <section className="wide-card">
         <Head
           eyebrow="Combined channel architecture"
-          title="Design the handoff—not seven isolated calendars"
+          title="Connect the channel handoffs"
           copy="A proposed role map based on the public footprint; validate contribution and customer movement internally."
         />
         <div className="channel-journey">
@@ -3276,8 +3337,8 @@ function Brand() {
     <div className="page-grid">
       <Head
         eyebrow="Messaging playbook"
-        title="Make every channel sound like Kitsch"
-        copy="A practical creative QA layer for launches, creators, CRM, retail and product pages—grounded in Kitsch’s live website and public 2023 brand book."
+        title="One Kitsch voice, adapted by channel"
+        copy="Use this creative QA layer before launches, creator briefs, CRM, retail and PDP work; validate it against the current internal brand book."
       />
       <section className="brand-hero">
         <div>
@@ -3305,25 +3366,37 @@ function Brand() {
             <Megaphone />
             <span>PRODUCT LAUNCH</span>
             <h3>Friction → promise → proof → next step</h3>
-            <p>Make the everyday problem recognizable before introducing the product world.</p>
+            <p>
+              Make the everyday problem recognizable before introducing the
+              product world.
+            </p>
           </article>
           <article>
             <Users />
             <span>CREATOR BRIEF</span>
             <h3>Situation → demonstration → reason to believe</h3>
-            <p>Preserve the creator’s voice while requiring a visible product payoff and approved claim.</p>
+            <p>
+              Preserve the creator’s voice while requiring a visible product
+              payoff and approved claim.
+            </p>
           </article>
           <article>
             <Radio />
             <span>EMAIL + SMS</span>
             <h3>Occasion → useful benefit → routine expansion</h3>
-            <p>Connect launches to replenishment, cross-sell and the next customer need—not only promotion.</p>
+            <p>
+              Connect launches to replenishment, cross-sell and the next
+              customer need—not only promotion.
+            </p>
           </article>
           <article>
             <ShoppingBag />
             <span>RETAIL + PDP</span>
             <h3>Question → specific answer → proof → how-to</h3>
-            <p>Give shoppers the same product truth across DTC, marketplaces and retail partners.</p>
+            <p>
+              Give shoppers the same product truth across DTC, marketplaces and
+              retail partners.
+            </p>
           </article>
         </div>
       </section>
@@ -3380,7 +3453,7 @@ function Brand() {
         <article className="wide-card">
           <Head
             eyebrow="Portfolio measurement"
-            title="Report the system—not only the SKU"
+            title="Measure portfolio roles, not only SKUs"
           />
           <div className="measure-stack">
             <span>NEED STATE</span>
@@ -3399,7 +3472,10 @@ function Brand() {
           <Label>HYPOTHESIS</Label>
         </article>
         <article className="wide-card">
-          <Head eyebrow="Governance case" title="One claims registry" />
+          <Head
+            eyebrow="Claims governance"
+            title="Govern claims in one registry"
+          />
           <p>
             The current role brief cites 32,000+ retailers / 92 countries; owned
             pages still expose 20,000 / 27 in places. Sustainability totals also
@@ -3541,9 +3617,9 @@ function Sources() {
   return (
     <div className="page-grid">
       <Head
-        eyebrow="Source registry"
-        title="Every claim should survive a click"
-        copy="Accessed September 8, 2026. Platform counters are snapshots and will change."
+        eyebrow="Sources + methods"
+        title="Trace every claim to evidence"
+        copy="Check the source, capture date, confidence and limitation before using a claim. Platform counters are September 8, 2026 snapshots and will change."
       />
       <section className="wide-card">
         <div className="table-wrap">
@@ -3667,35 +3743,35 @@ export default function Home() {
     [
       'LEADERSHIP',
       [
-        ['overview', 'Overview', Gauge],
-        ['intelligence', 'Growth intelligence', BrainCircuit],
+        ['overview', 'Executive overview', Gauge],
+        ['intelligence', 'Growth signals', BrainCircuit],
       ],
     ],
     [
       'GROWTH ENGINE',
       [
-        ['commerce', 'Commerce', ShoppingBag],
-        ['creators', 'Creator + affiliate', Handshake],
+        ['commerce', 'Commerce control', ShoppingBag],
+        ['creators', 'Creator operations', Handshake],
         ['funnel', 'Customer journey', Users],
-        ['website', 'Website systems', Globe2],
-        ['performance', 'KPI lab', Database],
+        ['website', 'Storefront + stack', Globe2],
+        ['performance', 'KPI definitions', Database],
       ],
     ],
     [
       'MARKET + CHANNELS',
       [
         ['launches', 'Launch control', CalendarDays],
-        ['social', 'Social channels', Users],
-        ['search', 'Search + content', Search],
+        ['social', 'Social system', Users],
+        ['search', 'Search + answers', Search],
         ['brand', 'Messaging playbook', Palette],
-        ['competitors', 'Market map', Target],
+        ['competitors', 'Competitor map', Target],
       ],
     ],
     [
       'OPERATING SYSTEM',
       [
-        ['operations', 'Operating system', ListChecks],
-        ['sources', 'Evidence', FileSearch],
+        ['operations', 'Marketing operations', ListChecks],
+        ['sources', 'Sources + methods', FileSearch],
       ],
     ],
   ] as const;

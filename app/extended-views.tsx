@@ -245,9 +245,9 @@ export function Website() {
   return (
     <div className="page-grid">
       <Head
-        eyebrow="Website + martech intelligence"
-        title="The storefront is a growth system—and a governance job"
-        copy="Technology is identified from public page-source and customer-facing surfaces. Detection does not prove current contract status, configuration quality, adoption or business impact."
+        eyebrow="Storefront + martech"
+        title="Own the journey and the stack"
+        copy="Use public implementation signals to identify what to verify internally: active vendors, data flows, owners and decision use. Detection does not prove configuration or impact."
       />
       <section className="stack-hero">
         <div>
@@ -279,7 +279,7 @@ export function Website() {
       <section className="wide-card">
         <Head
           eyebrow="Observable stack"
-          title="What appears to be connected"
+          title="Verify the active stack"
           copy="These are public implementation signals, not a verified internal systems inventory."
         />
         <div className="stack-grid">
@@ -307,7 +307,7 @@ export function Website() {
       <section className="wide-card">
         <Head
           eyebrow="Customer journey architecture"
-          title="Five handoffs the website must make measurable"
+          title="Make five storefront handoffs measurable"
         />
         <div className="site-journey">
           {[
@@ -350,7 +350,7 @@ export function Website() {
         <article className="wide-card">
           <Head
             eyebrow="Search + AI readiness"
-            title="Strong technical discovery surface"
+            title="Strengthen technical discovery"
           />
           <ul className="commerce-list">
             <li>
@@ -382,7 +382,7 @@ export function Website() {
         <article className="wide-card">
           <Head
             eyebrow="Operating risk"
-            title="More tools create more reconciliation"
+            title="Reconcile before adding tools"
           />
           <ul className="commerce-list risk">
             <li>
@@ -414,10 +414,7 @@ export function Website() {
         </article>
       </section>
       <section className="wide-card">
-        <Head
-          eyebrow="Stack governance"
-          title="The audit I would run in the first 30 days"
-        />
+        <Head eyebrow="Stack governance" title="First 30-day stack audit" />
         <div className="table-wrap">
           <table>
             <thead>
@@ -491,8 +488,8 @@ export function Funnel() {
     <div className="page-grid funnel-editorial">
       <Head
         eyebrow="Customer journey"
-        title="One journey. Five measurable handoffs."
-        copy="Select a stage to see the customer question, media job, owner and first-party measure. Funnel widths illustrate the operating structure only—they are not Kitsch traffic or conversion volumes."
+        title="Five handoffs. One customer journey."
+        copy="Select a stage to assign the customer question, media job, owner and first-party measure. Funnel widths illustrate the operating structure only—not Kitsch traffic or conversion volumes."
       />
 
       <section
@@ -611,7 +608,7 @@ export function Funnel() {
       <section className="wide-card funnel-media-card">
         <Head
           eyebrow="Media roles"
-          title="Judge each channel by its job"
+          title="Assign each channel a job"
           copy="A channel can create demand, explain value, close a sale—or do several jobs. Give it a role before giving it a budget."
         />
         <div className="media-grid editorial-media-grid">
@@ -726,7 +723,7 @@ export function Funnel() {
       <section className="wide-card funnel-question-card">
         <Head
           eyebrow="Message opportunities"
-          title="Answer three questions faster"
+          title="Answer three buying questions"
         />
         <div className="question-grid editorial-question-grid">
           {[

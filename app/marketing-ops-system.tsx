@@ -207,10 +207,7 @@ export function MarketingOpsSystem() {
         <div>
           <Layers3 />
           <p>MARKETING OPERATING SYSTEM</p>
-          <h2>
-            Tools are useful only when every handoff has an owner, definition
-            and decision.
-          </h2>
+          <h2>Every handoff needs an owner, definition and decision.</h2>
         </div>
         <div className="ops-system-principles">
           <span>ONE WORK RECORD</span>
@@ -223,7 +220,7 @@ export function MarketingOpsSystem() {
         <div className="ops-system-title">
           <div>
             <p>TOOL ARCHITECTURE</p>
-            <h2>The minimum stack required to replace heroics with rhythm</h2>
+            <h2>The minimum stack for reliable execution</h2>
             <span>
               This is a capability map—not a recommendation to buy every named
               product. Confirm the current stack, choose one owner per layer and
@@ -249,7 +246,7 @@ export function MarketingOpsSystem() {
         <div className="ops-system-title">
           <div>
             <p>BUDGET DECISION ENGINE</p>
-            <h2>Spend follows economics, constraints and learning value</h2>
+            <h2>Allocate spend by economics, constraints and learning value</h2>
             <span>
               No public evidence can determine Kitsch’s actual channel budget.
               Apply these rules after joining spend to realized contribution and
@@ -299,9 +296,7 @@ export function MarketingOpsSystem() {
         <div className="ops-system-title">
           <div>
             <p>IDENTITY + MEASUREMENT WORKFLOW</p>
-            <h2>
-              Connect the person, order, product and creative without guessing
-            </h2>
+            <h2>Connect customer, order, product and creative</h2>
             <span>
               Use deterministic identifiers and consent. Marketplace customers
               may remain channel-level cohorts when person-level identity is

@@ -50,7 +50,7 @@ const scorecards = [
     icon: PackageCheck,
   },
   {
-    name: 'Fees + product + commission',
+    name: 'Fully loaded creator cost',
     value: '—',
     question: 'What is the fully loaded creator investment?',
     icon: Banknote,
@@ -261,7 +261,7 @@ export function CreatorAffiliateDashboard() {
           <span className="creator-eyebrow">
             CREATOR + AFFILIATE OPERATING SYSTEM
           </span>
-          <h1>Manage creator value from contract to cohort.</h1>
+          <h1>Run creators from contract to cohort.</h1>
           <p>
             A governed workspace for roster health, content delivery, fully
             loaded investment, customer quality and renewal decisions—without

@@ -39,162 +39,162 @@ type TabHelp = {
 
 export const tabHelp: Record<DashboardTab, TabHelp> = {
   overview: {
-    label: 'Overview',
+    label: 'Executive overview',
     purpose:
-      'A fast leadership read of the most important public signals and unresolved questions.',
-    inspect: 'Start with the four executive signals and the P1 decision queue.',
-    decision: 'Choose which question deserves internal validation first.',
+      'Shows the role’s eight operating systems, the strongest public signals and the questions leadership must close.',
+    inspect:
+      'Start with role coverage, then scan the leadership signals and decision queue.',
+    decision: 'Name the highest-priority question, owner and evidence gap.',
     apply:
-      'Use it to open a weekly marketing leadership meeting—not to approve spend on its own.',
+      'Use it to open the weekly leadership pulse and route work into the correct operating view.',
     next: 'intelligence',
   },
   intelligence: {
-    label: 'Growth intelligence',
+    label: 'Growth signals',
     purpose:
-      'Turns public search, ad and market signals into testable growth opportunities.',
+      'Turns public search, ad and market evidence into a prioritized test queue.',
     inspect:
-      'Look for several independent signals pointing in the same direction.',
+      'Look for converging evidence, then check confidence and the missing internal metric.',
     decision:
-      'Select the category, message or creative hypothesis worth testing.',
+      'Choose one category, message or creative hypothesis to validate.',
     apply:
-      'Write one experiment with an owner, audience, metric and stop/scale rule.',
+      'Create one test with an owner, audience, budget guardrail, metric and stop/scale date.',
     next: 'performance',
   },
   commerce: {
-    label: 'Commerce',
+    label: 'Commerce control',
     purpose:
-      'Shows the product, channel and data system behind profitable repeat.',
+      'Connects products and channels to the data required for profitable repeat.',
     inspect:
-      'Compare product doorways, channel availability and the confidence label beside every proxy.',
+      'Inspect product roles, channel availability, proxy limitations and data readiness.',
     decision:
-      'Decide which franchise needs deeper margin and repeat-purchase analysis.',
+      'Choose the franchise or SKU that needs margin and cohort analysis next.',
     apply:
       'Join SKU sales to COGS, discounts, returns and 30/60/90-day repeat before scaling.',
     next: 'creators',
   },
   creators: {
-    label: 'Creator + affiliate',
+    label: 'Creator operations',
     purpose:
-      'Connects creator contracts and content delivery to fully loaded economics and customer quality.',
+      'Connects creator contracts and delivery to fully loaded economics and customer quality.',
     inspect:
-      'Start with data readiness, then review the creator role, delivery evidence and metric contract.',
-    decision:
-      'Choose whether to renew, revise, graduate or stop a creator relationship.',
+      'Check data readiness, creator role, delivery evidence and the metric contract.',
+    decision: 'Renew, revise, graduate or stop a creator relationship.',
     apply:
-      'Join creator and content IDs to mature net orders, finance costs, refunds and 30/60/90-day cohorts.',
+      'Join creator and content IDs to net orders, costs, refunds and mature 30/60/90-day cohorts.',
     next: 'funnel',
   },
   funnel: {
     label: 'Customer journey',
     purpose:
-      'Connects media activity to the customer question and business outcome at each stage.',
+      'Shows the customer question, channel job, owner and measure at each handoff.',
     inspect:
-      'Find the stage with the weakest handoff, then review the matching customer archetype.',
-    decision: 'Choose which customer question or journey break to solve first.',
+      'Select the weakest handoff, then inspect its customer question and owner.',
+    decision: 'Choose the journey break to solve first.',
     apply:
-      'Build one stage-specific test; do not ask every channel to do every job.',
+      'Assign one stage-specific fix, measure and owner; do not ask every channel to do every job.',
     next: 'website',
   },
   website: {
-    label: 'Website systems',
+    label: 'Storefront + stack',
     purpose:
-      'Maps the storefront journey and marketing technology into one operating system.',
+      'Maps the storefront journey, martech stack and measurement ownership.',
     inspect:
-      'Focus on journey handoffs, measurement conflicts and ownership gaps—not the number of tools.',
-    decision: 'Choose one conversion leak or governance risk to audit.',
+      'Inspect journey breaks, conflicting numbers and missing owners—not tool count.',
+    decision: 'Choose one conversion leak or governance risk to resolve.',
     apply:
-      'Confirm active vendors and data flows internally, then assign an owner and review cadence.',
+      'Confirm the active vendor and data flow, then assign an owner, SLA and review cadence.',
     next: 'launches',
   },
   performance: {
-    label: 'KPI lab',
+    label: 'KPI definitions',
     purpose:
-      'Defines the scorecard leadership can trust once first-party data is connected.',
+      'Defines the metrics leadership can trust once internal data is reconciled.',
     inspect:
-      'Read the business question above each KPI before looking at the formula.',
+      'Start with the business question, then check formula, source, owner and limitation.',
     decision:
-      'Agree on the metric definition, source, owner and decision threshold.',
+      'Approve the definition, source, owner, refresh rule and decision threshold.',
     apply:
-      'Replace placeholders with reconciled finance, commerce, CRM and media data.',
+      'Replace blanks only with reconciled finance, commerce, CRM and media data.',
     next: 'launches',
   },
   launches: {
     label: 'Launch control',
     purpose:
-      'Replaces status chasing with one cross-functional record of owners, deadlines, blockers and decisions.',
+      'Replaces status chasing with one record of owners, deadlines, blockers and decisions.',
     inspect:
-      'Start with the ten required owners. Open the illustrative records only to see how the tracker behaves.',
+      'Check the ten readiness gates; use the illustrative records only to understand the workflow.',
     decision:
-      'Assign the missing owner, resolve or accept the risk, change scope, or move the date.',
+      'Assign the owner, resolve or accept the risk, change scope or move the date.',
     apply:
-      'Update the record twice weekly before launch, use the meeting for exceptions, and run a 30-day learning review.',
+      'Update twice weekly, use meetings for exceptions and run the 30-day learning review.',
     next: 'operations',
   },
   social: {
-    label: 'Social channels',
+    label: 'Social system',
     purpose:
-      'Gives each platform a distinct job and connects creative output to customer movement.',
+      'Gives each platform a job and connects creative output to customer movement.',
     inspect:
-      'Choose a platform inside the tab, then compare observed evidence, insight and next action.',
-    decision: 'Decide which creative concept to scale, revise or stop.',
+      'Select a platform; compare its public evidence, operating role and next action.',
+    decision: 'Choose which concept to test, revise or stop.',
     apply:
-      'Tag every asset by hook, product, proof, creator, format and landing page.',
+      'Tag each asset by concept, hook, product, proof, creator, format and destination.',
     next: 'search',
   },
   search: {
-    label: 'Search + content',
+    label: 'Search + answers',
     purpose:
-      'Shows where customer demand and unanswered questions can guide durable content.',
+      'Turns customer demand and unanswered questions into a durable content backlog.',
     inspect:
-      'Separate relative search direction from actual volume, sales or attribution.',
-    decision: 'Choose a topic to create, consolidate or improve.',
+      'Separate relative demand direction from volume, ranking, traffic and sales.',
+    decision: 'Choose one page to create, consolidate or improve.',
     apply:
-      'Pair one intent cluster with a canonical page, proof source and conversion path.',
+      'Assign one intent cluster, canonical page, proof owner and conversion path.',
     next: 'brand',
   },
   brand: {
     label: 'Messaging playbook',
     purpose:
-      'Keeps launches, creators, CRM, retail and product pages anchored to one customer promise.',
+      'Keeps launches, creators, CRM, retail and PDPs anchored to one message spine.',
     inspect:
-      'Start with the channel message patterns; open visual and technical detail only when needed.',
+      'Check customer friction, promise, proof and next step before reviewing visual detail.',
     decision:
-      'Decide whether an asset names a real customer friction, makes a clear promise and supports it with approved proof.',
+      'Approve, revise or stop the asset based on clarity, brand fit and proof.',
     apply:
-      'Use it as a pre-production brief and creative QA checklist—not as a substitute for the official internal brand book.',
+      'Use it before production as a brief and QA checklist; validate against the internal brand book.',
     next: 'competitors',
   },
   competitors: {
-    label: 'Market map',
-    purpose:
-      'Frames Kitsch’s position against adjacent beauty, hair and accessory brands.',
+    label: 'Competitor map',
+    purpose: 'Compares Kitsch with adjacent beauty, hair and accessory brands.',
     inspect:
-      'Compare the strategic territory and customer promise, not only prices or follower counts.',
-    decision: 'Choose where Kitsch should differentiate, defend or learn.',
+      'Compare territory, promise, proof and channel pressure—not follower counts alone.',
+    decision: 'Choose where Kitsch should defend, differentiate or test.',
     apply:
-      'Translate the comparison into a sharper brief; do not copy a competitor tactic without customer evidence.',
+      'Turn one gap into a Kitsch-specific brief with customer evidence and a success rule.',
     next: 'operations',
   },
   operations: {
-    label: 'Operating system',
+    label: 'Marketing operations',
     purpose:
-      'Maps the role into the meetings, metrics and workflows that create rhythm.',
+      'Maps the role into cadence, OKRs, launches, budget, decisions, people and playbooks.',
     inspect:
-      'Start with the eight operating artifacts and the 30/60/90-day sequence.',
-    decision: 'Choose the first cadence or source-of-truth problem to fix.',
+      'Start with role coverage and the 30/60/90-day rollout, then inspect the live-work templates.',
+    decision:
+      'Choose the first source-of-truth or follow-through problem to fix.',
     apply:
-      'Pilot the system on one real launch, then document it only after the workflow is stable.',
+      'Pilot on one live launch, measure the operating result and document the stable workflow.',
     next: 'sources',
   },
   sources: {
-    label: 'Evidence',
+    label: 'Sources + methods',
     purpose:
-      'Shows where each public claim came from and what remains unknown.',
-    inspect: 'Check the source, access date, confidence and evidence boundary.',
+      'Shows the source, capture date, confidence and limitation behind each public claim.',
+    inspect: 'Check the source, date, confidence and evidence boundary.',
     decision:
-      'Decide whether the evidence is strong enough for a hypothesis, discussion or action.',
+      'Decide whether the evidence supports a question, hypothesis or action.',
     apply:
-      'Open the source and validate time-sensitive claims before presenting the report.',
+      'Open the source and refresh time-sensitive claims before using the report.',
     next: 'overview',
   },
 };

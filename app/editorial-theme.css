@@ -81,7 +81,7 @@ body {
   background: rgba(248, 240, 230, 0.9);
 }
 
-:where(
+:is(
   .wide-card,
   .principle-card,
   .commerce-hero,
@@ -119,7 +119,7 @@ body {
   border-radius: 22px;
 }
 
-:where(
+:is(
   .wide-card,
   .launch-card,
   .creative-card,
@@ -131,7 +131,7 @@ body {
   box-shadow: var(--editorial-shadow);
 }
 
-:where(
+:is(
   .dark-card,
   .platform-hero,
   .brand-hero,
@@ -155,7 +155,7 @@ body {
   border: 1px solid var(--editorial-outline);
 }
 
-:where(
+:is(
     .dark-card,
     .platform-hero,
     .brand-hero,
@@ -171,7 +171,7 @@ body {
     .demo
   )
   p,
-:where(
+:is(
     .dark-card,
     .platform-hero,
     .brand-hero,
@@ -187,7 +187,7 @@ body {
     .demo
   )
   span,
-:where(
+:is(
     .dark-card,
     .platform-hero,
     .brand-hero,
@@ -273,6 +273,22 @@ body {
 .brand-swatches i {
   overflow: hidden;
   border-radius: 12px;
+}
+
+.chips span,
+.priority,
+.mini-flow span,
+.ops-fields span {
+  border-radius: 999px !important;
+}
+
+.signal-strip,
+.gate-grid,
+.cadence-grid,
+.ninety-grid,
+.meeting-grid {
+  overflow: hidden;
+  border-radius: 22px;
 }
 
 .stack-hero > div:first-child,
@@ -734,6 +750,37 @@ summary:focus-visible {
 @media (max-width: 1100px) {
   .yoy-score-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 960px) {
+  .app-shell {
+    display: block !important;
+  }
+
+  .sidebar {
+    position: fixed;
+    left: -284px;
+    width: 268px;
+    transition: left 0.25s ease;
+  }
+
+  .sidebar.open {
+    left: 0;
+    box-shadow: 20px 0 50px rgba(63, 43, 36, 0.18);
+  }
+
+  .mobile-menu {
+    display: block;
+  }
+
+  .topbar {
+    padding: 0 20px;
+  }
+
+  .content {
+    max-width: none;
+    padding: 26px 20px;
   }
 }
 
