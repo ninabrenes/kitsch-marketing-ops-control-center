@@ -40,7 +40,6 @@ import {
   Gauge,
   Globe2,
   Handshake,
-  Lightbulb,
   ListChecks,
   LockKeyhole,
   Megaphone,
@@ -1090,7 +1089,8 @@ const commerceChannelNarratives = [
     role: 'Turn proof into purchase',
     story:
       'Creator demonstrations compress discovery, education and checkout into one session. The job is rapid product understanding—not just viral reach.',
-    decision: 'Watch creator contribution, refunds and new-buyer cohort quality.',
+    decision:
+      'Watch creator contribution, refunds and new-buyer cohort quality.',
   },
   {
     name: 'Retail',
@@ -1098,7 +1098,8 @@ const commerceChannelNarratives = [
     role: 'Make the brand easy to enter',
     story:
       'Target, Ulta and Walmart provide access, shelf credibility and review proof. Assortment should make the next product relationship obvious across retailers.',
-    decision: 'Watch velocity, in-stock rate, promo depth and cross-channel lift.',
+    decision:
+      'Watch velocity, in-stock rate, promo depth and cross-channel lift.',
   },
   {
     name: 'Marketplaces',
@@ -1860,74 +1861,8 @@ function Intelligence() {
   );
 }
 
-function Overview({
-  onNavigate,
-}: {
-  onNavigate: (tab: DashboardTab) => void;
-}) {
-  return (
-    <div className="page-grid">
-      <section className="hero-panel">
-        <div className="hero-copy">
-          <Label>PUBLIC-DATA OPERATING PROTOTYPE</Label>
-          <h1>
-            Know what changed.
-            <br />
-            <em>Run what happens next.</em>
-          </h1>
-          <p>
-            An executive view of public signals, operating priorities and the
-            internal data needed to make trusted decisions.
-          </p>
-          <div className="hero-chips">
-            <span>14 decision views</span>
-            <span>{sources.length} sourced references</span>
-            <span>0 fabricated Kitsch actuals</span>
-          </div>
-        </div>
-        <div
-          className="hero-art"
-          aria-label="Kitsch product and strategy collage"
-        >
-          <img
-            src="https://cdn.shopify.com/s/files/1/0104/6904/8384/files/69117-HairPerfumeDiscoverySet-Sampler-4pc-Fragrance-1280x1280px.jpg?v=1762182803"
-            alt="Kitsch hair perfume discovery set"
-          />
-          <img
-            src="https://cdn.shopify.com/s/files/1/0104/6904/8384/files/500904-AirDryCream-Consumables-hero-1280x1280px.jpg?v=1779490582"
-            alt="Kitsch air dry cream"
-          />
-          <div>
-            <span>KITSCH</span>
-            <small>
-              PUBLIC DATA PROTOTYPE
-              <br />
-              SEP 08 · 2026
-            </small>
-          </div>
-        </div>
-      </section>
-      <EvidenceToAction
-        evidence="Current public counters, retailer surfaces, product pages and dated market signals."
-        interpretation="Fragrance and social commerce are visible growth narratives, while omnichannel scale creates a reconciliation job."
-        internal="Finance-aligned revenue, spend, margin, inventory and customer cohorts joined across channels."
-        decision="Set the leadership priority, assign an owner and define the internal proof required before funding or scaling."
-        owner="Leadership"
-      />
-      <ExecutiveSpotlight onNavigate={onNavigate} />
-      <section className="principle-card">
-        <Lightbulb />
-        <div>
-          <strong>Positioning for the interview</strong>
-          <p>
-            I am not claiming to understand Kitsch better than the people inside
-            Kitsch. This prototype shows how I structure ambiguity, separate
-            evidence from assumptions, and turn signals into decisions.
-          </p>
-        </div>
-      </section>
-    </div>
-  );
+function Overview({ onNavigate }: { onNavigate: (tab: DashboardTab) => void }) {
+  return <ExecutiveSpotlight onNavigate={onNavigate} />;
 }
 function Ecommerce() {
   const tikTokTotal = tiktokValue.reduce((sum, r) => sum + r[1], 0);
@@ -3873,8 +3808,12 @@ export default function Home() {
           </button>
         </header>
         <div className="content">
-          <DashboardGuide active={active} onNavigate={navigate} />
-          <InsightCopilot key={active} active={active} />
+          {active !== 'overview' && (
+            <DashboardGuide active={active} onNavigate={navigate} />
+          )}
+          {active !== 'overview' && (
+            <InsightCopilot key={active} active={active} />
+          )}
           <TabsContent value="overview">
             <Overview onNavigate={navigate} />
           </TabsContent>

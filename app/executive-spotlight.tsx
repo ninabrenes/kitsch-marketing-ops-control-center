@@ -1,113 +1,291 @@
+'use client';
+
+/* oxlint-disable next/no-img-element -- Product imagery is served from official public Kitsch CDN assets. */
+import { useState } from 'react';
 import {
   ArrowRight,
-  CalendarClock,
+  ChevronDown,
   CircleAlert,
-  Database,
+  Clock3,
+  Eye,
+  ListChecks,
+  PackageCheck,
   Target,
   TrendingUp,
-  Users,
+  UsersRound,
 } from 'lucide-react';
 import type { DashboardTab } from './dashboard-guide';
+import { GlossaryHint, GlossaryText } from './glossary-term';
+import {
+  PlatformBrandIcon,
+  type PlatformBrandName,
+} from './platform-brand-icon';
 import './executive-overview.css';
 
-const healthAreas = [
+type Period = 'Week' | 'Month' | 'Quarter' | 'YoY';
+type DataMode = 'Public evidence' | 'Internal connection plan';
+type FunnelStage = 'Discover' | 'Consider' | 'Buy' | 'Repeat';
+
+const outcomes = [
   {
     icon: TrendingUp,
     name: 'Profitable growth',
-    question: 'Are sales growing without weakening contribution?',
-    metrics: 'Net sales vs. plan · contribution margin · MER',
+    question: 'Are we acquiring demand without weakening contribution?',
+    metric: 'Net sales · contribution · MER · CAC',
     source: 'Shopify + finance + paid media',
+    tab: 'performance' as DashboardTab,
   },
   {
-    icon: Users,
+    icon: UsersRound,
     name: 'Customer quality',
     question: 'Are new customers returning and expanding their routine?',
-    metrics: 'New-customer CAC · 90-day repeat · LTV:CAC',
+    metric: 'New-customer CAC · 90-day repeat · LTV:CAC',
     source: 'Shopify + Klaviyo + cohort model',
+    tab: 'funnel' as DashboardTab,
   },
   {
-    icon: CalendarClock,
+    icon: PackageCheck,
     name: 'Launch delivery',
-    question: 'Are launch risks visible early enough to fix?',
-    metrics: 'T−14 readiness · on-time dependencies · D+30 review',
+    question: 'Are priority launches ready early enough to fix risk?',
+    metric: 'T−14 readiness · dependencies · D+30 review',
     source: 'Asana launch portfolio',
+    tab: 'launches' as DashboardTab,
   },
   {
-    icon: Database,
+    icon: ListChecks,
     name: 'Operating control',
     question: 'Are money, decisions and commitments under control?',
-    metrics: 'Budget variance · overdue decisions · PO coverage',
+    metric: 'Budget variance · decision SLA · PO coverage',
     source: 'Finance + Asana + decision log',
+    tab: 'operations' as DashboardTab,
   },
 ] as const;
 
-const priorityBriefs: Array<{
-  number: string;
-  eyebrow: string;
-  title: string;
-  observed: string;
-  meaning: string;
-  missing: string;
+const changes = [
+  {
+    date: 'SEP 08 · 2026',
+    confidence: 'HIGH CONFIDENCE',
+    title: 'Public channel snapshot refreshed',
+    detail:
+      'Owned social, retailer and TikTok Shop counters were rechecked for the current evidence window.',
+    source: '34-source evidence library',
+  },
+  {
+    date: 'AUG 26 · 2026',
+    confidence: 'MEDIUM CONFIDENCE',
+    title: 'Creator concentration became measurable',
+    detail:
+      'Modash surfaced 43.7K sponsored posts in 12 months, with 95.4% of tracked activity on TikTok.',
+    source: 'Third-party creator tracking',
+  },
+  {
+    date: 'AUG · 2026',
+    confidence: 'HIGH CONFIDENCE',
+    title: 'The search evidence window advanced',
+    detail:
+      'The US Google Trends series now includes August for hair perfume, shampoo bars, heatless curls and adjacent demand.',
+    source: 'Google Trends · sampled index',
+  },
+] as const;
+
+const decisions = [
+  {
+    priority: 'P1',
+    title: 'Approve one profitable-demand measurement plan',
+    owner: 'Marketing Ops + Finance',
+    due: 'Proposed · Sep 11',
+    status: 'DRAFT',
+    tab: 'performance' as DashboardTab,
+    action: 'Review definitions',
+  },
+  {
+    priority: 'P2',
+    title: 'Set the Q4 launch-priority and escalation rule',
+    owner: 'Marketing Leader + Product',
+    due: 'Proposed · Sep 15',
+    status: 'PROPOSED',
+    tab: 'launches' as DashboardTab,
+    action: 'Review launches',
+  },
+  {
+    priority: 'P3',
+    title: 'Join creator cost, content, order and cohort IDs',
+    owner: 'Partnerships + Finance',
+    due: 'Proposed · Sep 18',
+    status: 'PROPOSED',
+    tab: 'creators' as DashboardTab,
+    action: 'Review creators',
+  },
+] as const;
+
+const funnelStages: Array<{
+  name: FunnelStage;
+  question: string;
+  platforms: PlatformBrandName[];
+  publicSignal: string;
+  internal: string;
   decision: string;
-  owner: string;
   tab: DashboardTab;
-  action: string;
 }> = [
   {
-    number: '01',
-    eyebrow: 'GROWTH OPPORTUNITY',
-    title: 'Prove whether fragrance creates a valuable second purchase',
-    observed:
-      'Hair perfume appears across current merchandising, TikTok Shop and 2026 editorial coverage.',
-    meaning:
-      'Fragrance may be an acquisition wedge, but public visibility cannot show customer quality.',
-    missing:
-      'First SKU, net contribution and 30/60/90-day second-category behavior.',
-    decision:
-      'Choose the fragrance cohort test and the threshold required before increasing investment.',
-    owner: 'Growth + CRM + Finance',
+    name: 'Discover',
+    question: 'Are the right people finding Kitsch?',
+    platforms: ['Instagram', 'TikTok', 'YouTube', 'Pinterest'],
+    publicSignal:
+      'Audience scale, search direction and creator activity are visible.',
+    internal: 'Qualified reach · new-customer sessions · blended CAC',
+    decision: 'Choose which message and audience deserve a controlled test.',
+    tab: 'intelligence',
+  },
+  {
+    name: 'Consider',
+    question: 'Does the product story remove uncertainty?',
+    platforms: ['Website', 'Instagram', 'Pinterest', 'YouTube'],
+    publicSignal:
+      'PDP claims, reviews, tutorials and retailer proof are visible.',
+    internal: 'PDP CVR · add-to-cart · review-assisted conversion',
+    decision: 'Fix the highest-friction product question or proof gap.',
+    tab: 'website',
+  },
+  {
+    name: 'Buy',
+    question: 'Are customers buying the right product profitably?',
+    platforms: ['Shopify', 'TikTok Shop'],
+    publicSignal:
+      'Prices, assortment and marketplace unit counters are visible.',
+    internal: 'Net CVR · contribution · returns · new-to-brand mix',
+    decision: 'Scale only the SKU × channel combinations that clear margin.',
     tab: 'commerce',
-    action: 'Open Commerce control',
   },
   {
-    number: '02',
-    eyebrow: 'MEASUREMENT RISK',
-    title: 'Create one cross-channel definition of profitable demand',
-    observed:
-      'DTC, TikTok Shop and retailers expose different public demand signals.',
-    meaning:
-      'Each channel can look successful while using a different denominator, price and time window.',
-    missing:
-      'Reconciled net sales, fees, returns, COGS, media and customer identity by channel.',
-    decision:
-      'Approve the metric owner, source hierarchy and weekly reconciliation rule.',
-    owner: 'Marketing Ops + Finance',
-    tab: 'performance',
-    action: 'Open KPI definitions',
-  },
-  {
-    number: '03',
-    eyebrow: 'DELIVERY RISK',
-    title: 'Protect launch capacity before adding more activity',
-    observed:
-      'The public calendar shows frequent product, offer and channel storytelling.',
-    meaning:
-      'More launches can create message collisions and hidden dependency pressure.',
-    missing:
-      'Active launch count, shared-resource load, readiness risk and operational hours.',
-    decision:
-      'Set a launch-priority rule and the conditions that trigger escalation or sequencing.',
-    owner: 'Marketing Leader + Ops',
-    tab: 'launches',
-    action: 'Open Launch control',
+    name: 'Repeat',
+    question: 'Do customers return and enter a second category?',
+    platforms: ['Website', 'Instagram', 'Facebook'],
+    publicSignal:
+      'Loyalty, email capture and routine merchandising are observable.',
+    internal: '30/60/90-day repeat · LTV · second-category rate',
+    decision: 'Build the lifecycle journey around the best next product job.',
+    tab: 'funnel',
   },
 ];
 
-const readingOrder = [
-  ['01', 'Health', 'Are the business, customer, launches and operating system on plan?'],
-  ['02', 'Change', 'What materially moved since the last review?'],
-  ['03', 'Exception', 'Where are we off track or missing trustworthy data?'],
-  ['04', 'Decision', 'Who must decide what—and by when?'],
+const channels: Array<{
+  name: PlatformBrandName;
+  role: string;
+  signal: string;
+  meaning: string;
+  tab: DashboardTab;
+}> = [
+  {
+    name: 'Instagram',
+    role: 'Brand theater + community',
+    signal: '1M followers displayed',
+    meaning: 'Largest visible owned audience; qualified reach is unknown.',
+    tab: 'social',
+  },
+  {
+    name: 'Facebook',
+    role: 'Community + retail reach',
+    signal: '473K page likes displayed',
+    meaning: 'Visible scale; current distribution and traffic are unknown.',
+    tab: 'social',
+  },
+  {
+    name: 'TikTok',
+    role: 'Discovery + demonstration',
+    signal: '342K followers displayed',
+    meaning: 'Creator-native activity is concentrated here.',
+    tab: 'social',
+  },
+  {
+    name: 'TikTok Shop',
+    role: 'Social commerce',
+    signal: '2.3M sold displayed',
+    meaning: 'Marketplace velocity is visible; net economics are not.',
+    tab: 'commerce',
+  },
+  {
+    name: 'YouTube',
+    role: 'Education + sponsorship',
+    signal: '24.1K subscribers displayed',
+    meaning: 'Long-form education and repeat sponsorships are visible.',
+    tab: 'creators',
+  },
+  {
+    name: 'Pinterest',
+    role: 'Evergreen intent',
+    signal: '11.5K followers displayed',
+    meaning: 'Searchable routine and seasonal discovery opportunity.',
+    tab: 'social',
+  },
+];
+
+const products = [
+  {
+    name: 'Hair perfume',
+    role: 'Discovery + trial',
+    image:
+      'https://cdn.shopify.com/s/files/1/0104/6904/8384/files/69117-HairPerfumeDiscoverySet-Sampler-4pc-Fragrance-1280x1280px.jpg?v=1762182803',
+    proof: 'Current DTC, editorial and social-commerce visibility',
+    internal: 'Sample-to-full-size · second category · contribution',
+    href: 'https://www.mykitsch.com/products/hair-perfume-discovery-set',
+  },
+  {
+    name: 'Heatless styling',
+    role: 'Creator-native acquisition',
+    image:
+      'https://cdn.shopify.com/s/files/1/0104/6904/8384/files/60640SatinWrappedJumboFlexiRods4pc-Rosewood-Hero-1280x1280px.jpg?v=1774638694',
+    proof: 'Demonstrable transformation across creator surfaces',
+    internal: 'Creator CAC · attach · refund · next-category rate',
+    href: 'https://www.mykitsch.com/collections/heatless-hair',
+  },
+  {
+    name: 'Satin sleep',
+    role: 'Brand legacy + retention',
+    image:
+      'https://www.mykitsch.com/cdn/shop/files/4945-StandardSatinPillowcase-Sleep-Ivory-Hero-1280x1280px.jpg?v=1776278489',
+    proof: 'Official PDP states 3.6M+ pillowcases sold',
+    internal: 'Full-price mix · gifting · 90-day repeat · margin',
+    href: 'https://www.mykitsch.com/products/satin-pillowcase-ivory',
+  },
+  {
+    name: 'Wash care',
+    role: 'Authority + replenishment',
+    image:
+      'https://cdn.shopify.com/s/files/1/0104/6904/8384/files/9081-RiceWaterProtein-Shampoo_Conditioner-2pc-Combo-BottleFreeBeauty-hero-opt2-1280x1280px_2.jpg?v=1780523783',
+    proof: 'Visible review depth and 2026 search-content investment',
+    internal: 'Five-wash activation · reorder · system attach · margin',
+    href: 'https://www.mykitsch.com/products/rice-water-protein-shampoo-bar-strengthening',
+  },
+  {
+    name: 'Styling care',
+    role: 'Visible result + repeat',
+    image:
+      'https://cdn.shopify.com/s/files/1/0104/6904/8384/files/500904-AirDryCream-Consumables-hero-1280x1280px.jpg?v=1779490582',
+    proof: 'Air Dry Cream appears across DTC and creator evidence',
+    internal: 'First-order contribution · replenishment · tool attach',
+    href: 'https://www.mykitsch.com/products/kitsch-smoothing-air-dry-cream',
+  },
+] as const;
+
+const okrConnections = [
+  ['Profitable demand', 'Net sales · contribution · CAC', 'Finance + Shopify'],
+  ['Predictable launches', 'T−14 readiness · dependency closure', 'Asana'],
+  [
+    'Customer expansion',
+    'Repeat · LTV · second-category rate',
+    'Shopify + Klaviyo',
+  ],
+  ['Operating rhythm', 'Decision SLA · follow-through', 'Asana + decision log'],
+] as const;
+
+const asanaMetrics = [
+  ['Active marketing OKRs', '—'],
+  ['Key results at risk', '—'],
+  ['Blocked dependencies', '—'],
+  ['Overdue decisions', '—'],
+  ['On-time follow-through', '—'],
+  ['Workstream capacity', '—'],
 ] as const;
 
 export function ExecutiveSpotlight({
@@ -115,126 +293,446 @@ export function ExecutiveSpotlight({
 }: {
   onNavigate: (tab: DashboardTab) => void;
 }) {
+  const [period, setPeriod] = useState<Period>('Week');
+  const [mode, setMode] = useState<DataMode>('Public evidence');
+  const [stage, setStage] = useState<FunnelStage>('Discover');
+  const [explained, setExplained] = useState(false);
+  const activeStage = funnelStages.find((item) => item.name === stage)!;
+
   return (
-    <section className="executive-control" aria-label="Executive control view">
-      <header className="executive-control__intro">
-        <div>
-          <span>WHAT BELONGS ON THE OVERVIEW</span>
-          <h2>A leadership page should drive a decision—not showcase every analysis.</h2>
+    <section
+      className="executive-command"
+      aria-label="Executive command center"
+    >
+      <header className="executive-command-bar">
+        <div className="executive-command-period" aria-label="Reporting period">
+          {(['Week', 'Month', 'Quarter', 'YoY'] as Period[]).map((item) => (
+            <button
+              type="button"
+              key={item}
+              className={period === item ? 'is-active' : ''}
+              aria-pressed={period === item}
+              onClick={() => setPeriod(item)}
+            >
+              {item}
+            </button>
+          ))}
         </div>
-        <p>
-          Read from health to action. Detailed social, commerce, launch and SEO
-          evidence stays in its specialist view.
-        </p>
+        <div className="executive-command-mode" aria-label="Evidence mode">
+          {(['Public evidence', 'Internal connection plan'] as DataMode[]).map(
+            (item) => (
+              <button
+                type="button"
+                key={item}
+                className={mode === item ? 'is-active' : ''}
+                aria-pressed={mode === item}
+                onClick={() => setMode(item)}
+              >
+                {item}
+              </button>
+            ),
+          )}
+        </div>
+        <div className="executive-command-refresh">
+          <Clock3 aria-hidden="true" />
+          <span>
+            Last refreshed <b>Sep 08, 2026</b>
+          </span>
+        </div>
+        <details className="executive-data-health">
+          <summary>
+            <i aria-hidden="true" /> Data health <ChevronDown />
+          </summary>
+          <div>
+            <strong>Public evidence is ready to review.</strong>
+            <p>
+              34 sources cataloged. Internal business systems are not connected.
+            </p>
+            <button type="button" onClick={() => onNavigate('sources')}>
+              Review sources <ArrowRight />
+            </button>
+          </div>
+        </details>
       </header>
 
-      <div className="executive-reading-order" aria-label="Executive reading order">
-        {readingOrder.map(([number, title, copy]) => (
-          <article key={number}>
-            <span>{number}</span>
-            <div>
-              <strong>{title}</strong>
-              <p>{copy}</p>
-            </div>
-          </article>
-        ))}
-      </div>
-
-      <section className="executive-health" aria-labelledby="health-title">
-        <div className="executive-section-heading">
-          <div>
-            <span>1 · BUSINESS HEALTH</span>
-            <h3 id="health-title">Are we on plan?</h3>
-          </div>
+      <div className="executive-command-hero">
+        <div>
+          <span>EXECUTIVE OVERVIEW · {period.toUpperCase()}</span>
+          <h1>
+            Clarity today. <em>Compounding tomorrow.</em>
+          </h1>
           <p>
-            Because this prototype has no authorized internal data, the honest
-            state is “not connected”—not a blank actual and not a fake target.
+            See where Kitsch stands, what changed, and which decision moves the
+            operating system forward.
           </p>
         </div>
-        <div className="executive-health__grid">
-          {healthAreas.map(({ icon: Icon, ...area }) => (
-            <article key={area.name}>
+        <div className="executive-command-hero-art">
+          <img
+            src="https://cdn.shopify.com/s/files/1/0104/6904/8384/files/69117-HairPerfumeDiscoverySet-Sampler-4pc-Fragrance-1280x1280px.jpg?v=1762182803"
+            alt="Kitsch Hair Perfume Discovery Set"
+          />
+          <div>
+            <span>{mode}</span>
+            <strong>No fabricated Kitsch actuals</strong>
+          </div>
+        </div>
+        <button
+          type="button"
+          className="executive-explain-button"
+          onClick={() => setExplained((current) => !current)}
+          aria-expanded={explained}
+        >
+          <Eye /> {explained ? 'Hide explanation' : 'Explain this dashboard'}
+        </button>
+      </div>
+
+      {explained && (
+        <aside className="executive-plain-language" aria-live="polite">
+          <div>
+            <span>IN PLAIN ENGLISH</span>
+            <strong>Start with the four unanswered business questions.</strong>
+          </div>
+          <p>
+            Public evidence can show audience, demand and visible activity. It
+            cannot tell leadership whether growth is profitable, customers are
+            returning or launches are on plan. Use the decision queue to choose
+            which internal connection closes the most important gap first.
+          </p>
+          <GlossaryHint />
+        </aside>
+      )}
+
+      <section className="executive-outcomes" aria-labelledby="outcome-title">
+        <header className="executive-section-title">
+          <div>
+            <span>BUSINESS HEALTH AT A GLANCE</span>
+            <h2 id="outcome-title">
+              Four outcomes. Four unanswered questions.
+            </h2>
+          </div>
+          <p>Honest status: internal performance data is not connected.</p>
+        </header>
+        <div className="executive-outcome-grid">
+          {outcomes.map(({ icon: Icon, ...item }) => (
+            <article key={item.name}>
               <header>
-                <Icon aria-hidden="true" />
-                <span>NOT CONNECTED</span>
+                <span className="executive-outcome-icon">
+                  <Icon aria-hidden="true" />
+                </span>
+                <b>NOT CONNECTED</b>
               </header>
-              <h4>{area.name}</h4>
-              <p>{area.question}</p>
+              <h3>{item.name}</h3>
+              <p>{item.question}</p>
               <dl>
                 <div>
-                  <dt>Show</dt>
-                  <dd>{area.metrics}</dd>
+                  <dt>Leadership should see</dt>
+                  <dd>
+                    <GlossaryText>{item.metric}</GlossaryText>
+                  </dd>
                 </div>
                 <div>
                   <dt>Connect</dt>
-                  <dd>{area.source}</dd>
+                  <dd>{item.source}</dd>
                 </div>
               </dl>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="executive-priorities" aria-labelledby="priority-title">
-        <div className="executive-section-heading">
-          <div>
-            <span>2 · CHANGE, EXCEPTION + DECISION</span>
-            <h3 id="priority-title">Three briefs for leadership</h3>
-          </div>
-          <p>
-            Each brief shows what is observed, what it may mean, what is missing
-            and the exact decision required.
-          </p>
-        </div>
-        <div className="executive-priorities__grid">
-          {priorityBriefs.map((brief) => (
-            <article key={brief.number}>
-              <header>
-                <span>{brief.number}</span>
-                <small>{brief.eyebrow}</small>
-              </header>
-              <h4>{brief.title}</h4>
-              <dl>
-                <div>
-                  <dt>What we can see</dt>
-                  <dd>{brief.observed}</dd>
-                </div>
-                <div>
-                  <dt>What it may mean</dt>
-                  <dd>{brief.meaning}</dd>
-                </div>
-                <div>
-                  <dt>What would prove it</dt>
-                  <dd>{brief.missing}</dd>
-                </div>
-              </dl>
-              <footer>
-                <Target aria-hidden="true" />
-                <div>
-                  <span>DECISION REQUIRED</span>
-                  <strong>{brief.decision}</strong>
-                  <small>Proposed owner · {brief.owner}</small>
-                </div>
-              </footer>
-              <button type="button" onClick={() => onNavigate(brief.tab)}>
-                {brief.action} <ArrowRight aria-hidden="true" />
+              <button type="button" onClick={() => onNavigate(item.tab)}>
+                Open specialist view <ArrowRight />
               </button>
             </article>
           ))}
         </div>
       </section>
 
-      <aside className="executive-data-alert">
+      <div className="executive-change-decision-grid">
+        <section
+          className="executive-decision-queue"
+          aria-labelledby="decision-title"
+        >
+          <header className="executive-section-title compact">
+            <div>
+              <span>THREE DECISIONS THIS WEEK</span>
+              <h2 id="decision-title">Prioritize. Assign. Close.</h2>
+            </div>
+            <p>Dates and owners are proposed—not current Kitsch commitments.</p>
+          </header>
+          <div className="executive-decision-rows">
+            {decisions.map((item) => (
+              <article key={item.priority}>
+                <span>{item.priority}</span>
+                <div>
+                  <strong>{item.title}</strong>
+                  <small>{item.owner}</small>
+                </div>
+                <time>{item.due}</time>
+                <b>{item.status}</b>
+                <button type="button" onClick={() => onNavigate(item.tab)}>
+                  {item.action} <ArrowRight />
+                </button>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section
+          className="executive-change-rail"
+          aria-labelledby="change-title"
+        >
+          <header>
+            <span>LATEST EVIDENCE CAPTURED</span>
+            <h2 id="change-title">What changed in the evidence set</h2>
+          </header>
+          <div>
+            {changes.map((item) => (
+              <article key={item.date}>
+                <i aria-hidden="true" />
+                <div>
+                  <span>{item.date}</span>
+                  <b>{item.confidence}</b>
+                  <strong>{item.title}</strong>
+                  <p>{item.detail}</p>
+                  <small>{item.source}</small>
+                </div>
+              </article>
+            ))}
+          </div>
+          <p className="executive-change-limit">
+            A true period-over-period change requires persisted snapshots. No
+            directional delta is invented here.
+          </p>
+        </section>
+      </div>
+
+      <section className="executive-funnel" aria-labelledby="funnel-title">
+        <header className="executive-section-title">
+          <div>
+            <span>CUSTOMER JOURNEY</span>
+            <h2 id="funnel-title">From discovery to the next good hair day.</h2>
+          </div>
+          <p>
+            Select a stage to see the signal, missing metric and decision it
+            supports.
+          </p>
+        </header>
+        <div
+          className="executive-funnel-track"
+          role="tablist"
+          aria-label="Customer journey stage"
+        >
+          {funnelStages.map((item, index) => (
+            <button
+              type="button"
+              role="tab"
+              aria-selected={stage === item.name}
+              className={stage === item.name ? 'is-active' : ''}
+              onClick={() => setStage(item.name)}
+              key={item.name}
+            >
+              <span>0{index + 1}</span>
+              <div>
+                <strong>{item.name}</strong>
+                <small>{item.question}</small>
+              </div>
+              <ArrowRight aria-hidden="true" />
+            </button>
+          ))}
+        </div>
+        <article className="executive-funnel-detail" role="tabpanel">
+          <div className="executive-funnel-platforms">
+            <span>PUBLIC SURFACES</span>
+            <div>
+              {activeStage.platforms.map((platform) => (
+                <PlatformBrandIcon
+                  key={platform}
+                  name={platform}
+                  size="small"
+                  label={false}
+                />
+              ))}
+            </div>
+          </div>
+          <dl>
+            <div>
+              <dt>What we can see</dt>
+              <dd>{activeStage.publicSignal}</dd>
+            </div>
+            <div>
+              <dt>Internal metric needed</dt>
+              <dd>
+                <GlossaryText>{activeStage.internal}</GlossaryText>
+              </dd>
+            </div>
+            <div>
+              <dt>Decision</dt>
+              <dd>{activeStage.decision}</dd>
+            </div>
+          </dl>
+          <button type="button" onClick={() => onNavigate(activeStage.tab)}>
+            Explore {activeStage.name.toLowerCase()} <ArrowRight />
+          </button>
+        </article>
+      </section>
+
+      <section
+        className="executive-channel-pulse"
+        aria-labelledby="channel-title"
+      >
+        <header className="executive-section-title compact">
+          <div>
+            <span>CHANNEL PULSE · PUBLIC SIGNALS</span>
+            <h2 id="channel-title">Every platform has one job.</h2>
+          </div>
+          <button type="button" onClick={() => onNavigate('social')}>
+            Open Social system <ArrowRight />
+          </button>
+        </header>
+        <div className="executive-channel-table">
+          {channels.map((item) => (
+            <button
+              type="button"
+              key={item.name}
+              onClick={() => onNavigate(item.tab)}
+            >
+              <PlatformBrandIcon name={item.name} size="small" label={false} />
+              <span>
+                <strong>{item.name}</strong>
+                <small>{item.role}</small>
+              </span>
+              <span>
+                <b>{item.signal}</b>
+                <small>{item.meaning}</small>
+              </span>
+              <ArrowRight />
+            </button>
+          ))}
+        </div>
+      </section>
+
+      <section
+        className="executive-product-pulse"
+        aria-labelledby="product-title"
+      >
+        <header className="executive-section-title compact">
+          <div>
+            <span>PRODUCT PORTFOLIO · FIVE FRANCHISES</span>
+            <h2 id="product-title">
+              Show the products that change the decision.
+            </h2>
+          </div>
+          <button type="button" onClick={() => onNavigate('commerce')}>
+            Open Commerce control <ArrowRight />
+          </button>
+        </header>
+        <div className="executive-product-grid">
+          {products.map((item) => (
+            <article key={item.name}>
+              <a href={item.href} target="_blank" rel="noreferrer">
+                <img
+                  src={item.image}
+                  alt={`Official Kitsch product: ${item.name}`}
+                />
+              </a>
+              <div>
+                <span>{item.role}</span>
+                <h3>{item.name}</h3>
+                <dl>
+                  <div>
+                    <dt>Public proof</dt>
+                    <dd>{item.proof}</dd>
+                  </div>
+                  <div>
+                    <dt>Internal data required</dt>
+                    <dd>
+                      <GlossaryText>{item.internal}</GlossaryText>
+                    </dd>
+                  </div>
+                </dl>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section
+        className="executive-okr-asana"
+        aria-labelledby="okr-asana-title"
+      >
+        <header className="executive-section-title">
+          <div>
+            <span>OKRS + ASANA CONNECTION</span>
+            <h2 id="okr-asana-title">
+              Connect strategy to the work that closes it.
+            </h2>
+          </div>
+          <p>
+            Team-level operating health only. No individual employee ranking or
+            invented productivity scores.
+          </p>
+        </header>
+        <div className="executive-okr-grid">
+          {okrConnections.map(([objective, metrics, source]) => (
+            <article key={objective}>
+              <header>
+                <Target aria-hidden="true" />
+                <span>OBJECTIVE</span>
+              </header>
+              <h3>{objective}</h3>
+              <p>
+                <GlossaryText>{metrics}</GlossaryText>
+              </p>
+              <dl>
+                <div>
+                  <dt>Actual</dt>
+                  <dd>—</dd>
+                </div>
+                <div>
+                  <dt>Connect</dt>
+                  <dd>{source}</dd>
+                </div>
+              </dl>
+            </article>
+          ))}
+        </div>
+        <div className="executive-asana-panel">
+          <header>
+            <div>
+              <ListChecks aria-hidden="true" />
+              <span>
+                <b>ASANA OPERATING HEALTH</b>
+                <small>Connect the portfolio to populate these metrics.</small>
+              </span>
+            </div>
+            <button type="button" onClick={() => onNavigate('operations')}>
+              Open operating system <ArrowRight />
+            </button>
+          </header>
+          <div>
+            {asanaMetrics.map(([label, value]) => (
+              <article key={label}>
+                <strong>{value}</strong>
+                <span>{label}</span>
+                <small>INTERNAL DATA REQUIRED</small>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <aside className="executive-data-boundary">
         <CircleAlert aria-hidden="true" />
         <div>
-          <span>DATA GOVERNANCE FOLLOW-UP</span>
-          <strong>Confirm one current company-footprint statement.</strong>
+          <span>DATA BOUNDARY</span>
+          <strong>
+            Public signals frame the question. Internal systems answer it.
+          </strong>
           <p>
-            The role brief says 32,000+ retailers across 92 countries; an older
-            site page says 20,000 across 27. Leadership communications need one
-            approved source and “last verified” date.
+            Connect Shopify, Klaviyo, finance, paid media and Asana before using
+            this view to judge performance, allocate budget or assess operating
+            health.
           </p>
         </div>
+        <button type="button" onClick={() => onNavigate('sources')}>
+          View source method <ArrowRight />
+        </button>
       </aside>
     </section>
   );
