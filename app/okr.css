@@ -502,6 +502,223 @@
   background: #d9d9d6;
   margin-top: 22px;
 }
+.team-health-cockpit {
+  background: linear-gradient(145deg, #fffdfa, #f7ede8);
+  border: 1px solid #ded2cc;
+  border-radius: 26px;
+  margin-top: 22px;
+  padding: 25px;
+}
+.team-health-cockpit > header {
+  align-items: flex-start;
+  display: flex;
+  gap: 24px;
+  justify-content: space-between;
+}
+.team-health-cockpit > header > div {
+  max-width: 760px;
+}
+.team-health-cockpit > header > div > span {
+  color: #713f2a;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.11em;
+}
+.team-health-cockpit > header h3 {
+  font:
+    400 28px/1.08 var(--font-kitsch-display),
+    Georgia,
+    serif;
+  margin: 7px 0;
+}
+.team-health-cockpit > header p {
+  color: #655b57;
+  font-size: 10px;
+  line-height: 1.55;
+  margin: 0;
+}
+.team-health-summary {
+  display: grid;
+  gap: 9px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-top: 22px;
+}
+.team-health-summary article {
+  background: #fff;
+  border: 1px solid #dfd4cf;
+  border-radius: 18px;
+  min-height: 155px;
+  padding: 16px;
+}
+.team-health-summary svg {
+  color: #713f2a;
+  width: 17px;
+}
+.team-health-summary strong {
+  display: block;
+  font:
+    400 30px/1 var(--font-kitsch-display),
+    Georgia,
+    serif;
+  margin-top: 20px;
+}
+.team-health-summary span,
+.team-health-summary small {
+  display: block;
+}
+.team-health-summary span {
+  font-size: 9px;
+  font-weight: 750;
+  margin-top: 4px;
+}
+.team-health-summary small {
+  color: #756962;
+  font-size: 8px;
+  margin-top: 5px;
+}
+.team-kanban-health {
+  background: #e5dcd7;
+  border-radius: 18px;
+  display: grid;
+  gap: 1px;
+  grid-template-columns: repeat(4, 1fr);
+  margin-top: 10px;
+  overflow: hidden;
+}
+.team-kanban-health article {
+  background: #f8f2ee;
+  padding: 14px;
+}
+.team-kanban-health span {
+  color: #713f2a;
+  font-size: 7px;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+}
+.team-kanban-health strong {
+  display: block;
+  font:
+    400 25px var(--font-kitsch-display),
+    Georgia,
+    serif;
+  margin: 10px 0 3px;
+}
+.team-kanban-health small {
+  color: #6d625d;
+  font-size: 8px;
+}
+.team-role-scorecards {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  margin-top: 10px;
+}
+.team-role-scorecards > article {
+  background: #fff;
+  border: 1px solid #dfd4cf;
+  border-radius: 18px;
+  display: flex;
+  flex-direction: column;
+  min-height: 315px;
+  padding: 16px;
+}
+.team-role-scorecards > article > header {
+  align-items: center;
+  display: flex;
+  gap: 6px;
+  justify-content: space-between;
+}
+.team-role-scorecards > article > header strong {
+  font-size: 10px;
+}
+.team-role-scorecards > article > header span {
+  color: #713f2a;
+  font-size: 7px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+.team-load-line {
+  background: #eee6e2;
+  border-radius: 99px;
+  height: 7px;
+  margin: 16px 0;
+  overflow: hidden;
+}
+.team-load-line span {
+  background: linear-gradient(90deg, #ca9a8e, #713f2a);
+  border-radius: inherit;
+  display: block;
+  height: 100%;
+}
+.team-role-scorecards dl {
+  margin: 0;
+}
+.team-role-scorecards dl > div {
+  align-items: center;
+  border-top: 1px solid #eee6e2;
+  display: flex;
+  gap: 8px;
+  justify-content: space-between;
+  padding: 7px 0;
+}
+.team-role-scorecards dt {
+  color: #6b615d;
+  font-size: 8px;
+}
+.team-role-scorecards dd {
+  font-size: 8px;
+  font-weight: 800;
+  margin: 0;
+}
+.team-role-scorecards p {
+  color: #655b57;
+  font-size: 8px;
+  line-height: 1.45;
+}
+.team-role-scorecards p b {
+  color: #713f2a;
+  display: block;
+  font-size: 7px;
+  letter-spacing: 0.07em;
+  margin-bottom: 3px;
+  text-transform: uppercase;
+}
+.team-role-scorecards footer {
+  align-items: flex-start;
+  background: #edf3f1;
+  border-radius: 11px;
+  color: #45665a;
+  display: flex;
+  font-size: 8px;
+  gap: 6px;
+  line-height: 1.4;
+  margin-top: auto;
+  padding: 9px;
+}
+.team-role-scorecards footer svg {
+  flex: 0 0 auto;
+  width: 12px;
+}
+.team-health-guardrail {
+  align-items: flex-start;
+  background: #f1e5df;
+  border-radius: 14px;
+  display: flex;
+  gap: 9px;
+  margin-top: 10px;
+  padding: 12px;
+}
+.team-health-guardrail svg {
+  color: #713f2a;
+  flex: 0 0 auto;
+  width: 15px;
+}
+.team-health-guardrail p {
+  color: #5f5652;
+  font-size: 9px;
+  line-height: 1.5;
+  margin: 0;
+}
 .people-system-grid article {
   background: #f0e6d8;
   padding: 20px;
@@ -619,6 +836,12 @@
   }
 }
 @media (max-width: 1100px) {
+  .team-role-scorecards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .team-health-summary {
+    grid-template-columns: repeat(2, 1fr);
+  }
   .executive-okr-grid,
   .metric-family-strip {
     grid-template-columns: repeat(2, 1fr);
@@ -633,6 +856,14 @@
   }
 }
 @media (max-width: 760px) {
+  .team-health-cockpit > header {
+    flex-direction: column;
+  }
+  .team-health-summary,
+  .team-kanban-health,
+  .team-role-scorecards {
+    grid-template-columns: 1fr;
+  }
   .executive-okr-snapshot {
     padding: 22px;
   }

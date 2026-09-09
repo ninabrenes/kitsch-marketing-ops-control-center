@@ -5,11 +5,14 @@ import {
   CircleAlert,
   ClipboardCheck,
   Clock3,
+  Gauge,
   ListChecks,
   MessageSquareText,
   Network,
+  ShieldCheck,
   Target,
   Users,
+  Workflow,
 } from 'lucide-react';
 import './okr.css';
 
@@ -336,6 +339,61 @@ const peopleSystem = [
   ],
 ] as const;
 
+const teamHealth = [
+  {
+    role: 'Creative Ops',
+    load: '78%',
+    work: '9 active',
+    blocked: '1 blocked',
+    handoff: '92%',
+    focus: 'Hair fragrance asset approvals',
+    action: 'Protect 20% capacity for launch revisions',
+  },
+  {
+    role: 'E-commerce',
+    load: '82%',
+    work: '7 active',
+    blocked: '2 blocked',
+    handoff: '88%',
+    focus: 'PDP, inventory and TikTok Shop readiness',
+    action: 'Resolve claim and inventory dependencies',
+  },
+  {
+    role: 'CRM / Lifecycle',
+    load: '70%',
+    work: '6 active',
+    blocked: '0 blocked',
+    handoff: '96%',
+    focus: 'Launch flows and post-purchase journey',
+    action: 'Reserve test capacity for second-category cross-sell',
+  },
+  {
+    role: 'Social + Creators',
+    load: '86%',
+    work: '12 active',
+    blocked: '3 blocked',
+    handoff: '84%',
+    focus: 'Creator briefs, rights and live URLs',
+    action: 'Reduce work in progress before adding briefs',
+  },
+  {
+    role: 'Marketing Ops',
+    load: '68%',
+    work: '8 active',
+    blocked: '1 decision',
+    handoff: '94%',
+    focus: 'Metric contracts and decision closure',
+    action: 'Escalate one overdue leadership decision',
+  },
+] as const;
+
+const kanbanHealth = [
+  ['READY', '14', 'Brief + owner + acceptance criteria'],
+  ['IN PROGRESS', '18', 'Target WIP limit · 20'],
+  ['BLOCKED', '7', 'Owner + unblock date required'],
+  ['PROOF / CLOSE', '11', 'Evidence link + approver'],
+] as const;
+
 function SectionHead({
   eyebrow,
   title,
@@ -632,6 +690,112 @@ export function OkrChiefOfStaff() {
               title="The human operating system behind the dashboard"
               copy="The role creates leverage by clarifying ownership, preparing decisions and protecting follow-through across functions—not by collecting more meetings."
             />
+            <section
+              className="team-health-cockpit"
+              aria-labelledby="team-health-title"
+            >
+              <header>
+                <div>
+                  <span>ILLUSTRATIVE ASANA-CONNECTED VIEW</span>
+                  <h3 id="team-health-title">
+                    Team operating health—not employee surveillance
+                  </h3>
+                  <p>
+                    Review capacity, commitments, blocked work and handoff
+                    quality by role. Personal coaching and sensitive 1:1 context
+                    never enter the shared scorecard.
+                  </p>
+                </div>
+                <span className="signal internal">
+                  INTERNAL ASANA DATA REQUIRED
+                </span>
+              </header>
+
+              <div className="team-health-summary">
+                <article>
+                  <Gauge />
+                  <strong>77%</strong>
+                  <span>illustrative planned load</span>
+                  <small>Target range · 70–80%</small>
+                </article>
+                <article>
+                  <Workflow />
+                  <strong>7</strong>
+                  <span>blocked work items</span>
+                  <small>Each needs owner + unblock date</small>
+                </article>
+                <article>
+                  <Clock3 />
+                  <strong>2.4d</strong>
+                  <span>illustrative decision age</span>
+                  <small>Escalate when SLA is exceeded</small>
+                </article>
+                <article>
+                  <ShieldCheck />
+                  <strong>91%</strong>
+                  <span>handoffs with proof</span>
+                  <small>Link + timestamp + approver</small>
+                </article>
+              </div>
+
+              <div className="team-kanban-health">
+                {kanbanHealth.map((column) => (
+                  <article key={column[0]}>
+                    <span>{column[0]}</span>
+                    <strong>{column[1]}</strong>
+                    <small>{column[2]}</small>
+                  </article>
+                ))}
+              </div>
+
+              <div className="team-role-scorecards">
+                {teamHealth.map((item) => (
+                  <article key={item.role}>
+                    <header>
+                      <strong>{item.role}</strong>
+                      <span>EXAMPLE</span>
+                    </header>
+                    <div className="team-load-line">
+                      <span style={{ width: item.load }} />
+                    </div>
+                    <dl>
+                      <div>
+                        <dt>Planned load</dt>
+                        <dd>{item.load}</dd>
+                      </div>
+                      <div>
+                        <dt>Asana work</dt>
+                        <dd>{item.work}</dd>
+                      </div>
+                      <div>
+                        <dt>Exceptions</dt>
+                        <dd>{item.blocked}</dd>
+                      </div>
+                      <div>
+                        <dt>Proof-ready handoffs</dt>
+                        <dd>{item.handoff}</dd>
+                      </div>
+                    </dl>
+                    <p>
+                      <b>Current focus</b>
+                      {item.focus}
+                    </p>
+                    <footer>
+                      <CheckCircle2 /> {item.action}
+                    </footer>
+                  </article>
+                ))}
+              </div>
+
+              <aside className="team-health-guardrail">
+                <CircleAlert />
+                <p>
+                  <b>Do measure:</b> workload, aging, blockers, rework, SLA and
+                  completion evidence. <b>Do not score:</b> hours online,
+                  message volume, personal sentiment or private 1:1 notes.
+                </p>
+              </aside>
+            </section>
             <div className="people-system-grid">
               {peopleSystem.map((item, index) => (
                 <article key={item[0]}>

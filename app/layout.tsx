@@ -15,8 +15,9 @@ const ptSerif = PT_Serif({
 });
 
 export const metadata: Metadata = {
-  title: 'Kitsch Marketing Operations Control Center',
-  description: 'A public-data prototype that turns observable Kitsch marketing signals into executive questions, launch readiness, and operating decisions.',
+  title: 'Kitsch Marketing Operations + Chief of Staff — Demo',
+  description:
+    'A public-data marketing operations demo that turns observable Kitsch signals into executive questions, launch readiness and accountable decisions.',
 };
 
 export default function RootLayout({
@@ -26,9 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${figtree.variable} ${ptSerif.variable} antialiased`}
-      >
+      <body className={`${figtree.variable} ${ptSerif.variable} antialiased`}>
         {children}
       </body>
     </html>

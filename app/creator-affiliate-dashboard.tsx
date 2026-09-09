@@ -5,14 +5,19 @@ import {
   BadgeCheck,
   Banknote,
   CalendarCheck2,
+  ChartNoAxesColumnIncreasing,
   CheckCircle2,
   ChevronRight,
   CircleAlert,
   ClipboardCheck,
+  ExternalLink,
+  Eye,
   FileCheck2,
   Filter,
   Link2,
+  MapPin,
   PackageCheck,
+  Repeat2,
   RefreshCw,
   ShieldCheck,
   Tags,
@@ -95,6 +100,102 @@ const scorecards = [
     value: '— / — / —',
     question: 'Do creator-acquired cohorts become durable customers?',
     icon: BadgeCheck,
+  },
+] as const;
+
+const publicCreatorSignals = [
+  {
+    value: '43.7K',
+    label: 'sponsored posts tracked',
+    note: 'Last 12 months in Modash dataset',
+    Icon: ChartNoAxesColumnIncreasing,
+  },
+  {
+    value: '95.4%',
+    label: 'TikTok share',
+    note: 'Of tracked Instagram, TikTok + YouTube posts',
+    Icon: Eye,
+  },
+  {
+    value: '16%',
+    label: 'repeat collaborators',
+    note: 'Posted in 3+ separate calendar months',
+    Icon: Repeat2,
+  },
+  {
+    value: '69.1%',
+    label: 'U.S. activity',
+    note: 'Share of tracked live creator content',
+    Icon: MapPin,
+  },
+] as const;
+
+const publicCreators = [
+  {
+    name: 'Margie Style',
+    handle: '@margiesstyle',
+    platform: 'Instagram' as const,
+    profile: 'https://www.instagram.com/margiesstyle/',
+    date: 'May 30, 2026',
+    result: '6.5K tracked post views',
+    story: 'Shine Serum inside a beauty routine',
+    signal:
+      'Product pairing can turn one demonstration into a broader styling ritual.',
+  },
+  {
+    name: 'Faith Marie',
+    handle: '@faith_marie1003',
+    platform: 'TikTok' as const,
+    profile: 'https://www.tiktok.com/@faith_marie1003',
+    date: 'Jan 7, 2026',
+    result: '10.5M tracked post views',
+    story: 'Zigzag headband trend demonstration',
+    signal:
+      'A simple visual transformation gives a low-explanation accessory viral potential.',
+  },
+  {
+    name: 'Literally Bethany',
+    handle: '@literally.bethany',
+    platform: 'TikTok' as const,
+    profile: 'https://www.tiktok.com/@literally.bethany',
+    date: 'May 22, 2026',
+    result: '1.8M tracked post views',
+    story: 'Heatless curls set during a workout',
+    signal:
+      'The strongest hook makes the product part of an existing routine—not an extra step.',
+  },
+  {
+    name: 'Armin Arshe',
+    handle: '@arminarshe',
+    platform: 'Instagram' as const,
+    profile: 'https://www.instagram.com/arminarshe/',
+    date: 'Jun 6, 2026',
+    result: '22.5K tracked post views',
+    story: 'Curly-hair routine with #kitschpartner',
+    signal:
+      'Routine-led education can build category authority beyond a single product claim.',
+  },
+  {
+    name: 'Jo Placencio',
+    handle: '@joplacencio',
+    platform: 'Instagram' as const,
+    profile: 'https://www.instagram.com/joplacencio/',
+    date: 'Jun 16, 2026',
+    result: '50.7K tracked post views',
+    story: 'Air Dry Cream for 50+ beauty audience',
+    signal:
+      'Life-stage specificity can widen relevance without flattening the brand voice.',
+  },
+  {
+    name: 'that_coupon_chick',
+    handle: '@that_coupon_chick',
+    platform: 'TikTok Shop' as const,
+    profile: 'https://www.tiktok.com/@that_coupon_chick',
+    date: 'Jan–Feb 2026',
+    result: '3 repeat posts surfaced',
+    story: 'Deals, launches and TikTok Shop discovery',
+    signal:
+      'Repeat commerce creators can become launch infrastructure if contribution stays healthy.',
   },
 ] as const;
 
@@ -283,9 +384,9 @@ export function CreatorAffiliateDashboard() {
           <span>DATA BOUNDARY</span>
           <strong>No creator performance actuals are public.</strong>
           <p>
-            Every blank below requires contracts, creator/affiliate platform
-            exports, commerce orders, returns and finance costs joined by
-            creator and content ID.
+            Public partners and post-level signals can be discovered. Roster
+            status, spend, attribution, profitability and retention still
+            require contracts, commerce orders and finance costs.
           </p>
           <b>INTERNAL DATA REQUIRED</b>
         </aside>
@@ -334,6 +435,175 @@ export function CreatorAffiliateDashboard() {
             TikTok Shop <ArrowRight />
           </a>
         </nav>
+      </section>
+
+      <section
+        className="creator-intelligence"
+        aria-labelledby="creator-intelligence-title"
+      >
+        <header className="creator-intelligence-head">
+          <div>
+            <span>PUBLIC CREATOR INTELLIGENCE · 2025–2026</span>
+            <h2 id="creator-intelligence-title">
+              The creator engine is visible. Its economics are not.
+            </h2>
+            <p>
+              Third-party collaboration tracking indicates a TikTok-heavy,
+              high-volume program with meaningful repeat partnerships. These are
+              discovery signals—not Kitsch roster or revenue actuals.
+            </p>
+          </div>
+          <div className="creator-source-actions">
+            <a
+              href="https://www.modash.io/breakdowns/kitsch-influencer-marketing-strategy"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Modash analysis <ExternalLink />
+            </a>
+            <a
+              href="https://sponsorradar.com/brands/kitsch"
+              target="_blank"
+              rel="noreferrer"
+            >
+              YouTube tracker <ExternalLink />
+            </a>
+          </div>
+        </header>
+
+        <div className="creator-public-signals">
+          {publicCreatorSignals.map(({ value, label, note, Icon }) => (
+            <article key={label}>
+              <Icon />
+              <strong>{value}</strong>
+              <h3>{label}</h3>
+              <p>{note}</p>
+              <span>THIRD-PARTY TRACKED</span>
+            </article>
+          ))}
+        </div>
+
+        <div className="creator-mix-story">
+          <article className="creator-channel-mix">
+            <div
+              className="creator-donut"
+              aria-label="95.4 percent TikTok, 4.4 percent Instagram, 0.2 percent YouTube"
+            >
+              <strong>95.4%</strong>
+              <span>TikTok</span>
+            </div>
+            <div>
+              <span>CHANNEL MIX</span>
+              <h3>TikTok is the distribution engine</h3>
+              <div className="creator-legend-row">
+                <i className="tiktok" /> TikTok <b>41.7K posts</b>
+              </div>
+              <div className="creator-legend-row">
+                <i className="instagram" /> Instagram <b>1.9K posts</b>
+              </div>
+              <div className="creator-legend-row">
+                <i className="youtube" /> YouTube <b>102 posts</b>
+              </div>
+            </div>
+          </article>
+          <article className="creator-seasonality">
+            <span>SEASONALITY SIGNAL</span>
+            <h3>January peaks; summer activity compresses</h3>
+            <div
+              className="creator-seasonality-bars"
+              aria-label="January 6.9 thousand posts; monthly average 3.6 thousand; August 1.7 thousand"
+            >
+              <div>
+                <span style={{ height: '100%' }} />
+                <b>JAN</b>
+                <small>6.9K</small>
+              </div>
+              <div>
+                <span style={{ height: '52%' }} />
+                <b>AVG</b>
+                <small>3.6K</small>
+              </div>
+              <div>
+                <span style={{ height: '25%' }} />
+                <b>AUG</b>
+                <small>1.7K</small>
+              </div>
+            </div>
+            <p>
+              Hypothesis: holiday commerce drives a creator surge. Validate
+              against launch calendar, spend and inventory before reallocating
+              budget.
+            </p>
+          </article>
+        </div>
+
+        <div className="creator-roster-head">
+          <div>
+            <span>PUBLICLY SURFACED COLLABORATIONS</span>
+            <h3>Six examples worth putting into the review queue</h3>
+          </div>
+          <p>
+            Inclusion means a public collaboration was surfaced—not that the
+            creator is currently contracted or recommended for renewal.
+          </p>
+        </div>
+        <div className="creator-card-grid">
+          {publicCreators.map((creator) => (
+            <article key={creator.handle}>
+              <a
+                className="creator-card-platform"
+                href={creator.profile}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`Open ${creator.name} profile`}
+              >
+                <PlatformBrandIcon name={creator.platform} size="large" />
+                <span>OPEN PUBLIC PROFILE</span>
+              </a>
+              <div className="creator-card-body">
+                <header>
+                  <div>
+                    <strong>{creator.name}</strong>
+                    <span>{creator.handle}</span>
+                  </div>
+                  <a
+                    href={creator.profile}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={`Open ${creator.name} profile`}
+                  >
+                    <ExternalLink />
+                  </a>
+                </header>
+                <div className="creator-card-meta">
+                  <span>{creator.date}</span>
+                  <b>{creator.result}</b>
+                </div>
+                <h4>{creator.story}</h4>
+                <p>{creator.signal}</p>
+                <small>Source · Modash public collaboration tracking</small>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <aside className="creator-smart-insight">
+          <div>
+            <Repeat2 />
+            <span>SMART INSIGHT</span>
+          </div>
+          <strong>Stop evaluating one post at a time.</strong>
+          <p>
+            With 16% of tracked collaborators posting across three or more
+            months, the operating opportunity is a cohort view: first post →
+            repeat brief → content reuse → first-order contribution → 90-day
+            customer value.
+          </p>
+          <b>
+            INTERNAL NEXT STEP · Join creator ID, content ID, code/link, order
+            and customer cohort.
+          </b>
+        </aside>
       </section>
 
       <section className="creator-scorecard-section">
