@@ -1,0 +1,332 @@
+.insight-copilot {
+  grid-column: 1 / -1;
+  margin: -6px 0 22px;
+  overflow: hidden;
+  border: 1px solid var(--editorial-outline, #d8cbc4);
+  border-radius: 24px;
+  background:
+    radial-gradient(
+      circle at 94% -25%,
+      rgba(248, 182, 143, 0.38),
+      transparent 36%
+    ),
+    #fffdf9;
+  box-shadow: 0 14px 42px rgba(73, 45, 36, 0.07);
+}
+
+.insight-copilot > header {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.75fr) minmax(280px, 1fr) auto;
+  align-items: center;
+  gap: 22px;
+  padding: 17px 20px;
+}
+
+.insight-copilot__identity {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.insight-copilot__mark {
+  display: inline-flex;
+  width: 42px;
+  height: 42px;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #dcbfb2;
+  border-radius: 14px;
+  background: #f3dfd7;
+  color: #713f2a;
+}
+
+.insight-copilot__mark svg {
+  width: 20px;
+}
+
+.insight-copilot__identity span,
+.insight-copilot__sources > span,
+.insight-copilot__answer-label > span {
+  display: block;
+  color: #713f2a;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.insight-copilot__identity h2 {
+  margin: 3px 0 0;
+  font:
+    400 21px/1.1 var(--font-kitsch-display),
+    Georgia,
+    serif;
+}
+
+.insight-copilot > header > p {
+  margin: 0;
+  color: #625650;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.insight-copilot > header > button,
+.insight-copilot__lenses button,
+.insight-copilot__answer footer button {
+  min-height: 42px;
+  border: 1px solid #cdbdb5;
+  border-radius: 999px;
+  background: #fff;
+  color: #231f20;
+  font-size: 10px;
+  font-weight: 750;
+}
+
+.insight-copilot > header > button {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0 14px;
+}
+
+.insight-copilot > header > button svg,
+.insight-copilot__answer footer button svg {
+  width: 15px;
+}
+
+.insight-copilot__body {
+  display: grid;
+  grid-template-columns: minmax(230px, 0.7fr) minmax(0, 1.3fr);
+  gap: 12px;
+  padding: 0 14px 14px;
+  border-top: 1px solid #e3d8d2;
+}
+
+.insight-copilot__body > aside,
+.insight-copilot__answer {
+  margin-top: 14px;
+  border: 1px solid #e2d5ce;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.78);
+}
+
+.insight-copilot__body > aside {
+  padding: 18px;
+}
+
+.insight-copilot__sources > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 12px;
+}
+
+.insight-copilot__internal-source {
+  align-items: center;
+  color: #625650;
+  font-size: 11px;
+}
+
+.insight-copilot__internal-source svg {
+  width: 16px;
+}
+
+.insight-copilot__lenses {
+  display: grid;
+  gap: 7px;
+  margin-top: 18px;
+}
+
+.insight-copilot__lenses button {
+  width: 100%;
+  padding: 0 14px;
+  text-align: left;
+}
+
+.insight-copilot__lenses button.active {
+  border-color: #ad7762;
+  background: #ead7cf;
+  box-shadow: inset 3px 0 0 #8b4f38;
+}
+
+.insight-copilot__guardrail {
+  display: grid;
+  grid-template-columns: 20px 1fr;
+  gap: 8px;
+  margin-top: 18px;
+  padding-top: 15px;
+  border-top: 1px solid #e3d8d2;
+  color: #625650;
+}
+
+.insight-copilot__guardrail svg {
+  width: 17px;
+  color: #00426a;
+}
+
+.insight-copilot__guardrail p {
+  margin: 0;
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.insight-copilot__answer {
+  min-width: 0;
+  padding: 22px 24px;
+}
+
+.insight-copilot__answer-label {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.insight-copilot__answer-label small {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #8b4f38;
+  font-size: 9px;
+}
+
+.insight-copilot__answer-label small svg {
+  width: 14px;
+}
+
+.insight-copilot__answer [data-streamdown='heading-3'] {
+  margin: 0 0 12px;
+  font:
+    400 28px/1.15 var(--font-kitsch-display),
+    Georgia,
+    serif;
+}
+
+.insight-copilot__answer :is(p, li) {
+  color: #544b47;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.insight-copilot__answer strong {
+  color: #231f20;
+}
+
+.insight-copilot__answer footer {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #e3d8d2;
+}
+
+.insight-copilot__answer footer button {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 7px;
+  padding: 0 15px;
+  border-color: #713f2a;
+  background: #713f2a;
+  color: #fff;
+}
+
+.insight-copilot__answer footer button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+.insight-copilot__answer footer p {
+  margin: 0;
+  color: #756962;
+  font-size: 9px;
+  line-height: 1.45;
+}
+
+.insight-copilot__loading {
+  display: flex;
+  min-height: 120px;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  color: #713f2a;
+  font-size: 12px;
+}
+
+.insight-copilot__loading svg {
+  width: 18px;
+  animation: insight-spin 900ms linear infinite;
+}
+
+@keyframes insight-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 960px) {
+  .insight-copilot > header {
+    grid-template-columns: 1fr auto;
+  }
+
+  .insight-copilot > header > p {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+}
+
+@media (max-width: 680px) {
+  .insight-copilot {
+    margin-bottom: 16px;
+    border-radius: 20px;
+  }
+
+  .insight-copilot > header {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .insight-copilot > header > p,
+  .insight-copilot > header > button {
+    grid-column: auto;
+    grid-row: auto;
+  }
+
+  .insight-copilot > header > button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .insight-copilot__body {
+    grid-template-columns: 1fr;
+    padding: 0 10px 10px;
+  }
+
+  .insight-copilot__lenses {
+    grid-template-columns: 1fr;
+  }
+
+  .insight-copilot__answer {
+    padding: 19px;
+  }
+
+  .insight-copilot__answer footer {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .insight-copilot__answer footer button {
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .insight-copilot__loading svg {
+    animation: none;
+  }
+}

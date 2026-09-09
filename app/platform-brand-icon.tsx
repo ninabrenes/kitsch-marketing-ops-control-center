@@ -1,5 +1,5 @@
 /* oxlint-disable next/no-img-element -- Simple Icons are remote brand assets; preserving their official CDN rendering is intentional. */
-import { ShoppingBag } from 'lucide-react';
+import { Globe2, ShoppingBag } from 'lucide-react';
 
 export type PlatformBrandName =
   | 'Instagram'
@@ -13,7 +13,7 @@ export type PlatformBrandName =
 
 const platformAssets: Record<
   PlatformBrandName,
-  { asset: string; slug: string }
+  { asset?: string; slug: string }
 > = {
   Instagram: {
     asset: 'https://cdn.simpleicons.org/instagram/E4405F',
@@ -40,7 +40,6 @@ const platformAssets: Record<
     slug: 'pinterest',
   },
   Website: {
-    asset: 'https://cdn.simpleicons.org/shopify/7AB55C',
     slug: 'website',
   },
   Shopify: {
@@ -66,7 +65,11 @@ export function PlatformBrandIcon({
       data-platform={platform.slug}
     >
       <span className="platform-brand-glyph">
-        <img src={platform.asset} alt={label ? '' : name} loading="eager" />
+        {platform.asset ? (
+          <img src={platform.asset} alt={label ? '' : name} loading="eager" />
+        ) : (
+          <Globe2 aria-label={label ? undefined : name} aria-hidden={label} />
+        )}
         {name === 'TikTok Shop' && (
           <ShoppingBag
             className="platform-brand-shop-badge"

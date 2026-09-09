@@ -22,6 +22,7 @@ import { ShopifyCommerceWorkspace } from './shopify-commerce-workspace';
 import { CreatorAffiliateDashboard } from './creator-affiliate-dashboard';
 import { MessagingEvidenceLibrary } from './messaging-evidence-library';
 import { EvidenceToAction } from './evidence-to-action';
+import { InsightCopilot } from './insight-copilot';
 import { SearchEvidenceWorkbench } from './search-evidence-workbench';
 import { GlossaryText } from './glossary-term';
 import './editorial-theme.css';
@@ -92,13 +93,43 @@ const links = {
   appStore: 'https://apps.apple.com/us/app/kitsch-llc/id1604441480',
 };
 const channels = [
-  ['Instagram', '1M', 'followers'],
-  ['Facebook', '473K', 'page likes'],
-  ['TikTok', '342K', 'followers'],
-  ['TikTok Shop', '2.3M', 'units sold shown'],
-  ['YouTube', '24.1K', 'subscribers'],
-  ['Pinterest', '11.5K', 'followers'],
-];
+  [
+    'Instagram',
+    '1M',
+    'followers',
+    'Visible audience scale—not reach, engagement, or revenue.',
+  ],
+  [
+    'Facebook',
+    '473K',
+    'page likes',
+    'A public community counter—not proof of current distribution.',
+  ],
+  [
+    'TikTok',
+    '342K',
+    'followers',
+    'Visible audience size; content quality needs post-level outcomes.',
+  ],
+  [
+    'TikTok Shop',
+    '2.3M',
+    'units sold shown',
+    'Marketplace velocity—not Kitsch net revenue or profit.',
+  ],
+  [
+    'YouTube',
+    '24.1K',
+    'subscribers',
+    'An owned education audience—not evidence of watch quality.',
+  ],
+  [
+    'Pinterest',
+    '11.5K',
+    'followers',
+    'A discovery audience; saves, clicks, and assisted sales are missing.',
+  ],
+] as const;
 const decisions = [
   [
     'P1',
@@ -1374,11 +1405,12 @@ function Metrics() {
       {channels.map((c) => (
         <article key={c[0]}>
           <div>
-            <span>{c[0]}</span>
+            <PlatformBrandIcon name={c[0]} size="small" />
             <Label>PUBLIC SIGNAL</Label>
           </div>
           <strong>{c[1]}</strong>
           <p>{c[2]}</p>
+          <small>{c[3]}</small>
         </article>
       ))}
     </section>
@@ -3883,6 +3915,7 @@ export default function Home() {
         </header>
         <div className="content">
           <DashboardGuide active={active} onNavigate={navigate} />
+          <InsightCopilot key={active} active={active} />
           <TabsContent value="overview">
             <Overview />
           </TabsContent>

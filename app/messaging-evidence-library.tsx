@@ -22,7 +22,7 @@ const sources = {
   airDry: 'https://www.mykitsch.com/products/kitsch-smoothing-air-dry-cream',
   blog: 'https://www.mykitsch.com/blogs/hair-care',
   instagram: 'https://www.instagram.com/mykitsch/',
-  tiktok: 'https://www.tiktok.com/@mykitsch',
+  tiktok: 'https://www.tiktok.com/@kitsch',
   youtube: 'https://www.youtube.com/@mykitsch',
   pinterest: 'https://www.pinterest.com/mykitsch/',
 } as const;

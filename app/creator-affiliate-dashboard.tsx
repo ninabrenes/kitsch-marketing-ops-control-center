@@ -421,7 +421,7 @@ export function CreatorAffiliateDashboard() {
             Instagram <ArrowRight />
           </a>
           <a
-            href="https://www.tiktok.com/@mykitsch"
+            href="https://www.tiktok.com/@kitsch"
             target="_blank"
             rel="noreferrer"
           >

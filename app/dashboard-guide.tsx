@@ -254,7 +254,7 @@ export function DashboardGuide({
           <strong>{help.label}</strong>
         </div>
         <div className="guide-purpose">
-          <span>WHAT THIS TAB MEANS</span>
+          <span>IN PLAIN ENGLISH</span>
           <p>{help.purpose}</p>
         </div>
         <div className="guide-actions">
@@ -272,7 +272,7 @@ export function DashboardGuide({
             onClick={() => setOpen(!open)}
             aria-expanded={open}
           >
-            {open ? 'Hide guide' : 'How to use this tab'}
+            {open ? 'Hide walkthrough' : 'Show walkthrough'}
             {open ? <ChevronUp /> : <ChevronDown />}
           </button>
         </div>
@@ -282,17 +282,17 @@ export function DashboardGuide({
           <div className="guide-three">
             <article>
               <MousePointerClick />
-              <span>1 · LOOK FOR</span>
+              <span>1 · LOOK AT</span>
               <p>{help.inspect}</p>
             </article>
             <article>
               <Lightbulb />
-              <span>2 · DECIDE</span>
+              <span>2 · ASK</span>
               <p>{help.decision}</p>
             </article>
             <article>
               <ArrowRight />
-              <span>3 · APPLY TO KITSCH</span>
+              <span>3 · DO NEXT</span>
               <p>{help.apply}</p>
             </article>
           </div>
