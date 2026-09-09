@@ -32,6 +32,8 @@ const outcomes = [
     name: 'Profitable growth',
     question: 'Are we acquiring demand without weakening contribution?',
     metric: 'Net sales · contribution · MER · CAC',
+    demoValue: '3.2× MER · $28 CAC',
+    demoDelta: '+0.3× vs sample prior period',
     source: 'Shopify + finance + paid media',
     tab: 'performance' as DashboardTab,
   },
@@ -40,6 +42,8 @@ const outcomes = [
     name: 'Customer quality',
     question: 'Are new customers returning and expanding their routine?',
     metric: 'New-customer CAC · 90-day repeat · LTV:CAC',
+    demoValue: '24% repeat · 3.6× LTV:CAC',
+    demoDelta: '+2.1 pts sample movement',
     source: 'Shopify + Klaviyo + cohort model',
     tab: 'funnel' as DashboardTab,
   },
@@ -48,6 +52,8 @@ const outcomes = [
     name: 'Launch delivery',
     question: 'Are priority launches ready early enough to fix risk?',
     metric: 'T−14 readiness · dependencies · D+30 review',
+    demoValue: '86% ready · 3 blocked',
+    demoDelta: '2 risks need owners',
     source: 'Asana launch portfolio',
     tab: 'launches' as DashboardTab,
   },
@@ -56,6 +62,8 @@ const outcomes = [
     name: 'Operating control',
     question: 'Are money, decisions and commitments under control?',
     metric: 'Budget variance · decision SLA · PO coverage',
+    demoValue: '+4.2% variance · 91% closed',
+    demoDelta: '2 sample decisions overdue',
     source: 'Finance + Asana + decision log',
     tab: 'operations' as DashboardTab,
   },
@@ -231,22 +239,34 @@ const channels: Array<{
 
 const products = [
   {
+    name: 'Shampoo + conditioner',
+    role: 'Daily ritual + replenishment',
+    image:
+      'https://cdn.shopify.com/s/files/1/0104/6904/8384/files/9081-RiceWaterProtein-Shampoo_Conditioner-2pc-Combo-BottleFreeBeauty-hero-opt2-1280x1280px_2.jpg?v=1780523783',
+    proof: 'Official two-step rice-water bar system · up to 100 washes per bar',
+    publicMetric: 'Up to 100 washes / bar',
+    internal: 'System attach · 60/90-day reorder · subscription · margin',
+    href: 'https://www.mykitsch.com/collections/all-products/products/rice-water-shampoo-conditioner-combo-pack',
+  },
+  {
+    name: 'Heatless curls',
+    role: 'Creator-native acquisition',
+    image:
+      'https://www.mykitsch.com/cdn/shop/products/heatlessCurlingSet-openShape_clawClip-new_1.jpg?v=1762182449',
+    proof: 'Official bundle · highly demonstrable before-and-after product',
+    publicMetric: '2-piece creator-ready bundle',
+    internal: 'Creator CAC · attach · refund · next-category rate',
+    href: 'https://www.mykitsch.com/products/satin-heatless-curling-set-bundle',
+  },
+  {
     name: 'Hair perfume',
     role: 'Discovery + trial',
     image:
       'https://cdn.shopify.com/s/files/1/0104/6904/8384/files/69117-HairPerfumeDiscoverySet-Sampler-4pc-Fragrance-1280x1280px.jpg?v=1762182803',
-    proof: 'Current DTC, editorial and social-commerce visibility',
+    proof: 'Official four-scent discovery set · current DTC visibility',
+    publicMetric: '4 mini scents',
     internal: 'Sample-to-full-size · second category · contribution',
     href: 'https://www.mykitsch.com/products/hair-perfume-discovery-set',
-  },
-  {
-    name: 'Heatless styling',
-    role: 'Creator-native acquisition',
-    image:
-      'https://cdn.shopify.com/s/files/1/0104/6904/8384/files/60640SatinWrappedJumboFlexiRods4pc-Rosewood-Hero-1280x1280px.jpg?v=1774638694',
-    proof: 'Demonstrable transformation across creator surfaces',
-    internal: 'Creator CAC · attach · refund · next-category rate',
-    href: 'https://www.mykitsch.com/collections/heatless-hair',
   },
   {
     name: 'Satin sleep',
@@ -254,17 +274,9 @@ const products = [
     image:
       'https://www.mykitsch.com/cdn/shop/files/4945-StandardSatinPillowcase-Sleep-Ivory-Hero-1280x1280px.jpg?v=1776278489',
     proof: 'Official PDP states 3.6M+ pillowcases sold',
+    publicMetric: '3.6M+ publicly stated sold',
     internal: 'Full-price mix · gifting · 90-day repeat · margin',
     href: 'https://www.mykitsch.com/products/satin-pillowcase-ivory',
-  },
-  {
-    name: 'Wash care',
-    role: 'Authority + replenishment',
-    image:
-      'https://cdn.shopify.com/s/files/1/0104/6904/8384/files/9081-RiceWaterProtein-Shampoo_Conditioner-2pc-Combo-BottleFreeBeauty-hero-opt2-1280x1280px_2.jpg?v=1780523783',
-    proof: 'Visible review depth and 2026 search-content investment',
-    internal: 'Five-wash activation · reorder · system attach · margin',
-    href: 'https://www.mykitsch.com/products/rice-water-protein-shampoo-bar-strengthening',
   },
   {
     name: 'Styling care',
@@ -272,6 +284,7 @@ const products = [
     image:
       'https://cdn.shopify.com/s/files/1/0104/6904/8384/files/500904-AirDryCream-Consumables-hero-1280x1280px.jpg?v=1779490582',
     proof: 'Air Dry Cream appears across DTC and creator evidence',
+    publicMetric: '24-hour frizz-control claim',
     internal: 'First-order contribution · replenishment · tool attach',
     href: 'https://www.mykitsch.com/products/kitsch-smoothing-air-dry-cream',
   },
@@ -289,12 +302,36 @@ const okrConnections = [
 ] as const;
 
 const asanaMetrics = [
-  ['Active marketing OKRs', '—'],
-  ['Key results at risk', '—'],
-  ['Blocked dependencies', '—'],
-  ['Overdue decisions', '—'],
-  ['On-time follow-through', '—'],
-  ['Workstream capacity', '—'],
+  ['Active marketing OKRs', '4'],
+  ['Key results at risk', '1'],
+  ['Blocked dependencies', '3'],
+  ['Overdue decisions', '2'],
+  ['On-time follow-through', '91%'],
+  ['Workstream capacity', '78%'],
+] as const;
+
+const dataConnections = [
+  ['Shopify', 'Orders · net sales · products · cohorts', 'READY TO CONNECT'],
+  [
+    'Klaviyo',
+    'Profiles · flows · repeat · attributed revenue',
+    'READY TO CONNECT',
+  ],
+  [
+    'GA4 + Looker',
+    'Sessions · journeys · conversion · reporting',
+    'BLUEPRINT READY',
+  ],
+  [
+    'Paid media',
+    'Spend · impressions · clicks · attributed orders',
+    'BLUEPRINT READY',
+  ],
+  [
+    'Asana',
+    'OKRs · launches · owners · blockers · due dates',
+    'READY TO CONNECT',
+  ],
 ] as const;
 
 export function ExecutiveSpotlight({
@@ -382,7 +419,7 @@ export function ExecutiveSpotlight({
         </div>
         <div className="executive-command-hero-note">
           <strong>Effortless hair for a kinder day.</strong>
-          <span>{mode} · No fabricated actuals</span>
+          <span>{mode} · Public facts + labeled demo values</span>
         </div>
         <button
           type="button"
@@ -427,10 +464,14 @@ export function ExecutiveSpotlight({
                 <span className="executive-outcome-icon">
                   <Icon aria-hidden="true" />
                 </span>
-                <b>NOT CONNECTED</b>
+                <b>ILLUSTRATIVE DEMO</b>
               </header>
               <h3>{item.name}</h3>
               <p>{item.question}</p>
+              <div className="executive-demo-metric">
+                <strong>{item.demoValue}</strong>
+                <small>{item.demoDelta}</small>
+              </div>
               <dl>
                 <div>
                   <dt>Leadership should see</dt>
@@ -609,6 +650,9 @@ export function ExecutiveSpotlight({
                 <div>
                   <span>{item.role}</span>
                   <h3>{item.name}</h3>
+                  <strong className="executive-product-metric">
+                    {item.publicMetric}
+                  </strong>
                   <dl>
                     <div>
                       <dt>Public proof</dt>
@@ -713,7 +757,7 @@ export function ExecutiveSpotlight({
               <ListChecks aria-hidden="true" />
               <span>
                 <b>ASANA OPERATING HEALTH</b>
-                <small>Connect the portfolio to populate these metrics.</small>
+                <small>Illustrative values until Asana is connected.</small>
               </span>
             </div>
             <button type="button" onClick={() => onNavigate('operations')}>
@@ -725,10 +769,38 @@ export function ExecutiveSpotlight({
               <article key={label}>
                 <strong>{value}</strong>
                 <span>{label}</span>
-                <small>INTERNAL DATA REQUIRED</small>
+                <small>ILLUSTRATIVE DEMO</small>
               </article>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section
+        className="executive-connections"
+        aria-labelledby="connections-title"
+      >
+        <header className="executive-section-title compact">
+          <div>
+            <span>DATA CONNECTION PLAN</span>
+            <h2 id="connections-title">From demo values to operating truth.</h2>
+          </div>
+          <p>
+            Each connector replaces the labeled sample metrics with governed
+            actuals.
+          </p>
+        </header>
+        <div>
+          {dataConnections.map(([name, fields, status]) => (
+            <article key={name}>
+              <i aria-hidden="true" />
+              <span>
+                <strong>{name}</strong>
+                <small>{fields}</small>
+              </span>
+              <b>{status}</b>
+            </article>
+          ))}
         </div>
       </section>
 
