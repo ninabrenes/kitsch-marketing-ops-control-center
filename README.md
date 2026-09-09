@@ -2,7 +2,9 @@
 
 An independent, public-data strategy prototype demonstrating how I would help a fast-growth beauty brand replace marketing heroics with an operating rhythm.
 
-**Live private presentation:** deployed through OpenAI Sites. The repository contains the complete source and research methodology; no Kitsch first-party data is included.
+**[Open the live interactive demo](https://kitsch-marketing-operations-demo.netlify.app/)**
+
+The repository contains the complete source and research methodology; no Kitsch first-party data is included.
 
 ## The challenge
 
