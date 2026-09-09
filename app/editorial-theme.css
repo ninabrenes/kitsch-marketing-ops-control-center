@@ -8,6 +8,106 @@
   --editorial-shadow: 0 14px 42px rgba(73, 45, 36, 0.08);
 }
 
+/* Final light editorial pass: eliminate legacy dark blocks and add depth without noise. */
+.hero-panel {
+  color: var(--ink);
+  background:
+    radial-gradient(
+      circle at 82% 14%,
+      rgba(248, 182, 143, 0.5),
+      transparent 32%
+    ),
+    linear-gradient(125deg, #fff 0%, #f6ebe6 58%, #ead6ce 100%);
+  border: 1px solid #e1d4cd;
+  box-shadow: 0 26px 65px rgba(113, 63, 42, 0.1);
+}
+
+.hero-panel p {
+  color: #5f5653;
+}
+.hero-panel h1 em {
+  color: #8b4f38;
+}
+
+.opportunity-card:nth-child(2) {
+  color: var(--ink);
+  background: linear-gradient(145deg, #fff8f4, #f3e2db);
+  border-color: #dfc9bf;
+}
+.opportunity-card:nth-child(2) p {
+  color: #5f5653;
+}
+.platform-mark.mark-dark {
+  color: var(--ink);
+  background: #f7efeb;
+  border: 1px solid #dfd4ce;
+}
+
+.funnel-map {
+  border: 1px solid #e1d8d3;
+  border-radius: 30px;
+  background: linear-gradient(160deg, #fff, #f8efeb);
+  box-shadow: 0 20px 50px rgba(113, 63, 42, 0.07);
+}
+
+.funnel-map article,
+.site-journey article,
+.media-grid article,
+.question-grid article,
+.ad-bars article,
+.score-grid article,
+.insight-grid article,
+.comp-media-matrix article,
+.workflow-cards > article,
+.ops-stack-grid article {
+  border-radius: 18px;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.funnel-map article:hover,
+.site-journey article:hover,
+.media-grid article:hover,
+.question-grid article:hover,
+.ad-bars article:hover,
+.score-grid article:hover,
+.insight-grid article:hover,
+.comp-media-matrix article:hover,
+.workflow-cards > article:hover,
+.ops-stack-grid article:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(113, 63, 42, 0.08);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .funnel-map article,
+  .site-journey article,
+  .media-grid article,
+  .question-grid article,
+  .ad-bars article,
+  .score-grid article,
+  .insight-grid article,
+  .comp-media-matrix article,
+  .workflow-cards > article,
+  .ops-stack-grid article {
+    transition: none;
+  }
+
+  .funnel-map article:hover,
+  .site-journey article:hover,
+  .media-grid article:hover,
+  .question-grid article:hover,
+  .ad-bars article:hover,
+  .score-grid article:hover,
+  .insight-grid article:hover,
+  .comp-media-matrix article:hover,
+  .workflow-cards > article:hover,
+  .ops-stack-grid article:hover {
+    transform: none;
+  }
+}
+
 body {
   background:
     radial-gradient(

@@ -14,6 +14,7 @@ import {
   Workflow,
 } from 'lucide-react';
 import { OkrChiefOfStaff } from './okr-chief-of-staff';
+import { DataReliabilitySpine } from './data-reliability-spine';
 
 const stack = [
   [
@@ -216,6 +217,7 @@ export function MarketingOpsSystem() {
           <span>ONE CLOSED LOOP</span>
         </div>
       </section>
+      <DataReliabilitySpine />
       <section className="wide-card">
         <div className="ops-system-title">
           <div>
