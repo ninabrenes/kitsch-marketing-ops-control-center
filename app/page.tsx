@@ -3733,7 +3733,7 @@ function Demo({ close }: { close: () => void }) {
       </button>
       <div className="demo-brand">
         <img src="/kitsch-official-logo.png" alt="Kitsch" />
-        <span>90-SECOND OPERATING WALKTHROUGH</span>
+        <span>HOW TO READ THIS DASHBOARD</span>
       </div>
       <div className="demo-body">
         <p>
@@ -3851,7 +3851,7 @@ export default function Home() {
           <p>PUBLIC DATA PROTOTYPE</p>
           <span>Accessed Sep 08, 2026</span>
           <button onClick={() => setDemo(true)}>
-            <Palette /> 90-sec walkthrough
+            <Palette /> Start here
           </button>
         </div>
       </aside>
@@ -3878,7 +3878,7 @@ export default function Home() {
             <Label>INTERNAL DATA REQUIRED</Label>
           </div>
           <button className="demo-button" onClick={() => setDemo(true)}>
-            <Palette /> 90-sec walkthrough
+            <Palette /> Start here
           </button>
         </header>
         <div className="content">
