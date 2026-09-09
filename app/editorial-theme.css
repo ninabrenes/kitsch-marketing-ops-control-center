@@ -239,7 +239,12 @@ body {
 }
 
 .brand-hero {
-  background: linear-gradient(135deg, #fffdf9 0%, #f7efe7 58%, #eddad3 100%) !important;
+  background: linear-gradient(
+    135deg,
+    #fffdf9 0%,
+    #f7efe7 58%,
+    #eddad3 100%
+  ) !important;
   color: var(--ink) !important;
   border: 1px solid var(--editorial-outline) !important;
   border-radius: 26px !important;
@@ -426,7 +431,10 @@ body {
 
 .message-playbook-grid h3 {
   margin: 8px 0;
-  font: 24px/1.16 var(--font-kitsch-display), Georgia, serif;
+  font:
+    24px/1.16 var(--font-kitsch-display),
+    Georgia,
+    serif;
 }
 
 .message-playbook-grid p {
@@ -782,9 +790,68 @@ summary:focus-visible {
     max-width: none;
     padding: 26px 20px;
   }
+
+  html,
+  body {
+    overflow-x: hidden;
+  }
+
+  .main,
+  .content,
+  .page-grid {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .table-wrap {
+    margin-inline: -4px;
+    padding: 0 4px 8px;
+    overscroll-behavior-inline: contain;
+    -webkit-overflow-scrolling: touch;
+  }
 }
 
 @media (max-width: 620px) {
+  .topbar {
+    height: 64px;
+    gap: 12px;
+    padding: 0 14px;
+  }
+
+  .topbar-logo {
+    max-width: 84px;
+  }
+
+  .topbar .demo-button {
+    min-height: 42px;
+    padding-inline: 11px;
+    font-size: 10px;
+  }
+
+  .content {
+    padding: 18px 14px 30px;
+  }
+
+  .mobile-menu,
+  .guide-actions button,
+  .source-link,
+  .nav-list button {
+    min-height: 44px;
+  }
+
+  .section-head h2 {
+    font-size: clamp(29px, 10vw, 40px);
+  }
+
+  .hero-panel {
+    min-height: 340px;
+    padding: 24px 20px;
+    border-radius: 24px;
+  }
+
+  .hero-panel h1 {
+    font-size: clamp(40px, 13vw, 58px);
+  }
   .yoy-score-grid {
     grid-template-columns: 1fr;
   }

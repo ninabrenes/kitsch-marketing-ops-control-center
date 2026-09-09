@@ -846,3 +846,228 @@
     justify-self: center;
   }
 }
+
+/* Phone layout: scoped containment and touch ergonomics for 320–430px. */
+@container (max-width: 430px) {
+  .scw-shell {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    gap: 12px;
+    overflow-x: clip;
+  }
+  .scw-shell :where(section, article, aside, div, header, label) {
+    min-width: 0;
+    max-width: 100%;
+  }
+  .scw-shell :where(h2, h3, h4, p, strong, small, dd, li) {
+    overflow-wrap: anywhere;
+  }
+  .scw-hero,
+  .scw-panel {
+    padding: 17px;
+  }
+  .scw-hero {
+    gap: 18px;
+    border-radius: 24px 24px 24px 8px;
+  }
+  .scw-hero h2 {
+    font-size: clamp(31px, 10cqw, 39px);
+    line-height: 1.02;
+  }
+  .scw-hero p {
+    font-size: 12px;
+    line-height: 1.55;
+  }
+  .scw-mode {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding: 3px;
+  }
+  .scw-mode button,
+  .scw-toolbar select,
+  .scw-product-links a {
+    min-height: 44px;
+  }
+  .scw-mode button {
+    width: 100%;
+    padding: 8px;
+    white-space: normal;
+  }
+  .scw-toolbar {
+    grid-template-columns: 1fr;
+    gap: 13px;
+    padding: 15px;
+    border-radius: 22px 22px 22px 8px;
+  }
+  .scw-view-status {
+    grid-column: auto;
+  }
+  .scw-toolbar select {
+    min-width: 0;
+    width: 100%;
+    font-size: 12px;
+    padding: 10px 36px 10px 14px;
+  }
+  .scw-kpi-grid {
+    gap: 8px;
+  }
+  .scw-kpi-grid article {
+    min-height: 0;
+    padding: 15px;
+    border-radius: 18px 18px 18px 6px;
+  }
+  .scw-kpi-grid strong {
+    font-size: 18px;
+  }
+  .scw-panel {
+    border-radius: 22px 22px 22px 8px;
+  }
+  .scw-panel-head {
+    gap: 9px;
+    margin-bottom: 14px;
+  }
+  .scw-panel-head h3,
+  .scw-contract h3 {
+    font-size: 24px;
+  }
+  .scw-panel-head .scw-pill {
+    max-width: 100%;
+    white-space: normal;
+  }
+  .scw-source-grid {
+    gap: 8px;
+  }
+  .scw-source-grid article {
+    grid-template-columns: 36px minmax(0, 1fr);
+    padding: 13px;
+  }
+  .scw-source-icon {
+    width: 36px;
+    height: 36px;
+  }
+  .scw-source-grid h4 {
+    font-size: 12px;
+  }
+  .scw-source-grid p {
+    display: -webkit-box;
+    overflow: hidden;
+    font-size: 10px;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+  .scw-source-grid small {
+    font-size: 8px;
+    line-height: 1.4;
+  }
+  .scw-readiness {
+    grid-column: 2;
+    font-size: 9px;
+  }
+  .scw-contract {
+    border-radius: 34px 34px 9px 34px;
+  }
+  .scw-contract > svg {
+    margin-bottom: 22px;
+  }
+  .scw-contract li {
+    min-height: 36px;
+    font-size: 11px;
+    line-height: 1.4;
+  }
+  .scw-unlock-grid article {
+    min-height: 0;
+    padding: 14px;
+  }
+  .scw-dependency-flow {
+    padding: 17px 14px;
+    border-radius: 24px 24px 8px 24px;
+  }
+  .scw-dependency-flow > div {
+    padding: 3px 0;
+  }
+  .scw-dependency-flow > div > span {
+    font-size: 8px;
+  }
+  .scw-dependency-flow > div > strong {
+    font-size: 17px;
+  }
+  .scw-unlock-note {
+    grid-template-columns: 20px minmax(0, 1fr);
+    align-items: start;
+    padding: 13px;
+  }
+  .scw-unlock-note p {
+    font-size: 10px;
+  }
+  .scw-unlock-note .scw-pill {
+    grid-column: 2;
+  }
+  .scw-product-list button {
+    grid-template-columns: 58px minmax(0, 1fr) 18px;
+    min-height: 76px;
+    width: 100%;
+    padding: 8px;
+  }
+  .scw-product-list img {
+    display: block;
+    width: 58px;
+    height: 58px;
+  }
+  .scw-product-list span > strong {
+    font-size: 11px;
+    line-height: 1.25;
+  }
+  .scw-product-list span > em,
+  .scw-product-list span > small {
+    font-size: 8px;
+    line-height: 1.3;
+  }
+  .scw-product-image {
+    min-height: 0;
+    aspect-ratio: 1 / 1;
+  }
+  .scw-product-image img {
+    display: block;
+  }
+  .scw-product-copy {
+    padding: 18px;
+  }
+  .scw-product-copy h4 {
+    font-size: 26px;
+  }
+  .scw-product-copy dt {
+    font-size: 8px;
+  }
+  .scw-product-copy dd {
+    font-size: 11px;
+    line-height: 1.5;
+  }
+  .scw-product-links {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  .scw-product-links a {
+    justify-content: center;
+    width: 100%;
+    font-size: 11px;
+  }
+  .scw-action-grid article {
+    grid-template-columns: 36px minmax(0, 1fr);
+    padding: 13px;
+  }
+  .scw-action-grid article > span {
+    width: 36px;
+    height: 36px;
+  }
+  .scw-action-grid h4 {
+    font-size: 12px;
+  }
+  .scw-action-grid p {
+    font-size: 10px;
+  }
+  .scw-action-grid article > strong {
+    grid-column: 2;
+    white-space: normal;
+  }
+}

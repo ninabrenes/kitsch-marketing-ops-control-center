@@ -243,7 +243,7 @@ export function ShopifyCommerceWorkspace() {
     [channel],
   );
   const selectedProduct =
-    products.find((product) => product.name === activeProduct) ??
+    visibleProducts.find((product) => product.name === activeProduct) ??
     visibleProducts[0] ??
     products[0];
 

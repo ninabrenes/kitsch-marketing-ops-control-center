@@ -21,6 +21,9 @@ import {
 import { ShopifyCommerceWorkspace } from './shopify-commerce-workspace';
 import { CreatorAffiliateDashboard } from './creator-affiliate-dashboard';
 import { MessagingEvidenceLibrary } from './messaging-evidence-library';
+import { EvidenceToAction } from './evidence-to-action';
+import { SearchEvidenceWorkbench } from './search-evidence-workbench';
+import { GlossaryText } from './glossary-term';
 import './editorial-theme.css';
 import {
   ArrowUpRight,
@@ -1334,8 +1337,14 @@ function Head({
   return (
     <div className="section-head">
       <p>{eyebrow}</p>
-      <h2>{title}</h2>
-      {copy && <span>{copy}</span>}
+      <h2>
+        <GlossaryText>{title}</GlossaryText>
+      </h2>
+      {copy && (
+        <span>
+          <GlossaryText>{copy}</GlossaryText>
+        </span>
+      )}
     </div>
   );
 }
@@ -1820,6 +1829,13 @@ function Overview() {
           </div>
         </div>
       </section>
+      <EvidenceToAction
+        evidence="Current public counters, retailer surfaces, product pages and dated market signals."
+        interpretation="Fragrance and social commerce are visible growth narratives, while omnichannel scale creates a reconciliation job."
+        internal="Finance-aligned revenue, spend, margin, inventory and customer cohorts joined across channels."
+        decision="Set the leadership priority, assign an owner and define the internal proof required before funding or scaling."
+        owner="Leadership"
+      />
       <Metrics />
       <section className="wide-card">
         <Head
@@ -1973,6 +1989,13 @@ function Ecommerce() {
         eyebrow="Commerce control"
         title="Products, channels, profitable repeat"
         copy="Inspect public product and channel signals, then connect orders, costs, returns and cohorts before making a commercial decision."
+      />
+      <EvidenceToAction
+        evidence="Public assortment, prices, retailer result counts, platform counters and Shopify-published case claims."
+        interpretation="Visible product velocity and mobile behavior suggest franchise and cross-channel opportunities—not realized Kitsch economics."
+        internal="Order-level net sales, discounts, returns, COGS, fees, fulfillment, customer status and 30/60/90-day repeat."
+        decision="Choose which SKU × channel combinations to scale, fix, bundle or stop on contribution and customer quality."
+        owner="E-commerce + Finance"
       />
       <section className="commerce-hero">
         <div>
@@ -2493,6 +2516,7 @@ function SearchView() {
         title="Answer the question. Earn the click."
         copy="Use the September 2026 public snapshot to prioritize customer questions; validate demand, ranking and conversion in Search Console and commerce data."
       />
+      <SearchEvidenceWorkbench />
       <section className="two-col">
         <article className="wide-card">
           <div className="icon-title">
@@ -3043,6 +3067,13 @@ function Social() {
         eyebrow="Social operating system"
         title="Give every channel a job"
         copy="Inspect each platform’s evidence, role and next action, then connect creative IDs to attention, commerce and cohort outcomes."
+      />
+      <EvidenceToAction
+        evidence="Current profile counters, observable posts, dated public captures and platform-native merchandising."
+        interpretation="Channel roles and creative patterns are directional; public output volume does not reveal performance."
+        internal="Monthly reach, watch time, saves, clicks, spend, conversions and cohort value joined by platform and creative ID."
+        decision="Protect each channel’s job, prioritize the next creative test and move budget only after comparable outcome data."
+        owner="Social + Growth"
       />
       <section className="wide-card social-switcher">
         <Tabs defaultValue="instagram">

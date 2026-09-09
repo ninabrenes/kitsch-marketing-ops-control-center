@@ -32,6 +32,7 @@ import {
 } from 'recharts';
 
 import './funnel-editorial.css';
+import { EvidenceToAction } from './evidence-to-action';
 
 const links = {
   site: 'https://www.mykitsch.com/',
@@ -490,6 +491,14 @@ export function Funnel() {
         eyebrow="Customer journey"
         title="Five handoffs. One customer journey."
         copy="Select a stage to assign the customer question, media job, owner and first-party measure. Funnel widths illustrate the operating structure only—not Kitsch traffic or conversion volumes."
+      />
+
+      <EvidenceToAction
+        evidence="Public channel surfaces, product journeys, creator content and retailer availability show where customers can discover and buy."
+        interpretation="The five-stage funnel is an illustrative operating map for assigning channel jobs and handoffs—not observed Kitsch conversion behavior."
+        internal="Customer, source, creative, first SKU, margin, device, market and mature second-order events joined at person/order level."
+        decision="Name the owner and first-party measure for each handoff, then fix the stage where verified customer movement breaks."
+        owner="Growth + E-commerce"
       />
 
       <section

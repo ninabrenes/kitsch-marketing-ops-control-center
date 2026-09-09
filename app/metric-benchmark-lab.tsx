@@ -17,6 +17,7 @@ import {
   TrendingUp,
   Users,
 } from 'lucide-react';
+import { GlossaryHint, GlossaryText } from './glossary-term';
 
 type Metric = {
   id: string;
@@ -331,6 +332,7 @@ export function MetricBenchmarkLab() {
             decision. Connect Shopify, Klaviyo, paid media and finance to unlock
             Kitsch actuals.
           </p>
+          <GlossaryHint />
         </div>
         <div className="mbl-hero-orbit" aria-label="Metric workflow">
           <span>
@@ -391,11 +393,15 @@ export function MetricBenchmarkLab() {
                 </div>
                 <div>
                   <span>{metric.id}</span>
-                  <h3>{metric.name}</h3>
+                  <h3>
+                    <GlossaryText>{metric.name}</GlossaryText>
+                  </h3>
                 </div>
                 <Confidence value={metric.confidence} />
               </header>
-              <p className="mbl-question">{metric.question}</p>
+              <p className="mbl-question">
+                <GlossaryText>{metric.question}</GlossaryText>
+              </p>
               <div className="mbl-values">
                 <div className="mbl-actual">
                   <span>INTERNAL ACTUAL</span>
@@ -414,7 +420,9 @@ export function MetricBenchmarkLab() {
                 <Calculator />
                 <div>
                   <span>FORMULA</span>
-                  <p>{metric.formula}</p>
+                  <p>
+                    <GlossaryText>{metric.formula}</GlossaryText>
+                  </p>
                 </div>
               </div>
               <div className="mbl-fields">
@@ -423,7 +431,9 @@ export function MetricBenchmarkLab() {
                 </span>
                 <div>
                   {metric.fields.map((field) => (
-                    <small key={field}>{field}</small>
+                    <small key={field}>
+                      <GlossaryText>{field}</GlossaryText>
+                    </small>
                   ))}
                 </div>
               </div>
@@ -431,7 +441,9 @@ export function MetricBenchmarkLab() {
                 <Target />
                 <div>
                   <span>DECISION IT CHANGES</span>
-                  <p>{metric.decision}</p>
+                  <p>
+                    <GlossaryText>{metric.decision}</GlossaryText>
+                  </p>
                 </div>
               </div>
               <div className="mbl-limit">

@@ -21,6 +21,7 @@ import {
   UsersRound,
 } from 'lucide-react';
 import { PlatformBrandIcon } from './platform-brand-icon';
+import { EvidenceToAction } from './evidence-to-action';
 import './creator-affiliate-dashboard.css';
 import './creator-affiliate-workflow.css';
 
@@ -289,6 +290,14 @@ export function CreatorAffiliateDashboard() {
           <b>INTERNAL DATA REQUIRED</b>
         </aside>
       </section>
+
+      <EvidenceToAction
+        evidence="Creator-native demos and social-commerce surfaces are publicly visible; program economics and roster health are not."
+        interpretation="Creator content can play distinct education, trust, reach and commerce roles, but engagement alone cannot identify a profitable partner."
+        internal="Contracts, deliverables, usage rights, fully loaded cost, mature net orders, refunds, contribution and repeat by creator/content ID."
+        decision="Renew, revise, graduate or stop each partnership based on its assigned role, delivery quality and mature customer economics."
+        owner="Partnerships + Finance"
+      />
 
       <section className="creator-public-read">
         <div>

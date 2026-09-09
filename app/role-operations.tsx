@@ -6,6 +6,8 @@ import {
   ListChecks,
 } from 'lucide-react';
 import { OpsVisualStudio } from './ops-visual-studio';
+import { EvidenceToAction } from './evidence-to-action';
+import { GlossaryHint, GlossaryText } from './glossary-term';
 
 const roleBlueprint = [
   [
@@ -70,8 +72,14 @@ function Head({
   return (
     <div className="section-head">
       <p>{eyebrow}</p>
-      <h2>{title}</h2>
-      {copy && <span>{copy}</span>}
+      <h2>
+        <GlossaryText>{title}</GlossaryText>
+      </h2>
+      {copy && (
+        <span>
+          <GlossaryText>{copy}</GlossaryText>
+        </span>
+      )}
     </div>
   );
 }
@@ -86,6 +94,13 @@ export function RoleOperations() {
         eyebrow="Role operating blueprint"
         title="Build rhythm. Own the numbers. Close the loop."
         copy="Each responsibility maps to the artifact, owner and cadence that makes it operational."
+      />
+      <EvidenceToAction
+        evidence="The role brief explicitly asks for cadence, dashboards, launch control, OKRs, budget governance and leadership follow-through."
+        interpretation="The leverage opportunity is a shared operating system that makes exceptions, ownership and decisions visible without status-chasing."
+        internal="Current meeting map, metric dictionary, launch calendar, Asana portfolio, budget/PO tracker, decision log and team capacity."
+        decision="Pilot one weekly pulse and one live launch, measure decision latency and readiness, then standardize what reduces friction."
+        owner="Marketing Ops / Chief of Staff"
       />
       <section className="role-hero">
         <div>
@@ -115,6 +130,7 @@ export function RoleOperations() {
           eyebrow="Job-description coverage"
           title="Eight responsibilities → eight operating artifacts"
         />
+        <GlossaryHint />
         <div className="table-wrap">
           <table>
             <thead>
@@ -129,7 +145,15 @@ export function RoleOperations() {
               {roleBlueprint.map((r) => (
                 <tr key={r[0]}>
                   {r.map((v, i) => (
-                    <td key={v}>{i === 0 ? <strong>{v}</strong> : v}</td>
+                    <td key={v}>
+                      {i === 0 ? (
+                        <strong>
+                          <GlossaryText>{v}</GlossaryText>
+                        </strong>
+                      ) : (
+                        <GlossaryText>{v}</GlossaryText>
+                      )}
+                    </td>
                   ))}
                 </tr>
               ))}

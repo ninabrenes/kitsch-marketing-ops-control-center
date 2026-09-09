@@ -8,6 +8,7 @@ import {
   ShoppingBag,
   Target,
 } from 'lucide-react';
+import { EvidenceToAction } from './evidence-to-action';
 
 const brands = [
   {
@@ -266,6 +267,13 @@ export function CompetitorIntelligence() {
           </article>
         </div>
       </section>
+      <EvidenceToAction
+        evidence="Official sites, public social profiles, current prices, retailer presence, ad-library surfaces and directional third-party snapshots."
+        interpretation="Four strategic lanes clarify where competitors apply pressure; follower and ad presence do not prove demand or efficiency."
+        internal="Kitsch share of search, win/loss research, retailer sell-through, paid incrementality and contribution-adjusted customer cohorts."
+        decision="Choose the lane to defend, differentiate or test—and write the evidence threshold that would change the choice."
+        owner="Brand + Growth"
+      />
       <section className="wide-card comp-boundary">
         <CircleAlert />
         <div>
