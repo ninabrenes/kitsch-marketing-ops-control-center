@@ -335,12 +335,16 @@
 }
 
 .source-claim-preview {
+  display: -webkit-box;
+  min-width: 0;
   overflow: hidden;
   color: #645a56;
   font-size: 10px;
   line-height: 1.45;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  overflow-wrap: anywhere;
+  white-space: normal;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 
 .source-detail {

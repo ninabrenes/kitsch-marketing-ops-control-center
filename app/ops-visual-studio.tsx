@@ -42,7 +42,7 @@ const visualSystems = [
     label: 'Cadence',
     Icon: CalendarDays,
     eyebrow: 'Operating cadence',
-    title: 'A rhythm for choices—not status theater',
+    title: 'Turn updates into decisions',
     copy: 'Async updates feed focused meetings. Each meeting closes with a decision, owner, date or documented no-change.',
     nodes: [
       {
@@ -286,11 +286,11 @@ export function OpsVisualStudio() {
     >
       <header className="ops-visual-studio__head">
         <div>
-          <span>ROLE-ALIGNED OPERATING BLUEPRINT</span>
-          <h2>From heroics to rhythm</h2>
+          <span>MARKETING OPERATING FLOWS</span>
+          <h2>Six flows the CMO can run</h2>
           <p>
-            Explore the six loops this role would run across marketing,
-            e-commerce, creative, retail and leadership.
+            Choose a flow to see its steps, owner, operating deadline and
+            closure evidence.
           </p>
         </div>
         <div className="ops-visual-studio__labels">

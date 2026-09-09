@@ -326,6 +326,59 @@ export function MarketingOpsSystem() {
             <strong>Evidence</strong> What proves completion.
           </span>
         </div>
+        <div
+          className="ops-leadership-loop"
+          aria-label="Weekly leadership decision loop"
+        >
+          {[
+            {
+              Icon: Target,
+              step: '01',
+              title: 'Read outcomes',
+              copy: 'Review OKR progress and the four business outcomes.',
+              system: 'OKR record',
+            },
+            {
+              Icon: CircleAlert,
+              step: '02',
+              title: 'Find exceptions',
+              copy: 'Surface only material variance, risk and blocked work.',
+              system: 'Asana signals',
+            },
+            {
+              Icon: ListChecks,
+              step: '03',
+              title: 'Make decisions',
+              copy: 'Choose one path with one accountable owner and due date.',
+              system: 'Decision log',
+            },
+            {
+              Icon: CheckCircle2,
+              step: '04',
+              title: 'Prove closure',
+              copy: 'Link the completed task, result and reusable learning.',
+              system: 'Evidence link',
+            },
+          ].map((stage, index, stages) => (
+            <article key={stage.step}>
+              <header>
+                <span>
+                  <stage.Icon aria-hidden="true" />
+                </span>
+                <small>{stage.step}</small>
+              </header>
+              <h3>{stage.title}</h3>
+              <p>{stage.copy}</p>
+              <footer>{stage.system}</footer>
+              {index < stages.length - 1 && (
+                <ArrowRight
+                  className="ops-leadership-loop__arrow"
+                  aria-hidden="true"
+                />
+              )}
+            </article>
+          ))}
+        </div>
       </section>
       <DataReliabilitySpine />
       <section className="wide-card ops-worked-okr">

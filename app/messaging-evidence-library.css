@@ -34,7 +34,7 @@
 }
 .message-library-hero h2 {
   font:
-    400 clamp(32px, 3.2vw, 48px)/1.02 var(--font-kitsch-display),
+    400 clamp(32px, 3vw, 42px)/1.04 var(--font-kitsch-display),
     Georgia,
     serif;
   letter-spacing: -0.04em;

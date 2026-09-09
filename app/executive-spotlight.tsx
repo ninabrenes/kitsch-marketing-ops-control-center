@@ -430,10 +430,8 @@ export function ExecutiveSpotlight({
           <span>
             DEMO VIEW · TUESDAY, SEPTEMBER 8, 2026 · {period.toUpperCase()}
           </span>
-          <h1>
-            Clarity today. <em>Compounding tomorrow.</em>
-          </h1>
-          <p>Real signals. Smarter decisions. A more connected Kitsch.</p>
+          <h1>Weekly marketing review</h1>
+          <p>Outcomes, changes, decisions, owners and data status.</p>
         </div>
         <div className="executive-command-hero-note">
           <strong>Effortless hair for a kinder day.</strong>

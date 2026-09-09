@@ -38,7 +38,7 @@
 }
 .creator-hero h1 {
   font:
-    400 clamp(42px, 5vw, 68px)/0.96 var(--font-kitsch-display),
+    400 clamp(34px, 3.2vw, 42px)/1.02 var(--font-kitsch-display),
     Georgia,
     serif;
   letter-spacing: -0.045em;
@@ -179,7 +179,7 @@
 }
 .creator-intelligence-head h2 {
   font:
-    400 clamp(32px, 3.8vw, 50px)/1 var(--font-kitsch-display),
+    400 clamp(30px, 3vw, 40px)/1.04 var(--font-kitsch-display),
     Georgia,
     serif;
   letter-spacing: -0.04em;

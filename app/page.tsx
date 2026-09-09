@@ -22,7 +22,6 @@ import { ShopifyCommerceWorkspace } from './shopify-commerce-workspace';
 import { CreatorAffiliateDashboard } from './creator-affiliate-dashboard';
 import { MessagingEvidenceLibrary } from './messaging-evidence-library';
 import { EvidenceToAction } from './evidence-to-action';
-import { InsightCopilot } from './insight-copilot';
 import { SearchEvidenceWorkbench } from './search-evidence-workbench';
 import { SocialSystemWorkspace } from './social-system-workspace';
 import { GlossaryText } from './glossary-term';
@@ -3926,9 +3925,6 @@ export default function Home() {
           <TabsContent value="sources">
             <Sources />
           </TabsContent>
-          {active !== 'overview' && (
-            <InsightCopilot key={active} active={active} />
-          )}
         </div>
       </main>
     </Tabs>

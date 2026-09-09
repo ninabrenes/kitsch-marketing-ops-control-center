@@ -40,7 +40,7 @@
   margin: 7px 0;
   color: var(--ops-ink);
   font:
-    400 clamp(34px, 4.2vw, 52px)/1 var(--font-kitsch-display),
+    400 clamp(30px, 3vw, 40px)/1.04 var(--font-kitsch-display),
     Georgia,
     serif;
   letter-spacing: -0.035em;

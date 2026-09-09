@@ -1182,3 +1182,199 @@ summary:focus-visible {
     grid-column: 2;
   }
 }
+
+/* Component QA pass: tighter CMO hierarchy, resilient icon slots and no internal clipping. */
+.section-head h1,
+.section-head h2 {
+  max-width: 980px;
+  font-size: clamp(28px, 2.8vw, 40px);
+  line-height: 1.06;
+  text-wrap: balance;
+}
+
+.hero-panel h1 {
+  max-width: 850px;
+  font-size: clamp(40px, 4.4vw, 58px);
+  line-height: 0.98;
+  text-wrap: balance;
+}
+
+.wide-card,
+.wide-card > *,
+.signal-strip,
+.signal-strip > *,
+.site-journey--interactive,
+.site-journey--interactive > *,
+.source-disclosure-list,
+.source-disclosure-list > * {
+  min-width: 0;
+}
+
+.signal-strip {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  overflow: visible;
+}
+
+.signal-strip article,
+.signal-strip article > div,
+.signal-strip .platform-brand,
+.signal-strip .platform-brand b {
+  min-width: 0;
+}
+
+.signal-strip .platform-brand b,
+.signal-strip article > small,
+.signal-strip article > p {
+  overflow-wrap: anywhere;
+}
+
+.platform-brand-glyph,
+.platform-brand-small .platform-brand-glyph,
+.platform-brand-large .platform-brand-glyph {
+  overflow: visible;
+}
+
+.platform-brand-glyph > img,
+.platform-brand-glyph > svg:not(.platform-brand-shop-badge) {
+  display: block;
+  max-width: 62%;
+  max-height: 62%;
+  object-fit: contain;
+}
+
+.platform-brand-shop-badge {
+  right: -3px;
+  bottom: -3px;
+  width: 12px !important;
+  height: 12px !important;
+  padding: 2px;
+}
+
+.site-journey--interactive {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  align-items: stretch;
+}
+
+.site-journey--interactive button {
+  height: auto;
+  min-height: 218px;
+  overflow: visible;
+  overflow-wrap: anywhere;
+}
+
+.source-claim-preview {
+  display: -webkit-box;
+  min-width: 0;
+  overflow: hidden;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.ops-editorial-head h2,
+.creator-intelligence-head h2 {
+  font-size: clamp(29px, 3vw, 40px);
+  line-height: 1.04;
+  text-wrap: balance;
+}
+
+.ops-flow-diagram {
+  gap: 34px;
+}
+
+.ops-flow-step article {
+  min-height: 190px;
+  box-shadow: 0 12px 28px rgba(113, 63, 42, 0.06);
+}
+
+.ops-flow-step article header > span {
+  width: 42px;
+  height: 42px;
+}
+
+@media (max-width: 1180px) {
+  .signal-strip {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .site-journey--interactive {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .section-head h1,
+  .section-head h2,
+  .ops-editorial-head h2,
+  .creator-intelligence-head h2 {
+    font-size: clamp(27px, 8.5vw, 34px);
+    line-height: 1.08;
+  }
+
+  .hero-panel h1,
+  .creator-hero h1 {
+    font-size: clamp(34px, 10.5vw, 42px);
+    line-height: 1;
+  }
+
+  .executive-command-hero h1,
+  .social-system-hero h1 {
+    font-size: clamp(32px, 10vw, 40px);
+  }
+
+  .executive-data-health summary,
+  .product-showcase-links a,
+  .creator-card-body header > a,
+  .funnel-stage-pills button,
+  .funnel-editorial details summary,
+  .message-caption-corpus a,
+  .message-example-grid a,
+  .keyword-table a,
+  .comp-details a,
+  .ops-source-links a,
+  .ops-system-detail summary {
+    min-height: 44px;
+  }
+
+  .creator-card-body header > a {
+    min-width: 44px;
+  }
+
+  .message-caption-corpus a,
+  .message-example-grid a,
+  .keyword-table a,
+  .comp-details a,
+  .ops-source-links a {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .signal-strip,
+  .site-journey--interactive {
+    grid-template-columns: 1fr;
+  }
+
+  .site-journey--interactive button {
+    min-height: 0;
+    padding: 17px;
+  }
+
+  .platform-brand,
+  .creator-platforms .platform-brand {
+    max-width: 100%;
+  }
+
+  .platform-brand b {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .ops-flow-diagram {
+    gap: 12px;
+  }
+
+  .ops-flow-step article {
+    min-height: 0;
+  }
+}

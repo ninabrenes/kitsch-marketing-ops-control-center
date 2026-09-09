@@ -30,9 +30,9 @@
 .site-journey--interactive button {
   position: relative;
   min-width: 0;
-  min-height: 188px;
+  min-height: 218px;
   padding: 18px;
-  overflow: hidden;
+  overflow: visible;
   color: var(--funnel-ink);
   text-align: left;
   cursor: pointer;

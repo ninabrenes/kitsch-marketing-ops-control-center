@@ -913,7 +913,7 @@ export function Funnel() {
         <div className="funnel-insight">
           <Lightbulb />
           <div>
-            <span>Smart insight</span>
+            <span>Recommended action</span>
             <p>
               <b>Fit is the likely leverage point.</b> Portfolio breadth becomes
               an advantage when a customer can identify the right doorway and
@@ -928,7 +928,7 @@ export function Funnel() {
           <Database />
         </span>
         <div>
-          <small>Measurement blueprint</small>
+          <small>Required measurement</small>
           <h3>Connect the journey at customer + creative level</h3>
           <p>
             Customer ID × first-touch source × creative ID × need state × first

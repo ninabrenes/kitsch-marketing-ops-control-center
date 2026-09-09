@@ -26,7 +26,7 @@
 }
 .scw-hero h2 {
   font:
-    400 clamp(34px, 5cqw, 56px)/1 var(--font-kitsch-display),
+    400 clamp(32px, 4cqw, 42px)/1.03 var(--font-kitsch-display),
     Georgia,
     serif;
   letter-spacing: -0.04em;

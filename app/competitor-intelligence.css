@@ -19,7 +19,7 @@
 
 .competitor-hero h1 {
   max-width: 19ch;
-  font-size: clamp(2rem, 3.2vw, 3rem);
+  font-size: clamp(2rem, 3vw, 2.625rem);
   line-height: 1.04;
 }
 

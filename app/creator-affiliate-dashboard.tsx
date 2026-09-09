@@ -524,7 +524,7 @@ export function CreatorAffiliateDashboard() {
       >
         <header className="creator-intelligence-head">
           <div>
-            <span>PUBLIC CREATOR INTELLIGENCE · 2025–2026</span>
+            <span>PUBLIC CREATOR EVIDENCE · 2025–2026</span>
             <h2 id="creator-intelligence-title">
               Scale is visible. Economics are not.
             </h2>
@@ -730,8 +730,8 @@ export function CreatorAffiliateDashboard() {
             and customer cohort.
           </b>
           <small>
-            This recommendation follows the displayed repeat-partner rule. It is
-            not live AI and does not use private Kitsch data.
+            Rule-based recommendation from the displayed public evidence; no
+            private Kitsch data is used.
           </small>
         </aside>
       </section>

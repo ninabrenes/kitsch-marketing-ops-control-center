@@ -263,7 +263,7 @@ export function ShopifyCommerceWorkspace() {
     <section className="scw-shell" aria-labelledby="commerce-workspace-title">
       <header className="scw-hero">
         <div>
-          <span className="scw-eyebrow">COMMERCE INTELLIGENCE WORKSPACE</span>
+          <span className="scw-eyebrow">COMMERCE CONTROL</span>
           <h2 id="commerce-workspace-title">
             Commerce decisions, grounded in order economics.
           </h2>

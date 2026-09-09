@@ -963,12 +963,14 @@
   margin-top: 20px;
 }
 .executive-okr-grid article {
+  min-width: 0;
   padding: 17px;
   border: 1px solid var(--editorial-outline);
   border-radius: 18px;
   background: #fff;
 }
 .executive-okr-grid article header {
+  min-width: 0;
   display: flex;
   gap: 8px;
   align-items: center;
@@ -983,6 +985,7 @@
   letter-spacing: 0.08em;
 }
 .executive-okr-grid h3 {
+  overflow-wrap: anywhere;
   margin: 18px 0 7px;
   font:
     21px/1.1 var(--font-kitsch-display),
@@ -990,6 +993,8 @@
     serif;
 }
 .executive-okr-grid article > p {
+  min-width: 0;
+  overflow-wrap: anywhere;
   min-height: 37px;
   margin: 0;
   color: #655a55;
@@ -998,8 +1003,15 @@
 }
 .executive-okr-grid dl {
   display: grid;
-  grid-template-columns: 0.42fr 1fr;
+  grid-template-columns: minmax(0, 0.42fr) minmax(0, 1fr);
   gap: 8px;
+}
+
+.executive-okr-grid dd,
+.executive-okr-grid dt,
+.executive-okr-grid button {
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 .executive-asana-panel {
   margin-top: 12px;
@@ -1235,10 +1247,15 @@
 
 .executive-command {
   max-width: 1600px;
+  grid-template-columns: minmax(0, 1fr);
   margin: 0 auto;
   padding: 14px clamp(18px, 2.4vw, 38px) 30px;
   gap: 10px;
   background: #f8f4ef;
+}
+
+.executive-command > * {
+  min-width: 0;
 }
 
 .executive-command-bar {
@@ -1772,7 +1789,7 @@
   order: 8;
 }
 
-@media (max-width: 1180px) and (min-width: 761px) {
+@media (max-width: 1500px) and (min-width: 761px) {
   .executive-command-bar {
     grid-template-columns: 210px auto 1fr auto;
   }
