@@ -513,6 +513,36 @@ export function ExecutiveSpotlight({
             supports.
           </p>
         </header>
+        <figure className="executive-funnel-visual">
+          <div className="executive-funnel-visual-viewport">
+            <a
+              href="/kitsch-decision-flow-desk.png"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Open the full Decision Flow Desk concept"
+            >
+              <img
+                src="/kitsch-customer-journey-visual.png"
+                alt="Illustrated Kitsch customer journey from Discover through Consider and Buy to Repeat, with the public channels, internal metric and key action for each stage"
+              />
+            </a>
+          </div>
+          <figcaption>
+            <span>VISUAL ONE-PAGE</span>
+            <p>
+              The selected design concept, now paired with the interactive
+              stage-by-stage operating view below. It illustrates the system; it
+              does not report Kitsch performance.
+            </p>
+            <a
+              href="/kitsch-decision-flow-desk.png"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Open full concept <ArrowRight />
+            </a>
+          </figcaption>
+        </figure>
         <div
           className="executive-funnel-track"
           role="tablist"

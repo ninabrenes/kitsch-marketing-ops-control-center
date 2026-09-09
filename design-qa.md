@@ -15,6 +15,9 @@
 - **Data integrity:** Passed. Internal actuals remain blank, proposed owners/dates are labeled, public counters are described as displayed signals and no performance delta is fabricated.
 - **Interaction:** Passed. Week/month/quarter/YoY, evidence-mode controls, data-health disclosure, plain-language explanation, specialist navigation and funnel-stage tabs work.
 - **Responsive behavior:** Passed. At 390 px, controls stack, the sidebar becomes a menu, decision rows collapse, the funnel becomes a readable vertical sequence and cards become single-column.
+- **Visual concept:** Passed. The selected Decision Flow Desk customer-journey artwork is embedded in the overview with an explicit illustrative-data boundary and a link to the full concept.
+- **Specialist entry:** Passed. Commerce and Marketing Operations now expose their page title and primary explanation within the first mobile viewport, with compact access to the walkthrough and Insight Copilot.
+- **Semantics:** Passed for the audited priority views. Executive Overview, Commerce Control and Marketing Operations each expose one descriptive `h1`.
 - **Runtime:** Passed. Production/Netlify build succeeds and the in-app browser reported no console errors or warnings.
 
 ## Issues resolved during QA
@@ -25,5 +28,9 @@
 - P1: Added four outcome-level OKR connections and privacy-safe Asana operating metrics without employee ranking.
 - P2: Added official platform marks, real product imagery, keyboard focus states and reduced-motion behavior.
 - P2: Tightened mobile hero artwork and converted the funnel into a touch-friendly vertical sequence.
+- P1: Added the selected visual customer-journey concept to the overview while preserving the interactive funnel beneath it.
+- P1: Removed forced image cropping so the journey starts at “Discover” on narrow screens and remains horizontally inspectable.
+- P2: Compacted the mobile interpretation panels and increased core navigation/action targets to 44 px.
+- P2: Added correct top-level heading semantics to Commerce Control and Marketing Operations.
 
 final result: passed

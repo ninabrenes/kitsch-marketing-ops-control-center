@@ -280,25 +280,33 @@
 
 @media (max-width: 680px) {
   .insight-copilot {
-    margin-bottom: 16px;
+    margin-bottom: 12px;
     border-radius: 20px;
   }
 
   .insight-copilot > header {
-    grid-template-columns: 1fr;
-    gap: 12px;
-    padding: 16px;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 10px;
+    padding: 12px 14px;
   }
 
-  .insight-copilot > header > p,
   .insight-copilot > header > button {
     grid-column: auto;
     grid-row: auto;
   }
 
+  .insight-copilot > header > p {
+    display: none;
+  }
+
   .insight-copilot > header > button {
-    width: 100%;
+    width: auto;
+    min-height: 44px;
     justify-content: center;
+  }
+
+  .insight-copilot__identity h2 {
+    font-size: 18px;
   }
 
   .insight-copilot__body {

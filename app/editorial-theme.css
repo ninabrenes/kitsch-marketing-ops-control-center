@@ -8,6 +8,15 @@
   --editorial-shadow: 0 14px 42px rgba(73, 45, 36, 0.08);
 }
 
+.section-head h1,
+.section-head h2 {
+  margin: 0;
+  font-family: var(--font-kitsch-display), Georgia, serif;
+  font-size: clamp(30px, 4vw, 48px);
+  font-weight: 400;
+  letter-spacing: -0.035em;
+}
+
 /* Final light editorial pass: eliminate legacy dark blocks and add depth without noise. */
 .hero-panel {
   color: var(--ink);
@@ -141,6 +150,9 @@ body {
   width: 100%;
   height: auto;
   object-fit: contain;
+}
+.nav-list button {
+  min-height: 44px !important;
 }
 
 .topbar-logo {
@@ -484,7 +496,10 @@ body {
 
 .commerce-channel-story__grid header > span {
   color: var(--rose);
-  font: 26px var(--font-kitsch-display), Georgia, serif;
+  font:
+    26px var(--font-kitsch-display),
+    Georgia,
+    serif;
 }
 
 .commerce-channel-story__grid header > svg {
@@ -503,7 +518,10 @@ body {
 
 .commerce-channel-story__grid h3 {
   margin: 8px 0;
-  font: 22px/1.12 var(--font-kitsch-display), Georgia, serif;
+  font:
+    22px/1.12 var(--font-kitsch-display),
+    Georgia,
+    serif;
 }
 
 .commerce-channel-story__grid p {
@@ -1128,6 +1146,7 @@ summary:focus-visible {
     min-height: 44px;
   }
 
+  .section-head h1,
   .section-head h2 {
     font-size: clamp(29px, 10vw, 40px);
   }

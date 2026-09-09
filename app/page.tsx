@@ -1403,17 +1403,20 @@ function Head({
   eyebrow,
   title,
   copy,
+  as = 'h2',
 }: {
   eyebrow: string;
   title: string;
   copy?: string;
+  as?: 'h1' | 'h2';
 }) {
+  const Heading = as;
   return (
     <div className="section-head">
       <p>{eyebrow}</p>
-      <h2>
+      <Heading>
         <GlossaryText>{title}</GlossaryText>
-      </h2>
+      </Heading>
       {copy && (
         <span>
           <GlossaryText>{copy}</GlossaryText>
@@ -1870,6 +1873,7 @@ function Ecommerce() {
   return (
     <div className="page-grid">
       <Head
+        as="h1"
         eyebrow="Commerce control"
         title="Products, channels, profitable repeat"
         copy="Inspect public product and channel signals, then connect orders, costs, returns and cohorts before making a commercial decision."

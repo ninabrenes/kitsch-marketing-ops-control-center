@@ -64,17 +64,20 @@ function Head({
   eyebrow,
   title,
   copy,
+  as = 'h2',
 }: {
   eyebrow: string;
   title: string;
   copy?: string;
+  as?: 'h1' | 'h2';
 }) {
+  const Heading = as;
   return (
     <div className="section-head">
       <p>{eyebrow}</p>
-      <h2>
+      <Heading>
         <GlossaryText>{title}</GlossaryText>
-      </h2>
+      </Heading>
       {copy && (
         <span>
           <GlossaryText>{copy}</GlossaryText>
@@ -91,6 +94,7 @@ export function RoleOperations() {
   return (
     <div className="page-grid">
       <Head
+        as="h1"
         eyebrow="Role operating blueprint"
         title="Build rhythm. Own the numbers. Close the loop."
         copy="Each responsibility maps to the artifact, owner and cadence that makes it operational."
