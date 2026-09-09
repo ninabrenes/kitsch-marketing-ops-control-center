@@ -141,6 +141,10 @@ const publicCreators = [
     story: 'Shine Serum inside a beauty routine',
     signal:
       'Product pairing can turn one demonstration into a broader styling ritual.',
+    evidence:
+      'https://www.modash.io/content-library/brands/kitsch-examples/influencers',
+    evidenceLabel: 'View tracked mention',
+    source: 'Modash public collaboration tracking',
   },
   {
     name: 'Faith Marie',
@@ -152,6 +156,10 @@ const publicCreators = [
     story: 'Zigzag headband trend demonstration',
     signal:
       'A simple visual transformation gives a low-explanation accessory viral potential.',
+    evidence:
+      'https://www.modash.io/breakdowns/kitsch-influencer-marketing-strategy',
+    evidenceLabel: 'View tracked mention',
+    source: 'Modash public collaboration tracking',
   },
   {
     name: 'Literally Bethany',
@@ -163,6 +171,10 @@ const publicCreators = [
     story: 'Heatless curls set during a workout',
     signal:
       'The strongest hook makes the product part of an existing routine—not an extra step.',
+    evidence:
+      'https://www.modash.io/breakdowns/kitsch-influencer-marketing-strategy',
+    evidenceLabel: 'View tracked mention',
+    source: 'Modash public collaboration tracking',
   },
   {
     name: 'Armin Arshe',
@@ -174,6 +186,10 @@ const publicCreators = [
     story: 'Curly-hair routine with #kitschpartner',
     signal:
       'Routine-led education can build category authority beyond a single product claim.',
+    evidence:
+      'https://www.modash.io/content-library/brands/kitsch-examples/influencers',
+    evidenceLabel: 'View tracked mention',
+    source: 'Modash public collaboration tracking',
   },
   {
     name: 'Jo Placencio',
@@ -185,6 +201,10 @@ const publicCreators = [
     story: 'Air Dry Cream for 50+ beauty audience',
     signal:
       'Life-stage specificity can widen relevance without flattening the brand voice.',
+    evidence:
+      'https://www.modash.io/content-library/brands/kitsch-examples/influencers',
+    evidenceLabel: 'View tracked mention',
+    source: 'Modash public collaboration tracking',
   },
   {
     name: 'that_coupon_chick',
@@ -196,6 +216,66 @@ const publicCreators = [
     story: 'Deals, launches and TikTok Shop discovery',
     signal:
       'Repeat commerce creators can become launch infrastructure if contribution stays healthy.',
+    evidence:
+      'https://www.modash.io/breakdowns/kitsch-influencer-marketing-strategy',
+    evidenceLabel: 'View tracked mentions',
+    source: 'Modash public collaboration tracking',
+  },
+  {
+    name: 'muchelleb',
+    handle: '@muchelleb',
+    platform: 'YouTube' as const,
+    profile: 'https://www.youtube.com/@muchelleb',
+    date: 'Apr–May 2026',
+    result: '2 sponsorships · 495K tracked subscribers',
+    story: 'Reset and life-admin videos with Kitsch sponsorships',
+    signal:
+      'A recurring reset format gives Kitsch a natural bridge into self-care and habit-building.',
+    evidence: 'https://youtube.com/watch?v=d8qZR5Dgo-8',
+    evidenceLabel: 'Watch sponsored video',
+    source: 'SponsorRadar public sponsorship tracking',
+  },
+  {
+    name: 'Brooke Makenna',
+    handle: '@brookemakenna',
+    platform: 'YouTube' as const,
+    profile: 'https://www.youtube.com/@brookemakenna',
+    date: 'Tracked through 2026',
+    result: '6 sponsorships · 383K tracked subscribers',
+    story: 'Repeat YouTube sponsorship relationship',
+    signal:
+      'Repeated sponsorships are a stronger fit signal than one-off reach, but still require cohort economics to justify renewal.',
+    evidence: 'https://sponsorradar.com/channels/brookemakenna',
+    evidenceLabel: 'View sponsorship record',
+    source: 'SponsorRadar public sponsorship tracking',
+  },
+  {
+    name: 'Amanda the Jedi',
+    handle: '@AmandaTheJedi',
+    platform: 'YouTube' as const,
+    profile: 'https://www.youtube.com/@AmandaTheJedi',
+    date: 'Tracked through 2026',
+    result: '5 sponsorships · 677K tracked subscribers',
+    story: 'Repeat sponsorships in entertainment commentary',
+    signal:
+      'An entertainment-adjacent audience can extend Kitsch beyond beauty tutorials when the integration still feels native.',
+    evidence: 'https://sponsorradar.com/channels/amandathejedi',
+    evidenceLabel: 'View sponsorship record',
+    source: 'SponsorRadar public sponsorship tracking',
+  },
+  {
+    name: 'Linda Vater',
+    handle: '@LindaVater',
+    platform: 'YouTube' as const,
+    profile: 'https://www.youtube.com/@LindaVater',
+    date: 'Mar 21, 2026',
+    result: 'Public sponsored video surfaced',
+    story: 'Kitsch sponsorship inside a lifestyle and gardening video',
+    signal:
+      'Lifestyle placements can reach high-intent audiences outside beauty, provided the product role is explicit and measurable.',
+    evidence: 'https://youtube.com/watch?v=sMBp3JtMPxw',
+    evidenceLabel: 'Watch sponsored video',
+    source: 'SponsorRadar public sponsorship tracking',
   },
 ] as const;
 
@@ -483,6 +563,42 @@ export function CreatorAffiliateDashboard() {
           ))}
         </div>
 
+        <article className="creator-youtube-evidence">
+          <div className="creator-youtube-evidence-title">
+            <PlatformBrandIcon name="YouTube" size="large" />
+            <div>
+              <span>YOUTUBE SPONSORSHIP FOOTPRINT</span>
+              <h3>Repeat sponsorships are visible across named channels</h3>
+              <p>
+                SponsorRadar currently surfaces 96 Kitsch sponsorships across 79
+                YouTube creators. This is public sponsorship evidence—not Kitsch
+                campaign delivery, spend or attributed sales data.
+              </p>
+            </div>
+          </div>
+          <dl>
+            <div>
+              <dt>96</dt>
+              <dd>sponsorships tracked</dd>
+            </div>
+            <div>
+              <dt>79</dt>
+              <dd>YouTube creators</dd>
+            </div>
+            <div>
+              <dt>1.2</dt>
+              <dd>average per creator</dd>
+            </div>
+          </dl>
+          <a
+            href="https://sponsorradar.com/brands/kitsch"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Review public tracker <ExternalLink />
+          </a>
+        </article>
+
         <div className="creator-mix-story">
           <article className="creator-channel-mix">
             <div
@@ -540,11 +656,14 @@ export function CreatorAffiliateDashboard() {
         <div className="creator-roster-head">
           <div>
             <span>PUBLICLY SURFACED COLLABORATIONS</span>
-            <h3>Six examples worth putting into the review queue</h3>
+            <h3>
+              {publicCreators.length} sourced profiles for the review queue
+            </h3>
           </div>
           <p>
             Inclusion means a public collaboration was surfaced—not that the
-            creator is currently contracted or recommended for renewal.
+            creator is currently contracted or recommended for renewal. Views,
+            subscriber counts and sponsorship totals are third-party snapshots.
           </p>
         </div>
         <div className="creator-card-grid">
@@ -581,7 +700,15 @@ export function CreatorAffiliateDashboard() {
                 </div>
                 <h4>{creator.story}</h4>
                 <p>{creator.signal}</p>
-                <small>Source · Modash public collaboration tracking</small>
+                <div className="creator-card-links">
+                  <a href={creator.profile} target="_blank" rel="noreferrer">
+                    Profile <ExternalLink />
+                  </a>
+                  <a href={creator.evidence} target="_blank" rel="noreferrer">
+                    {creator.evidenceLabel} <ExternalLink />
+                  </a>
+                </div>
+                <small>Source · {creator.source}</small>
               </div>
             </article>
           ))}

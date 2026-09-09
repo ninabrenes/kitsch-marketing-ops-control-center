@@ -486,6 +486,20 @@ const sources = [
     'Official Kitsch wordmark used in the persistent application chrome',
     'High',
   ],
+  [
+    'S33',
+    'Modash Kitsch creator analysis',
+    'https://www.modash.io/breakdowns/kitsch-influencer-marketing-strategy',
+    'Third-party 2025–2026 collaboration volume, channel mix, seasonality and named public-post examples; not Kitsch campaign economics',
+    'Medium',
+  ],
+  [
+    'S34',
+    'SponsorRadar Kitsch sponsorship tracker',
+    'https://sponsorradar.com/brands/kitsch',
+    'Third-party YouTube sponsorship footprint, named channels and public video evidence; not Kitsch spend or attribution data',
+    'Medium',
+  ],
 ];
 const monthTimeline = [
   [
