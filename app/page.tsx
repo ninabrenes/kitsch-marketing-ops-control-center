@@ -885,6 +885,8 @@ const commerceProducts = [
     description:
       'Protects blowouts, braids and long or short hair with an adjustable satin-lined waterproof format.',
     role: 'Evergreen utility hero',
+    narrative:
+      'Lead with the universal tension—keeping styled hair dry—then prove fit and protection visually. The strategic expansion is a complete shower-to-sleep protection routine, not another isolated cap color.',
   },
   {
     name: 'Hair Perfume Discovery Set',
@@ -897,6 +899,8 @@ const commerceProducts = [
     description:
       'Four trial scents with patented odor-neutralizing positioning; lowers fragrance discovery risk.',
     role: 'Trial → full-size gateway',
+    narrative:
+      'The set removes the uncertainty of buying fragrance online. Its job is to create a low-risk first order, identify a preferred scent and move that customer into a full-size or layering routine.',
   },
   {
     name: 'Smoothing Air Dry Cream',
@@ -909,6 +913,8 @@ const commerceProducts = [
     description:
       'One-step, no-heat styling with up to 24-hour frizz control and natural-texture definition.',
     role: 'Evergreen acquisition hero',
+    narrative:
+      'A fast before-and-after demonstration makes the promise easy to understand. The growth question is whether a first styling order creates repeat use and cross-sell into heatless or curl-care routines.',
   },
   {
     name: 'Satin Pillowcase',
@@ -921,6 +927,8 @@ const commerceProducts = [
     description:
       'Accessible overnight hair and skin protection with a deep color/licensing variant system.',
     role: 'Brand legacy + retail proof',
+    narrative:
+      'This is a durable brand-entry product: familiar, giftable and supported by visible retail reviews. Variants refresh demand, while the larger opportunity is migration into the broader overnight-care system.',
   },
   {
     name: 'Rice Water Shampoo Bar',
@@ -933,6 +941,8 @@ const commerceProducts = [
     description:
       'pH-balanced, color-safe solid cleansing positioned around strength, volume and packaging reduction.',
     role: 'Authority + replenishment',
+    narrative:
+      'The bar must overcome format skepticism before it can sell sustainability. Education should prove performance first, then make replenishment and the conditioner pairing feel like the natural next step.',
   },
   {
     name: 'Rice Water Bar Set',
@@ -945,6 +955,8 @@ const commerceProducts = [
     description:
       'Shampoo-and-conditioner system that converts a technical bar story into a complete routine.',
     role: 'AOV + routine builder',
+    narrative:
+      'Bundling removes the question of what belongs together and raises the first basket. Its commercial value depends on whether routine adoption improves contribution and repeat—not the bundle price alone.',
   },
   {
     name: 'Warm Sugar Hair Perfume',
@@ -957,6 +969,8 @@ const commerceProducts = [
     description:
       'Odor-neutralizing gourmand mist for hair, body and pillowcase; designed for layering and gifting.',
     role: 'Full-size fragrance hero',
+    narrative:
+      'The scent combines utility, identity and gifting. The narrative should move from a memorable sensory hook to odor-neutralizing proof, then test whether customers build a multi-scent wardrobe.',
   },
   {
     name: 'Whoville Cookies Hair Perfume',
@@ -969,6 +983,8 @@ const commerceProducts = [
     description:
       'Licensed seasonal scent that combines recognizable IP, gourmand novelty and scarcity.',
     role: 'Collectible demand spike',
+    narrative:
+      'Licensed familiarity and scarcity can create a sharp acquisition moment. Success is not the launch spike alone; it is whether those buyers return for an evergreen Kitsch fragrance after the drop ends.',
   },
   {
     name: 'Satin Heatless Curling Set',
@@ -981,6 +997,8 @@ const commerceProducts = [
     description:
       'Overnight, no-heat curl formation with a visual demonstration that is native to creator commerce.',
     role: 'Demo-led acquisition',
+    narrative:
+      'The product tells its story through transformation: set at night, reveal in the morning. Creator proof can acquire the customer, while education, styling companions and replacement cycles build value afterward.',
   },
   {
     name: 'Cherry Blossom Dermaplaners',
@@ -993,6 +1011,8 @@ const commerceProducts = [
     description:
       'Low-ticket, easy-to-demonstrate facial exfoliation tool that broadens the basket beyond hair.',
     role: 'Impulse basket builder',
+    narrative:
+      'A low price and instantly legible demonstration make this an accessible add-on. Its role is broader basket participation, so measure attachment and repeat instead of judging it like a standalone hero.',
   },
   {
     name: 'Eco-Friendly Nylon Elastics',
@@ -1005,6 +1025,8 @@ const commerceProducts = [
     description:
       'High-frequency replenishment staple that expresses the brand’s original everyday-essentials equity.',
     role: 'Volume + retail entry',
+    narrative:
+      'This is the brand-origin story in product form: an everyday item made more thoughtful. It can recruit at mass retail and replenish often, then introduce shoppers to higher-value care and styling routines.',
   },
   {
     name: 'Rice Water Liquid Shampoo',
@@ -1017,6 +1039,8 @@ const commerceProducts = [
     description:
       'Familiar liquid delivery extends rice-water authority to customers who are not ready for solid bars.',
     role: 'Format expansion',
+    narrative:
+      'The liquid format makes an established ingredient story easier to adopt. The portfolio test is whether it expands the audience without confusing or cannibalizing the more differentiated bar system.',
   },
 ];
 const tiktokValue = [
@@ -1066,6 +1090,40 @@ const commerceFranchises = [
     'Keep the entry price low',
     'Elastics, clips and dermaplaners support mass retail, impulse purchase and basket building.',
   ],
+];
+const commerceChannelNarratives = [
+  {
+    name: 'DTC + Shopify',
+    platform: 'Shopify' as PlatformBrandName,
+    role: 'Teach the full routine',
+    story:
+      'The owned site carries the richest education, bundles and first-party relationship. It should help a customer move from one problem to a complete routine.',
+    decision: 'Watch conversion, contribution, attachment and 90-day repeat.',
+  },
+  {
+    name: 'TikTok Shop',
+    platform: 'TikTok Shop' as PlatformBrandName,
+    role: 'Turn proof into purchase',
+    story:
+      'Creator demonstrations compress discovery, education and checkout into one session. The job is rapid product understanding—not just viral reach.',
+    decision: 'Watch creator contribution, refunds and new-buyer cohort quality.',
+  },
+  {
+    name: 'Retail',
+    icon: Store,
+    role: 'Make the brand easy to enter',
+    story:
+      'Target, Ulta and Walmart provide access, shelf credibility and review proof. Assortment should make the next product relationship obvious across retailers.',
+    decision: 'Watch velocity, in-stock rate, promo depth and cross-channel lift.',
+  },
+  {
+    name: 'Marketplaces',
+    icon: ShoppingBag,
+    role: 'Capture existing intent',
+    story:
+      'Amazon and other marketplaces serve convenience, comparison and replenishment. Content consistency and price discipline protect trust when shoppers compare channels.',
+    decision: 'Watch search rank, realized price, fees, returns and repeat.',
+  },
 ];
 const augAssets = [
   {
@@ -2080,6 +2138,41 @@ function Ecommerce() {
           <small>Independent strategy synthesis</small>
         </article>
       </section>
+      <section className="wide-card commerce-channel-story">
+        <Head
+          eyebrow="Channel narrative"
+          title="One portfolio. Four customer jobs."
+          copy="Kitsch is a product business, so channels play the role that service lines would in a services company: each should move the customer relationship forward in a different way."
+        />
+        <div className="commerce-channel-story__grid">
+          {commerceChannelNarratives.map((channel, index) => {
+            const ChannelIcon = channel.icon;
+            return (
+              <article key={channel.name}>
+                <header>
+                  <span>0{index + 1}</span>
+                  {channel.platform ? (
+                    <PlatformBrandIcon
+                      name={channel.platform}
+                      label={false}
+                      size="small"
+                    />
+                  ) : (
+                    ChannelIcon && <ChannelIcon aria-hidden="true" />
+                  )}
+                </header>
+                <small>{channel.name}</small>
+                <h3>{channel.role}</h3>
+                <p>{channel.story}</p>
+                <div>
+                  <Target aria-hidden="true" />
+                  <span>{channel.decision}</span>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      </section>
       <ShopifyCommerceWorkspace />
       <details className="editorial-disclosure commerce-deep-dive">
         <summary>
@@ -2221,6 +2314,13 @@ function Ecommerce() {
                   </div>
                   <h3>{p.name}</h3>
                   <p>{p.description}</p>
+                  <details className="product-narrative">
+                    <summary>
+                      <span>Read the product story</span>
+                      <ChevronRight aria-hidden="true" />
+                    </summary>
+                    <p>{p.narrative}</p>
+                  </details>
                   <dl>
                     <dt>Visible channels</dt>
                     <dd>{p.channels}</dd>
