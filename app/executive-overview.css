@@ -1059,3 +1059,617 @@
     transition: none;
   }
 }
+
+/* Decision Flow Desk — coded from the selected visual reference. */
+@media (min-width: 761px) {
+  .app-shell.overview-mode {
+    display: block !important;
+    background: #f8f4ef;
+  }
+  .overview-mode > .sidebar,
+  .overview-mode > .main > .topbar {
+    display: none;
+  }
+  .overview-mode > .main > .content {
+    max-width: none;
+    padding: 0;
+  }
+}
+
+.executive-command {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 14px clamp(18px, 2.4vw, 38px) 30px;
+  gap: 10px;
+  background: #f8f4ef;
+}
+
+.executive-command-bar {
+  position: sticky;
+  top: 0;
+  grid-template-columns: 230px auto auto 1fr auto auto;
+  gap: 14px;
+  min-height: 76px;
+  padding: 8px 6px;
+  border: 0;
+  border-bottom: 1px solid #d8cbc4;
+  border-radius: 0;
+  background: rgba(248, 244, 239, 0.94);
+  box-shadow: none;
+}
+
+.executive-desk-brand {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-content: center;
+}
+.executive-desk-brand img {
+  width: 150px;
+  height: 28px;
+  object-fit: contain;
+  object-position: left center;
+}
+.executive-desk-brand span {
+  margin-top: 2px;
+  color: #6e625d;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.24em;
+}
+.executive-desk-brand strong {
+  margin-top: 1px;
+  font:
+    italic 16px var(--font-kitsch-display),
+    Georgia,
+    serif;
+  font-weight: 400;
+  color: #6b5d58;
+}
+
+.executive-command-period,
+.executive-command-mode {
+  border: 1px solid #ded3cd;
+  border-radius: 999px;
+  background: transparent;
+}
+.executive-command-period button,
+.executive-command-mode button {
+  min-height: 38px;
+  border-radius: 999px;
+  padding-inline: 16px;
+  font-size: 11px;
+}
+.executive-command-period button.is-active,
+.executive-command-mode button.is-active {
+  background: #ead6cf;
+  box-shadow: none;
+}
+.executive-command-refresh {
+  justify-self: end;
+  padding-left: 15px;
+  border-left: 1px solid #d8cbc4;
+}
+.executive-data-health summary {
+  border: 0;
+  background: transparent;
+}
+.executive-data-health summary i {
+  background: #2da568;
+  box-shadow: none;
+}
+.executive-desk-avatar {
+  display: grid;
+  width: 46px;
+  height: 46px;
+  place-items: center;
+  border-radius: 50%;
+  background: #ead8d1;
+  font:
+    20px var(--font-kitsch-display),
+    Georgia,
+    serif;
+}
+
+.executive-command-hero {
+  grid-template-columns: minmax(0, 1fr) 230px;
+  min-height: 145px;
+  padding: 20px 8px 16px;
+  border: 0;
+  border-radius: 0;
+  background-color: #f8f4ef;
+  background-image: url('https://cdn.shopify.com/s/files/1/0104/6904/8384/files/69117-HairPerfumeDiscoverySet-Sampler-4pc-Fragrance-1280x1280px.jpg?v=1762182803');
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: 420px 420px;
+}
+.executive-command-hero h1 {
+  max-width: 1120px;
+  margin: 7px 0 5px;
+  font-size: clamp(42px, 3.8vw, 57px);
+  line-height: 0.96;
+}
+.executive-command-hero h1 em {
+  color: inherit;
+}
+.executive-command-hero p {
+  font:
+    21px var(--font-kitsch-display),
+    Georgia,
+    serif;
+  color: #655b57;
+}
+.executive-command-hero-note {
+  position: relative;
+  z-index: 1;
+  align-self: center;
+  justify-self: end;
+  width: 150px;
+  padding: 10px 0;
+}
+.executive-command-hero-note strong,
+.executive-command-hero-note span {
+  display: block;
+}
+.executive-command-hero-note strong {
+  font:
+    italic 21px/1.08 var(--font-kitsch-display),
+    Georgia,
+    serif;
+  font-weight: 400;
+}
+.executive-command-hero-note span {
+  margin-top: 12px;
+  color: #776a64;
+  font-size: 9px;
+  line-height: 1.45;
+}
+.executive-explain-button {
+  right: 8px;
+  bottom: 12px;
+  left: auto;
+  min-height: 38px;
+  border-radius: 999px;
+}
+
+.executive-outcomes,
+.executive-decision-queue,
+.executive-change-rail,
+.executive-funnel,
+.executive-channel-pulse,
+.executive-product-pulse,
+.executive-okr-asana {
+  padding: 14px;
+  border-radius: 16px;
+  box-shadow: none;
+}
+.executive-outcomes {
+  padding: 8px;
+}
+.executive-outcomes .executive-section-title {
+  display: none;
+}
+.executive-outcome-grid {
+  gap: 7px;
+  margin: 0;
+}
+.executive-outcome-grid article {
+  position: relative;
+  display: grid;
+  grid-template-columns: 54px 1fr;
+  grid-template-rows: auto auto auto;
+  min-height: 92px;
+  padding: 9px 11px;
+  border-radius: 13px;
+}
+.executive-outcome-grid article > header {
+  grid-row: 1 / 4;
+  align-self: start;
+}
+.executive-outcome-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+}
+.executive-outcome-grid article > header b {
+  position: absolute;
+  right: 12px;
+  bottom: 9px;
+  padding: 0;
+  background: transparent;
+  color: var(--clay);
+  font:
+    17px var(--font-kitsch-display),
+    Georgia,
+    serif;
+  letter-spacing: 0;
+}
+.executive-outcome-grid h3 {
+  margin: 3px 0 2px;
+  font-size: 18px;
+}
+.executive-outcome-grid article > p {
+  min-height: 0;
+  margin: 0;
+  font-size: 10px;
+}
+.executive-outcome-grid dl {
+  grid-column: 2;
+  margin: 3px 0 20px;
+}
+.executive-outcome-grid dl div:first-child,
+.executive-outcome-grid dl dt {
+  display: none;
+}
+.executive-outcome-grid dl div {
+  padding: 0;
+  border: 0;
+}
+.executive-outcome-grid dl dd {
+  margin: 0;
+  color: #786d67;
+  font-size: 9px;
+}
+.executive-outcome-grid article > button {
+  position: absolute;
+  inset: 0;
+  min-height: 0;
+  border: 0;
+  opacity: 0;
+}
+
+.executive-funnel {
+  order: 3;
+}
+.executive-funnel .executive-section-title {
+  grid-template-columns: 1.45fr 0.55fr;
+  padding: 0 8px 12px;
+}
+.executive-funnel .executive-section-title h2 {
+  font-size: clamp(30px, 3vw, 43px);
+}
+.executive-funnel-track {
+  gap: 0;
+  margin-top: 0;
+  overflow: hidden;
+  border-radius: 12px;
+}
+.executive-funnel-track button {
+  position: relative;
+  display: grid;
+  grid-template-columns: 42% 1fr auto;
+  gap: 10px;
+  min-height: 102px;
+  padding: 0 12px 0 0;
+  overflow: hidden;
+  border: 0;
+  border-right: 4px solid #fff;
+  border-radius: 0;
+  background: #efd9d2;
+}
+.executive-funnel-track button:nth-child(2) {
+  background: #eee4dc;
+}
+.executive-funnel-track button:nth-child(3) {
+  background: #e8c5b6;
+}
+.executive-funnel-track button:nth-child(4) {
+  background: #e8d3d2;
+  border-right: 0;
+}
+.executive-funnel-track button.is-active {
+  border-color: #fff;
+  background: #e7c8bc;
+  box-shadow: inset 0 -4px 0 #9b5f48;
+}
+.executive-funnel-track button > img {
+  width: 100%;
+  height: 102px;
+  object-fit: cover;
+}
+.executive-funnel-track button > span {
+  display: none;
+}
+.executive-funnel-track button strong {
+  color: #8f513d;
+  font:
+    19px var(--font-kitsch-display),
+    Georgia,
+    serif;
+  text-transform: uppercase;
+}
+.executive-funnel-track button small {
+  color: #3f3733;
+  font:
+    15px/1.15 var(--font-kitsch-display),
+    Georgia,
+    serif;
+}
+.executive-funnel-detail {
+  grid-template-columns: 0.5fr 1.7fr auto;
+  margin-top: 0;
+  padding: 12px;
+  border-width: 0 1px 1px;
+  border-radius: 0 0 12px 12px;
+}
+.executive-funnel-detail dl {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.executive-change-decision-grid {
+  order: 4;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.executive-change-rail {
+  grid-column: 1;
+  grid-row: 1;
+  background: #fff;
+}
+.executive-decision-queue {
+  grid-column: 2;
+  grid-row: 1;
+}
+.executive-change-rail > header,
+.executive-decision-queue > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 40px;
+  padding: 0 0 8px;
+  border-bottom: 1px solid #d8cbc4;
+}
+.executive-change-rail > header > span,
+.executive-decision-queue .executive-section-title span,
+.executive-decision-queue .executive-section-title > p {
+  display: none;
+}
+.executive-change-rail h2,
+.executive-decision-queue .executive-section-title h2 {
+  margin: 0;
+  font-size: 22px;
+}
+.executive-change-rail > div,
+.executive-decision-rows {
+  margin-top: 7px;
+}
+.executive-change-rail article {
+  grid-template-columns: 24px 1fr;
+  padding: 6px 0;
+  border-bottom: 1px solid #ece4df;
+}
+.executive-change-rail article + article {
+  margin-top: 0;
+}
+.executive-change-rail article > i {
+  width: 20px;
+  height: 20px;
+  background: #ead6cf;
+}
+.executive-change-rail article p,
+.executive-change-rail article small,
+.executive-change-limit {
+  display: none;
+}
+.executive-change-rail article strong {
+  margin-top: 2px;
+}
+.executive-decision-rows {
+  gap: 0;
+}
+.executive-decision-rows article {
+  grid-template-columns: 26px minmax(180px, 1fr) 120px 84px 50px;
+  min-height: 46px;
+  padding: 5px;
+  border: 0;
+  border-bottom: 1px solid #ece4df;
+  border-radius: 0;
+}
+.executive-decision-rows article > span {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  font-size: 12px;
+}
+.executive-decision-rows article > b {
+  text-align: center;
+}
+.executive-decision-rows button {
+  min-height: 32px;
+  padding: 0;
+  border: 0;
+}
+
+.executive-pulse-row {
+  order: 5;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.executive-pulse-row .executive-section-title {
+  grid-template-columns: 1fr auto;
+  padding-bottom: 8px;
+}
+.executive-pulse-row .executive-section-title h2 {
+  margin-top: 2px;
+  font-size: 22px;
+}
+.executive-pulse-row .executive-section-title > button {
+  min-height: 34px;
+  border-radius: 999px;
+}
+.executive-product-grid {
+  gap: 6px;
+  margin-top: 8px;
+}
+.executive-product-grid article {
+  border: 0;
+  border-radius: 10px;
+}
+.executive-product-grid article > a {
+  aspect-ratio: 1.6/0.72;
+  border-radius: 9px;
+}
+.executive-product-grid article > div {
+  padding: 6px 3px;
+}
+.executive-product-grid article > div > span,
+.executive-product-grid dl {
+  display: none;
+}
+.executive-product-grid h3 {
+  font-size: 13px;
+}
+.executive-channel-table {
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  margin-top: 8px;
+}
+.executive-channel-table > button {
+  grid-template-columns: auto 1fr;
+  min-height: 61px;
+  padding: 7px;
+  border-width: 0 1px 0 0;
+  border-radius: 0;
+}
+.executive-channel-table > button > span:nth-of-type(2),
+.executive-channel-table > button > svg {
+  display: none;
+}
+.executive-channel-table span strong {
+  font-size: 10px;
+}
+.executive-channel-table span small {
+  font-size: 8px;
+}
+
+.executive-okr-asana {
+  order: 6;
+}
+.executive-data-boundary {
+  order: 7;
+}
+
+@media (min-width: 1300px) {
+  .executive-command-hero h1 {
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 1180px) and (min-width: 761px) {
+  .executive-command-bar {
+    grid-template-columns: 210px auto 1fr auto;
+  }
+  .executive-command-mode,
+  .executive-command-refresh {
+    display: none;
+  }
+  .executive-decision-rows article {
+    grid-template-columns: 26px 1fr 80px 48px;
+  }
+  .executive-decision-rows time {
+    display: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .executive-command {
+    padding: 12px 14px 24px;
+  }
+  .executive-desk-brand,
+  .executive-desk-avatar {
+    display: none;
+  }
+  .executive-command-bar {
+    top: 72px;
+  }
+  .executive-command-period,
+  .executive-command-mode {
+    width: 100%;
+  }
+  .executive-command-period button,
+  .executive-command-mode button {
+    min-width: 0;
+    flex: 1;
+    padding-inline: 8px;
+  }
+  .executive-command-hero {
+    display: block;
+    min-height: 355px;
+    padding: 24px 20px 178px;
+    background-position: 64% bottom;
+    background-size: 230px 230px;
+  }
+  .executive-command-hero > div:first-child {
+    max-width: 100%;
+  }
+  .executive-command-hero-note {
+    display: none;
+  }
+  .executive-command-hero h1 {
+    font-size: 43px;
+  }
+  .executive-command-hero p {
+    font-size: 17px;
+  }
+  .executive-explain-button {
+    position: absolute;
+    right: 14px;
+    bottom: 14px;
+    left: auto;
+    width: auto;
+    height: 44px;
+    min-height: 44px;
+  }
+  .executive-outcomes {
+    padding: 8px;
+  }
+  .executive-outcome-grid article {
+    min-height: 112px;
+  }
+  .executive-outcome-grid article > button {
+    display: block;
+  }
+  .executive-funnel .executive-section-title {
+    grid-template-columns: 1fr;
+  }
+  .executive-funnel-track {
+    grid-template-columns: 1fr;
+  }
+  .executive-funnel-track button {
+    grid-template-columns: 38% 1fr auto;
+    min-height: 96px;
+    border-right: 0;
+    border-bottom: 4px solid #fff;
+  }
+  .executive-funnel-track button > img {
+    height: 96px;
+  }
+  .executive-funnel-detail,
+  .executive-change-decision-grid,
+  .executive-pulse-row {
+    grid-template-columns: 1fr;
+  }
+  .executive-change-rail,
+  .executive-decision-queue {
+    grid-column: 1;
+    grid-row: auto;
+  }
+  .executive-change-rail {
+    grid-row: 1;
+  }
+  .executive-decision-rows article {
+    grid-template-columns: 28px 1fr;
+  }
+  .executive-decision-rows time,
+  .executive-decision-rows article > b,
+  .executive-decision-rows button {
+    grid-column: 2;
+  }
+  .executive-product-grid,
+  .executive-channel-table {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .executive-product-grid article > a {
+    aspect-ratio: 1.5/0.8;
+  }
+}

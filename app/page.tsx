@@ -3746,7 +3746,7 @@ export default function Home() {
       value={active}
       onValueChange={(v) => navigate(v as DashboardTab)}
       orientation="vertical"
-      className="app-shell"
+      className={`app-shell ${active === 'overview' ? 'overview-mode' : ''}`}
     >
       <aside className={`sidebar ${mobile ? 'open' : ''}`}>
         <div className="wordmark">

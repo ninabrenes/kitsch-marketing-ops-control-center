@@ -121,6 +121,7 @@ const decisions = [
 const funnelStages: Array<{
   name: FunnelStage;
   question: string;
+  image: string;
   platforms: PlatformBrandName[];
   publicSignal: string;
   internal: string;
@@ -130,6 +131,8 @@ const funnelStages: Array<{
   {
     name: 'Discover',
     question: 'Are the right people finding Kitsch?',
+    image:
+      'https://www.mykitsch.com/cdn/shop/files/4945-StandardSatinPillowcase-Sleep-Ivory-Hero-1280x1280px.jpg?v=1776278489',
     platforms: ['Instagram', 'TikTok', 'YouTube', 'Pinterest'],
     publicSignal:
       'Audience scale, search direction and creator activity are visible.',
@@ -140,6 +143,8 @@ const funnelStages: Array<{
   {
     name: 'Consider',
     question: 'Does the product story remove uncertainty?',
+    image:
+      'https://cdn.shopify.com/s/files/1/0104/6904/8384/files/69117-HairPerfumeDiscoverySet-Sampler-4pc-Fragrance-1280x1280px.jpg?v=1762182803',
     platforms: ['Website', 'Instagram', 'Pinterest', 'YouTube'],
     publicSignal:
       'PDP claims, reviews, tutorials and retailer proof are visible.',
@@ -150,6 +155,8 @@ const funnelStages: Array<{
   {
     name: 'Buy',
     question: 'Are customers buying the right product profitably?',
+    image:
+      'https://cdn.shopify.com/s/files/1/0104/6904/8384/files/9081-RiceWaterProtein-Shampoo_Conditioner-2pc-Combo-BottleFreeBeauty-hero-opt2-1280x1280px_2.jpg?v=1780523783',
     platforms: ['Shopify', 'TikTok Shop'],
     publicSignal:
       'Prices, assortment and marketplace unit counters are visible.',
@@ -160,6 +167,8 @@ const funnelStages: Array<{
   {
     name: 'Repeat',
     question: 'Do customers return and enter a second category?',
+    image:
+      'https://cdn.shopify.com/s/files/1/0104/6904/8384/files/60640SatinWrappedJumboFlexiRods4pc-Rosewood-Hero-1280x1280px.jpg?v=1774638694',
     platforms: ['Website', 'Instagram', 'Facebook'],
     publicSignal:
       'Loyalty, email capture and routine merchandising are observable.',
@@ -305,6 +314,11 @@ export function ExecutiveSpotlight({
       aria-label="Executive command center"
     >
       <header className="executive-command-bar">
+        <div className="executive-desk-brand">
+          <img src="/kitsch-official-logo.png" alt="Kitsch" />
+          <span>MARKETING OPERATIONS</span>
+          <strong>Decision Flow Desk</strong>
+        </div>
         <div className="executive-command-period" aria-label="Reporting period">
           {(['Week', 'Month', 'Quarter', 'YoY'] as Period[]).map((item) => (
             <button
@@ -353,28 +367,22 @@ export function ExecutiveSpotlight({
             </button>
           </div>
         </details>
+        <span className="executive-desk-avatar" aria-hidden="true">
+          K
+        </span>
       </header>
 
       <div className="executive-command-hero">
         <div>
-          <span>EXECUTIVE OVERVIEW · {period.toUpperCase()}</span>
+          <span>TUESDAY, SEPTEMBER 8, 2026 · {period.toUpperCase()}</span>
           <h1>
             Clarity today. <em>Compounding tomorrow.</em>
           </h1>
-          <p>
-            See where Kitsch stands, what changed, and which decision moves the
-            operating system forward.
-          </p>
+          <p>Real signals. Smarter decisions. A more connected Kitsch.</p>
         </div>
-        <div className="executive-command-hero-art">
-          <img
-            src="https://cdn.shopify.com/s/files/1/0104/6904/8384/files/69117-HairPerfumeDiscoverySet-Sampler-4pc-Fragrance-1280x1280px.jpg?v=1762182803"
-            alt="Kitsch Hair Perfume Discovery Set"
-          />
-          <div>
-            <span>{mode}</span>
-            <strong>No fabricated Kitsch actuals</strong>
-          </div>
+        <div className="executive-command-hero-note">
+          <strong>Effortless hair for a kinder day.</strong>
+          <span>{mode} · No fabricated actuals</span>
         </div>
         <button
           type="button"
@@ -513,36 +521,6 @@ export function ExecutiveSpotlight({
             supports.
           </p>
         </header>
-        <figure className="executive-funnel-visual">
-          <div className="executive-funnel-visual-viewport">
-            <a
-              href="/kitsch-decision-flow-desk.png"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Open the full Decision Flow Desk concept"
-            >
-              <img
-                src="/kitsch-customer-journey-visual.png"
-                alt="Illustrated Kitsch customer journey from Discover through Consider and Buy to Repeat, with the public channels, internal metric and key action for each stage"
-              />
-            </a>
-          </div>
-          <figcaption>
-            <span>VISUAL ONE-PAGE</span>
-            <p>
-              The selected design concept, now paired with the interactive
-              stage-by-stage operating view below. It illustrates the system; it
-              does not report Kitsch performance.
-            </p>
-            <a
-              href="/kitsch-decision-flow-desk.png"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Open full concept <ArrowRight />
-            </a>
-          </figcaption>
-        </figure>
         <div
           className="executive-funnel-track"
           role="tablist"
@@ -557,6 +535,7 @@ export function ExecutiveSpotlight({
               onClick={() => setStage(item.name)}
               key={item.name}
             >
+              <img src={item.image} alt="" aria-hidden="true" />
               <span>0{index + 1}</span>
               <div>
                 <strong>{item.name}</strong>
@@ -602,85 +581,91 @@ export function ExecutiveSpotlight({
         </article>
       </section>
 
-      <section
-        className="executive-channel-pulse"
-        aria-labelledby="channel-title"
-      >
-        <header className="executive-section-title compact">
-          <div>
-            <span>CHANNEL PULSE · PUBLIC SIGNALS</span>
-            <h2 id="channel-title">Every platform has one job.</h2>
-          </div>
-          <button type="button" onClick={() => onNavigate('social')}>
-            Open Social system <ArrowRight />
-          </button>
-        </header>
-        <div className="executive-channel-table">
-          {channels.map((item) => (
-            <button
-              type="button"
-              key={item.name}
-              onClick={() => onNavigate(item.tab)}
-            >
-              <PlatformBrandIcon name={item.name} size="small" label={false} />
-              <span>
-                <strong>{item.name}</strong>
-                <small>{item.role}</small>
-              </span>
-              <span>
-                <b>{item.signal}</b>
-                <small>{item.meaning}</small>
-              </span>
-              <ArrowRight />
+      <div className="executive-pulse-row">
+        <section
+          className="executive-product-pulse"
+          aria-labelledby="product-title"
+        >
+          <header className="executive-section-title compact">
+            <div>
+              <span>PRODUCT PORTFOLIO · FIVE FRANCHISES</span>
+              <h2 id="product-title">
+                Show the products that change the decision.
+              </h2>
+            </div>
+            <button type="button" onClick={() => onNavigate('commerce')}>
+              Open Commerce control <ArrowRight />
             </button>
-          ))}
-        </div>
-      </section>
-
-      <section
-        className="executive-product-pulse"
-        aria-labelledby="product-title"
-      >
-        <header className="executive-section-title compact">
-          <div>
-            <span>PRODUCT PORTFOLIO · FIVE FRANCHISES</span>
-            <h2 id="product-title">
-              Show the products that change the decision.
-            </h2>
+          </header>
+          <div className="executive-product-grid">
+            {products.map((item) => (
+              <article key={item.name}>
+                <a href={item.href} target="_blank" rel="noreferrer">
+                  <img
+                    src={item.image}
+                    alt={`Official Kitsch product: ${item.name}`}
+                  />
+                </a>
+                <div>
+                  <span>{item.role}</span>
+                  <h3>{item.name}</h3>
+                  <dl>
+                    <div>
+                      <dt>Public proof</dt>
+                      <dd>{item.proof}</dd>
+                    </div>
+                    <div>
+                      <dt>Internal data required</dt>
+                      <dd>
+                        <GlossaryText>{item.internal}</GlossaryText>
+                      </dd>
+                    </div>
+                  </dl>
+                </div>
+              </article>
+            ))}
           </div>
-          <button type="button" onClick={() => onNavigate('commerce')}>
-            Open Commerce control <ArrowRight />
-          </button>
-        </header>
-        <div className="executive-product-grid">
-          {products.map((item) => (
-            <article key={item.name}>
-              <a href={item.href} target="_blank" rel="noreferrer">
-                <img
-                  src={item.image}
-                  alt={`Official Kitsch product: ${item.name}`}
+        </section>
+
+        <section
+          className="executive-channel-pulse"
+          aria-labelledby="channel-title"
+        >
+          <header className="executive-section-title compact">
+            <div>
+              <span>CHANNEL PULSE · PUBLIC SIGNALS</span>
+              <h2 id="channel-title">Every platform has one job.</h2>
+            </div>
+            <button type="button" onClick={() => onNavigate('social')}>
+              Open Social system <ArrowRight />
+            </button>
+          </header>
+          <div className="executive-channel-table">
+            {channels.map((item) => (
+              <button
+                type="button"
+                key={item.name}
+                onClick={() => onNavigate(item.tab)}
+              >
+                <PlatformBrandIcon
+                  name={item.name}
+                  size="small"
+                  label={false}
                 />
-              </a>
-              <div>
-                <span>{item.role}</span>
-                <h3>{item.name}</h3>
-                <dl>
-                  <div>
-                    <dt>Public proof</dt>
-                    <dd>{item.proof}</dd>
-                  </div>
-                  <div>
-                    <dt>Internal data required</dt>
-                    <dd>
-                      <GlossaryText>{item.internal}</GlossaryText>
-                    </dd>
-                  </div>
-                </dl>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
+                <span>
+                  <strong>{item.name}</strong>
+                  <small>{item.role}</small>
+                </span>
+                <span>
+                  <b>{item.signal}</b>
+                  <small>{item.meaning}</small>
+                </span>
+                <ArrowRight />
+              </button>
+            ))}
+          </div>
+        </section>
+      </div>
 
       <section
         className="executive-okr-asana"
