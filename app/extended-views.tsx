@@ -19,6 +19,7 @@ import {
   Search,
   ShoppingBag,
   Store,
+  Target,
   Users,
   Wind,
   Workflow,
@@ -83,6 +84,66 @@ const stackGroups = [
     'Localization and consent-management surfaces across a large international footprint.',
     'E-commerce + Legal',
   ],
+] as const;
+
+const storefrontStages = [
+  {
+    name: 'Discover',
+    surface: 'Homepage · collections · creator landings',
+    handoff: 'Traffic quality → product discovery',
+    question: 'Did the right shopper reach a relevant product doorway?',
+    measure: 'Qualified landing sessions · collection-to-PDP rate',
+    owner: 'Brand + Growth',
+    action: 'Route each high-reach concept to one need-state landing page.',
+    Icon: Megaphone,
+  },
+  {
+    name: 'Understand',
+    surface: 'PDP · reviews · quiz · blog',
+    handoff: 'Need state → proof interaction',
+    question: 'Can the shopper quickly judge fit, use and proof?',
+    measure: 'PDP engagement · review/quiz use · add-to-cart rate',
+    owner: 'E-commerce + Content',
+    action: 'Put use case, mechanism and credible proof above the fold.',
+    Icon: Search,
+  },
+  {
+    name: 'Buy',
+    surface: 'Offer · cart · checkout · payment',
+    handoff: 'Intent → healthy order',
+    question: 'Did the purchase complete at an acceptable margin?',
+    measure: 'Checkout completion · AOV · realized contribution',
+    owner: 'E-commerce + Finance',
+    action: 'Review device friction and promotion economics together.',
+    Icon: ShoppingBag,
+  },
+  {
+    name: 'Return',
+    surface: 'Klaviyo · app · loyalty · support',
+    handoff: 'First product → next useful routine',
+    question: 'Did the first purchase create a relevant next step?',
+    measure: '30/60/90-day second order · time to second order',
+    owner: 'Lifecycle + CX',
+    action: 'Trigger education and next-product logic from the first SKU.',
+    Icon: Repeat2,
+  },
+  {
+    name: 'Advocate',
+    surface: 'Review · referral · ambassador',
+    handoff: 'Outcome → trusted demand',
+    question: 'Did a verified outcome become reusable proof?',
+    measure: 'Review rate · referral orders · approved UGC reuse',
+    owner: 'Community + Partnerships',
+    action: 'Ask for proof at the moment the product outcome is clearest.',
+    Icon: HeartHandshake,
+  },
+] as const;
+
+const storefrontDemoMetrics = [
+  ['Qualified visit → PDP', '28%', 'GA4 + Shopify', 'Growth'],
+  ['PDP → add to cart', '9%', 'Shopify', 'E-commerce'],
+  ['Checkout completion', '55%', 'Shopify', 'E-commerce'],
+  ['90-day second order', '25%', 'Shopify + Klaviyo', 'Lifecycle'],
 ] as const;
 
 const funnelStages = [
@@ -243,11 +304,15 @@ function External({
 }
 
 export function Website() {
+  const [activeStorefrontStage, setActiveStorefrontStage] = useState(0);
+  const storefrontStage = storefrontStages[activeStorefrontStage];
+  const StorefrontIcon = storefrontStage.Icon;
+
   return (
     <div className="page-grid">
       <Head
         eyebrow="Storefront + martech"
-        title="Own the journey and the stack"
+        title="Storefront control"
         copy="Use public implementation signals to identify what to verify internally: active vendors, data flows, owners and decision use. Detection does not prove configuration or impact."
       />
       <section className="stack-hero">
@@ -308,43 +373,72 @@ export function Website() {
       <section className="wide-card">
         <Head
           eyebrow="Customer journey architecture"
-          title="Make five storefront handoffs measurable"
+          title="Make every handoff measurable"
+          copy="Select a stage to see its customer question, accountable owner and next action."
         />
-        <div className="site-journey">
-          {[
-            [
-              'DISCOVER',
-              'Homepage · collections · creator landings',
-              'Traffic quality → product discovery',
-            ],
-            [
-              'UNDERSTAND',
-              'PDP · reviews · quiz · blog',
-              'Need state → proof interaction',
-            ],
-            [
-              'BUY',
-              'Offer · cart · checkout · payment',
-              'Intent → contribution-positive order',
-            ],
-            [
-              'RETURN',
-              'Klaviyo · app · loyalty · support',
-              'First product → next useful routine',
-            ],
-            [
-              'ADVOCATE',
-              'Review · referral · ambassador',
-              'Outcome → trusted demand',
-            ],
-          ].map((x, i) => (
-            <article key={x[0]}>
+        <div className="site-journey site-journey--interactive">
+          {storefrontStages.map((stage, i) => (
+            <button
+              type="button"
+              key={stage.name}
+              className={activeStorefrontStage === i ? 'active' : ''}
+              onClick={() => setActiveStorefrontStage(i)}
+              aria-pressed={activeStorefrontStage === i}
+            >
               <span>0{i + 1}</span>
-              <strong>{x[0]}</strong>
-              <p>{x[1]}</p>
-              <small>{x[2]}</small>
+              <stage.Icon aria-hidden="true" />
+              <strong>{stage.name}</strong>
+              <p>{stage.surface}</p>
+              <small>{stage.handoff}</small>
+            </button>
+          ))}
+        </div>
+        <article className="storefront-stage-detail" aria-live="polite">
+          <span className="storefront-stage-detail__icon">
+            <StorefrontIcon aria-hidden="true" />
+          </span>
+          <div>
+            <small>HOW TO READ · {storefrontStage.name}</small>
+            <h3>{storefrontStage.question}</h3>
+            <p>{storefrontStage.measure}</p>
+          </div>
+          <dl>
+            <div>
+              <dt>Owner</dt>
+              <dd>{storefrontStage.owner}</dd>
+            </div>
+            <div>
+              <dt>Next action</dt>
+              <dd>{storefrontStage.action}</dd>
+            </div>
+          </dl>
+        </article>
+      </section>
+      <section className="wide-card storefront-demo-scorecard">
+        <Head
+          eyebrow="Demo OKR illustration"
+          title="What a connected storefront review could show"
+          copy="Illustrative targets for demonstrating the operating model—not Kitsch actuals, approved goals or industry benchmarks. Replace them after baseline validation."
+        />
+        <div className="storefront-demo-scorecard__grid">
+          {storefrontDemoMetrics.map(([metric, target, source, owner]) => (
+            <article key={metric}>
+              <span>EXAMPLE TARGET</span>
+              <strong>{target}</strong>
+              <h3>{metric}</h3>
+              <p>{source}</p>
+              <small>Owner · {owner}</small>
             </article>
           ))}
+        </div>
+        <div className="method-note">
+          <Database />
+          <p>
+            Connect Shopify, GA4 and Klaviyo by customer, order, product, device
+            and acquisition source before treating the targets as a management
+            scorecard.
+          </p>
+          <Label>INTERNAL DATA REQUIRED</Label>
         </div>
       </section>
       <section className="two-col">
@@ -500,6 +594,33 @@ export function Funnel() {
         decision="Name the owner and first-party measure for each handoff, then fix the stage where verified customer movement breaks."
         owner="Growth + E-commerce"
       />
+
+      <section
+        className="funnel-demo-okr"
+        aria-label="Illustrative funnel OKRs"
+      >
+        <div>
+          <Target aria-hidden="true" />
+          <span>DEMO OKR · NOT KITSCH ACTUALS</span>
+          <strong>Turn discovery into a valuable second order</strong>
+          <p>
+            Illustrative targets show how the report becomes actionable once
+            internal baselines and approved goals are connected.
+          </p>
+        </div>
+        {[
+          ['Discover → Consider', '≥ 28%', 'Qualified landing to PDP'],
+          ['Consider → Buy', '≥ 9%', 'PDP to add to cart'],
+          ['Buy', '≥ 55%', 'Checkout completion'],
+          ['Repeat', '≥ 25%', '90-day second order'],
+        ].map(([stage, target, label]) => (
+          <article key={stage}>
+            <small>{stage}</small>
+            <strong>{target}</strong>
+            <span>{label}</span>
+          </article>
+        ))}
+      </section>
 
       <section
         className="funnel-story"

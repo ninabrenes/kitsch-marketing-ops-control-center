@@ -3,8 +3,8 @@
 import { useState } from 'react';
 import './social.css';
 import './experience.css';
+import './launch-sources-control.css';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Progress } from '@/components/ui/progress';
 import { Funnel, Website } from './extended-views';
 import { RoleOperations } from './role-operations';
 import { DashboardGuide, type DashboardTab } from './dashboard-guide';
@@ -24,6 +24,7 @@ import { MessagingEvidenceLibrary } from './messaging-evidence-library';
 import { EvidenceToAction } from './evidence-to-action';
 import { InsightCopilot } from './insight-copilot';
 import { SearchEvidenceWorkbench } from './search-evidence-workbench';
+import { SocialSystemWorkspace } from './social-system-workspace';
 import { GlossaryText } from './glossary-term';
 import './editorial-theme.css';
 import {
@@ -129,36 +130,60 @@ const channels = [
     'A discovery audience; saves, clicks, and assisted sales are missing.',
   ],
 ] as const;
-const launches = [
-  [
-    'Soft Santal + Caramel Cream',
-    'Live',
-    88,
-    'Close the loop from scent discovery to full-size repeat',
-    'Creative · Site · TikTok Shop · CRM',
-  ],
-  [
-    'Halloween Collection',
-    'Live',
-    76,
-    'Online-exclusive urgency needs a single inventory signal',
-    'Social · Site · Influencer · CX',
-  ],
-  [
-    'Tennis Collection',
-    'Live',
-    72,
-    'Clarify audience overlap and post-launch learning owner',
-    'Creative · Organic · Email · Analytics',
-  ],
-  [
-    'Next cross-channel launch',
-    'Internal date required',
-    42,
-    'Template demonstrates gating; no internal status assumed',
-    'Retail · Amazon · Paid · Ops',
-  ],
-];
+const launchExceptions = [
+  {
+    state: 'CRITICAL BLOCKER',
+    launch: 'Demo launch A',
+    gate: 'Inventory + demand forecast',
+    owner: 'E-commerce lead',
+    due: 'T−14 decision checkpoint',
+    evidence: 'Allocation file + approved forecast version',
+    blocked:
+      'Channel quantities cannot be committed until available inventory and the demand scenario agree.',
+    recovery:
+      'Reconcile the forecast, inventory and channel allocation; then approve scope, quantity or date.',
+    decision: 'Reduce scope, move inventory or accept a later date.',
+  },
+  {
+    state: 'AT RISK',
+    launch: 'Demo launch B',
+    gate: 'Claims + creative approval',
+    owner: 'Brand lead',
+    due: 'Before creator briefing',
+    evidence: 'Final claim matrix + approved asset link',
+    blocked:
+      'Creators and paid media do not yet have one approved language set for the product promise.',
+    recovery:
+      'Resolve the open claim, mark unusable variants and attach the approved wording to the launch record.',
+    decision: 'Approve revised language or remove the unsupported claim.',
+  },
+  {
+    state: 'DECISION DUE',
+    launch: 'Demo launch C',
+    gate: 'Offer + margin guardrail',
+    owner: 'Marketing leader',
+    due: 'Before CRM and paid builds',
+    evidence: 'Offer options + contribution sensitivity',
+    blocked:
+      'Email, storefront and paid copy cannot lock until the offer and minimum contribution rule are selected.',
+    recovery:
+      'Compare the options on customer value, contribution and operational complexity, then record the rationale.',
+    decision: 'Choose the offer or launch without a promotion.',
+  },
+  {
+    state: 'REVIEW DUE',
+    launch: 'Demo launch D',
+    gate: 'D+30 learning review',
+    owner: 'Marketing Ops',
+    due: '30 days after launch',
+    evidence: 'Plan vs outcome + reusable learning',
+    blocked:
+      'The launch cannot improve the next playbook until the commercial result and missed handoffs are reviewed.',
+    recovery:
+      'Join the launch goal to net sales, contribution, acquisition, repeat signals and operating exceptions.',
+    decision: 'Repeat, revise or stop the launch pattern.',
+  },
+] as const;
 const kpis = [
   [
     'Are we acquiring efficiently?',
@@ -1295,7 +1320,7 @@ const paidBrands = [
     'Avoid discount escalation',
   ],
 ];
-const messageScores = [
+const messageScores: ReadonlyArray<readonly [string, number, string]> = [
   [
     'Functional clarity',
     92,
@@ -1322,6 +1347,12 @@ const messageScores = [
     'Public creative skews product-aware; problem framing and education are whitespace.',
   ],
 ];
+const messageSignal = (score: number) =>
+  score >= 80
+    ? 'CLEAR PUBLIC SIGNAL'
+    : score >= 60
+      ? 'MIXED PUBLIC SIGNAL'
+      : 'NEEDS STRONGER PROOF';
 const smartInsights = [
   {
     level: 'HIGH',
@@ -1591,6 +1622,45 @@ function Intelligence() {
           ))}
         </div>
       </section>
+      <section className="wide-card hypothesis-queue">
+        <Head
+          eyebrow="Hypothesis + test queue"
+          title="Five questions for the next growth review"
+          copy="Open a hypothesis to see the observation, proposed decision and internal evidence required. These are test briefs—not performance conclusions."
+        />
+        <div>
+          {smartInsights.map((s, i) => (
+            <details key={s.title}>
+              <summary>
+                <span>{String(i + 1).padStart(2, '0')}</span>
+                <div>
+                  <small>{s.level} CONFIDENCE</small>
+                  <strong>{s.title}</strong>
+                </div>
+                <ChevronRight aria-hidden="true" />
+              </summary>
+              <dl>
+                <div>
+                  <dt>What we observed</dt>
+                  <dd>{s.fact}</dd>
+                </div>
+                <div>
+                  <dt>What it may mean</dt>
+                  <dd>{s.read}</dd>
+                </div>
+                <div>
+                  <dt>Proposed test</dt>
+                  <dd>{s.action}</dd>
+                </div>
+                <div>
+                  <dt>Prove it with</dt>
+                  <dd>{s.metric}</dd>
+                </div>
+              </dl>
+            </details>
+          ))}
+        </div>
+      </section>
       <section className="wide-card chart-card">
         <div className="chart-heading">
           <div>
@@ -1800,54 +1870,28 @@ function Intelligence() {
           </ol>
         </article>
       </section>
-      <section className="wide-card">
-        <Head
-          eyebrow="Expert rubric"
-          title="Communication clarity assessment"
-          copy="A directional public-evidence rubric—not a performance score or consumer-research result."
-        />
+      <details className="wide-card editorial-disclosure communication-rubric">
+        <summary>
+          <span>COMMUNICATION RUBRIC · DIRECTIONAL</span>
+          <strong>Open the qualitative brand read</strong>
+          <ChevronRight aria-hidden="true" />
+        </summary>
         <div className="score-grid">
           {messageScores.map((s) => (
             <article key={s[0]}>
               <div>
                 <strong>{s[0]}</strong>
-                <span>{s[1]}/100</span>
-              </div>
-              <div className="score-track">
-                <i style={{ width: `${s[1]}%` }} />
+                <span>{messageSignal(s[1])}</span>
               </div>
               <p>{s[2]}</p>
             </article>
           ))}
         </div>
-      </section>
-      <section className="wide-card">
-        <Head
-          eyebrow="Smart insight contract"
-          title="Move from observation to decision"
-        />
-        <div className="insight-grid">
-          {smartInsights.map((s, i) => (
-            <article key={s.title}>
-              <div>
-                <span>0{i + 1}</span>
-                <b>{s.level} CONFIDENCE</b>
-              </div>
-              <h3>{s.title}</h3>
-              <dl>
-                <dt>Observed</dt>
-                <dd>{s.fact}</dd>
-                <dt>Interpretation</dt>
-                <dd>{s.read}</dd>
-                <dt>Decision</dt>
-                <dd>{s.action}</dd>
-                <dt>Validate with</dt>
-                <dd>{s.metric}</dd>
-              </dl>
-            </article>
-          ))}
-        </div>
-      </section>
+        <p className="rubric-limit">
+          Categories reflect a public-surface review—not consumer research,
+          brand lift or a quantified performance score.
+        </p>
+      </details>
       <section className="principle-card">
         <Megaphone />
         <div>
@@ -2308,6 +2352,66 @@ function Launches() {
         title="See risk before the date slips"
         copy="Use one shared record for every dependency, owner, due date and decision, then close the launch with a 30-day learning review. All records below are illustrative."
       />
+      <section className="wide-card launch-exception-control">
+        <header className="launch-exception-head">
+          <div>
+            <span>READINESS EXCEPTIONS</span>
+            <h2>Fix the blocker—not the completion score</h2>
+            <p>
+              Open an exception to see why it matters, the recovery path and the
+              decision required. A critical gate stays red even when every other
+              task is complete.
+            </p>
+          </div>
+          <aside role="note">
+            <CircleAlert aria-hidden="true" />
+            <span>
+              <strong>DEMO WORKSPACE · NOT KITSCH STATUS</strong>
+              Every launch, owner, deadline and state below is fictional.
+            </span>
+          </aside>
+        </header>
+        <div className="launch-exception-columns" aria-hidden="true">
+          <span>State</span>
+          <span>Launch</span>
+          <span>Critical gate</span>
+          <span>Owner</span>
+          <span>Due</span>
+          <span>Evidence</span>
+          <span>Brief</span>
+        </div>
+        <div className="launch-exception-list">
+          {launchExceptions.map((item) => (
+            <details key={item.launch}>
+              <summary>
+                <span className="launch-exception-state">{item.state}</span>
+                <strong>{item.launch}</strong>
+                <span>{item.gate}</span>
+                <span>{item.owner}</span>
+                <span>{item.due}</span>
+                <span>{item.evidence}</span>
+                <small>
+                  Open <ChevronRight aria-hidden="true" />
+                </small>
+              </summary>
+              <div className="launch-recovery-brief">
+                <article>
+                  <span>WHY IT IS BLOCKED</span>
+                  <p>{item.blocked}</p>
+                </article>
+                <article>
+                  <span>RECOVERY PATH</span>
+                  <p>{item.recovery}</p>
+                </article>
+                <article>
+                  <span>DECISION REQUIRED</span>
+                  <p>{item.decision}</p>
+                </article>
+              </div>
+            </details>
+          ))}
+        </div>
+      </section>
       <section className="launch-explainer">
         <article>
           <span>01 · BEFORE LAUNCH</span>
@@ -2336,73 +2440,39 @@ function Launches() {
           </p>
         </article>
       </section>
-      <details className="editorial-disclosure">
+      <details className="editorial-disclosure launch-gate-library">
         <summary>
-          <span>ILLUSTRATIVE RECORDS</span>
-          <strong>See how three launches would appear in the tracker</strong>
-          <ChevronRight />
+          <span>READINESS GATE LIBRARY</span>
+          <strong>See the ten controls behind the exception view</strong>
+          <ChevronRight aria-hidden="true" />
         </summary>
         <div className="editorial-disclosure-body">
-          <section className="launch-grid">
-            {launches.map((l, i) => (
-              <article className="launch-card" key={l[0]}>
-                <div className="launch-top">
-                  <span>0{i + 1}</span>
-                  <Label>ILLUSTRATIVE</Label>
-                </div>
-                <h3>{l[0]}</h3>
-                <p className="date">
-                  <CalendarDays /> {l[1]}
-                </p>
-                <Progress value={Number(l[2])} />
-                <div className="ready">
-                  <span>Example completion</span>
-                  <strong>{l[2]}%</strong>
-                </div>
-                <p className="risk">{l[3]}</p>
-                <div className="chips">
-                  {String(l[4])
-                    .split(' · ')
-                    .map((w) => (
-                      <span key={w}>{w}</span>
-                    ))}
-                </div>
-              </article>
+          <div className="gate-grid">
+            {[
+              'Goal and audience',
+              'Demand forecast and inventory',
+              'Creative assets',
+              'Channel plan',
+              'Website merchandising',
+              'Retailer readiness',
+              'Measurement plan',
+              'Customer-care answers',
+              'Go / no-go decision',
+              '30-day results review',
+            ].map((x, i) => (
+              <div key={x}>
+                <span>{String(i + 1).padStart(2, '0')}</span>
+                <p>{x}</p>
+                <small>
+                  {[1, 4, 6, 8].includes(i)
+                    ? 'Decision checkpoint'
+                    : 'Owner + due date'}
+                </small>
+              </div>
             ))}
-          </section>
+          </div>
         </div>
       </details>
-      <section className="wide-card">
-        <Head
-          eyebrow="Readiness gates"
-          title="Ten gates every launch must clear"
-          copy="A launch is ready only when these inputs are complete or a named decision-maker accepts the risk."
-        />
-        <div className="gate-grid">
-          {[
-            'Goal and audience',
-            'Demand forecast and inventory',
-            'Creative assets',
-            'Channel plan',
-            'Website merchandising',
-            'Retailer readiness',
-            'Measurement plan',
-            'Customer-care answers',
-            'Go / no-go decision',
-            '30-day results review',
-          ].map((x, i) => (
-            <div key={x}>
-              <span>{String(i + 1).padStart(2, '0')}</span>
-              <p>{x}</p>
-              <small>
-                {[1, 4, 6, 8].includes(i)
-                  ? 'Decision checkpoint'
-                  : 'Owner + due date'}
-              </small>
-            </div>
-          ))}
-        </div>
-      </section>
     </div>
   );
 }
@@ -3005,6 +3075,31 @@ function Social() {
         decision="Protect each channel’s job, prioritize the next creative test and move budget only after comparable outcome data."
         owner="Social + Growth"
       />
+      <section className="social-demo-okr" aria-label="Illustrative social OKR">
+        <div className="social-demo-okr__objective">
+          <Target aria-hidden="true" />
+          <span>DEMO OKR · NOT KITSCH ACTUALS</span>
+          <h3>Turn social attention into qualified customer growth</h3>
+          <p>
+            These example targets demonstrate the management view. Replace them
+            with approved baselines after platform, Shopify and cohort data are
+            joined by creative ID.
+          </p>
+        </div>
+        {[
+          ['Attention', '≥ 35%', '3-second hold', 'Platform export'],
+          ['Intent', '≥ 4%', 'Save + share rate', 'Platform export'],
+          ['Commerce', '≥ 3%', 'Social landing CVR', 'GA4 + Shopify'],
+          ['Quality', '≥ 25%', '90-day second order', 'Shopify + Klaviyo'],
+        ].map(([stage, target, metric, source]) => (
+          <article key={stage}>
+            <small>{stage}</small>
+            <strong>{target}</strong>
+            <h3>{metric}</h3>
+            <p>{source}</p>
+          </article>
+        ))}
+      </section>
       <section className="wide-card social-switcher">
         <Tabs defaultValue="instagram">
           <TabsList className="platform-tabs">
@@ -3266,9 +3361,10 @@ function Social() {
           ))}
         </div>
       </section>
-      <section className="dark-card social-connect">
+      <section className="wide-card social-connect social-learning-loop">
         <Radio />
-        <h3>One asset ID. One customer journey. One learning ledger.</h3>
+        <span>MEASUREMENT DESIGN</span>
+        <h3>One creative ID → one learning loop</h3>
         <p>
           Join paid, organic, TikTok Shop, affiliate, CRM and website behavior
           by creative concept, hook, product, proof, creator, format, offer and
@@ -3285,6 +3381,15 @@ function Social() {
           <ChevronRight />
           <span>Decision</span>
         </div>
+        <details>
+          <summary>How to use this</summary>
+          <p>
+            Review the same creative ID from reach through 90-day customer
+            value. Protect concepts that attract valuable new customers, improve
+            those that earn attention but lose the click, and stop those that
+            fail at both stages.
+          </p>
+        </details>
         <Label>INTERNAL DATA REQUIRED</Label>
       </section>
     </div>
@@ -3296,156 +3401,7 @@ function Competitors() {
 function Brand() {
   return (
     <div className="page-grid">
-      <Head
-        eyebrow="Messaging playbook"
-        title="One Kitsch voice, adapted by channel"
-        copy="Use this creative QA layer before launches, creator briefs, CRM, retail and PDP work; validate it against the current internal brand book."
-      />
-      <section className="brand-hero">
-        <div>
-          <span>KITSCH</span>
-          <h3>
-            Practical problem-solving
-            <br />× cultural relevance
-            <br />× accessible purpose
-          </h3>
-        </div>
-        <p>
-          Kitsch’s defensible territory is not prestige for prestige’s sake. It
-          is the ability to turn daily friction into a desirable, affordable
-          ritual across an unusually broad portfolio.
-        </p>
-      </section>
-      <section className="wide-card">
-        <Head
-          eyebrow="Why this view exists"
-          title="One message spine, adapted by channel"
-          copy="Use this before an asset enters production. It keeps the customer problem, promise and proof consistent while allowing each channel to do a different job."
-        />
-        <div className="message-playbook-grid">
-          <article>
-            <Megaphone />
-            <span>PRODUCT LAUNCH</span>
-            <h3>Friction → promise → proof → next step</h3>
-            <p>
-              Make the everyday problem recognizable before introducing the
-              product world.
-            </p>
-          </article>
-          <article>
-            <Users />
-            <span>CREATOR BRIEF</span>
-            <h3>Situation → demonstration → reason to believe</h3>
-            <p>
-              Preserve the creator’s voice while requiring a visible product
-              payoff and approved claim.
-            </p>
-          </article>
-          <article>
-            <Radio />
-            <span>EMAIL + SMS</span>
-            <h3>Occasion → useful benefit → routine expansion</h3>
-            <p>
-              Connect launches to replenishment, cross-sell and the next
-              customer need—not only promotion.
-            </p>
-          </article>
-          <article>
-            <ShoppingBag />
-            <span>RETAIL + PDP</span>
-            <h3>Question → specific answer → proof → how-to</h3>
-            <p>
-              Give shoppers the same product truth across DTC, marketplaces and
-              retail partners.
-            </p>
-          </article>
-        </div>
-      </section>
       <MessagingEvidenceLibrary />
-      <section className="wide-card visual-system">
-        <div>
-          <Head
-            eyebrow="Current web typography"
-            title="Figtree + editorial serif"
-            copy="The live store uses Figtree for interface and body copy, with a PT Serif mapping for its Sophillia-style display treatment. The 2023 guide specifies Avenir and Didot; this dashboard follows the newer live web implementation."
-          />
-          <div className="type-samples">
-            <p>Figtree keeps operational data clear and modern.</p>
-            <strong>
-              PT Serif brings Kitsch’s softer editorial character to major
-              headings.
-            </strong>
-          </div>
-        </div>
-        <div>
-          <Head
-            eyebrow="Official core palette"
-            title="Calm neutrals, warm pinks, true black"
-          />
-          <div className="brand-swatches">
-            {[
-              ['CORE', '#F0E6D8'],
-              ['PINK', '#E9D5CD'],
-              ['TERRACOTTA', '#CA9A8E'],
-              ['COOL GRAY 1', '#D9D9D6'],
-              ['COOL GRAY 11', '#53565A'],
-              ['TRUE BLACK', '#231F20'],
-              ['LIVE WEB CTA', '#F8B68F'],
-            ].map((c) => (
-              <div key={c[1]}>
-                <i style={{ background: c[1] }} />
-                <span>{c[0]}</span>
-                <small>{c[1]}</small>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-      <section className="brand-pillars">
-        {brandPillars.map((p) => (
-          <article key={p[0]}>
-            <span>{p[0]}</span>
-            <small>{p[1]}</small>
-            <p>{p[2]}</p>
-          </article>
-        ))}
-      </section>
-      <section className="two-col">
-        <article className="wide-card">
-          <Head
-            eyebrow="Portfolio measurement"
-            title="Measure portfolio roles, not only SKUs"
-          />
-          <div className="measure-stack">
-            <span>NEED STATE</span>
-            <ChevronRight />
-            <span>FRANCHISE</span>
-            <ChevronRight />
-            <span>CHANNEL</span>
-            <ChevronRight />
-            <span>EVERGREEN / DROP</span>
-          </div>
-          <p>
-            That structure makes halo, cannibalization, replenishment and launch
-            incrementality visible. It also gives Product, Brand, E-commerce and
-            Retail a shared language.
-          </p>
-          <Label>HYPOTHESIS</Label>
-        </article>
-        <article className="wide-card">
-          <Head
-            eyebrow="Claims governance"
-            title="Govern claims in one registry"
-          />
-          <p>
-            The current role brief cites 32,000+ retailers / 92 countries; owned
-            pages still expose 20,000 / 27 in places. Sustainability totals also
-            vary across localized pages. Give every material claim an owner,
-            source, geography and refresh date.
-          </p>
-          <Label>INTERNAL DATA REQUIRED</Label>
-        </article>
-      </section>
       <details className="editorial-disclosure">
         <summary>
           <span>OPTIONAL TECHNICAL APPENDIX</span>
@@ -3574,6 +3530,56 @@ function Operations() {
     </div>
   );
 }
+function sourceOperatingMetadata(id: string, name: string, confidence: string) {
+  const isOwned = [
+    'DTC homepage',
+    'Founder page',
+    'Hair Care blog',
+    'Robots.txt',
+    'XML sitemap index',
+    'Kitsch-owned logo asset',
+  ].includes(name);
+  const isSocial = [
+    'TikTok profile',
+    'TikTok Shop',
+    'Instagram',
+    'YouTube',
+    'Pinterest',
+    'LinkedIn',
+  ].includes(name);
+  const isBenchmark = Number(id.slice(1)) >= 27 && Number(id.slice(1)) <= 31;
+
+  return {
+    captured: 'Evidence library refreshed Sep 08, 2026',
+    limitation: isBenchmark
+      ? 'External methodology and population differ from Kitsch; use as a directional reference only.'
+      : confidence.includes('Medium')
+        ? 'Third-party or editorial evidence; verify the original method and refresh before making a decision.'
+        : 'Directly observable at capture time; it still cannot prove internal revenue, attribution or profitability.',
+    method: isBenchmark
+      ? 'Read the named publisher’s methodology and record only the comparable definition.'
+      : isOwned
+        ? 'Manual review of the linked Kitsch-owned page or technical surface.'
+        : isSocial
+          ? 'Manual public-profile snapshot; counters and visible content can change.'
+          : 'Manual review of the linked public source; conflicts remain visible rather than averaged away.',
+    tabs: isBenchmark
+      ? 'KPI definitions · Growth signals'
+      : isSocial
+        ? 'Social system · Growth signals · Commerce control'
+        : isOwned
+          ? 'Storefront + stack · Search + answers · Messaging playbook'
+          : 'Growth signals · Competitor map · Commerce control',
+    owner: isBenchmark
+      ? 'Analytics / Finance'
+      : isSocial
+        ? 'Social / Creator Ops'
+        : isOwned
+          ? 'E-commerce / Brand'
+          : 'Marketing Ops',
+  };
+}
+
 function Sources() {
   return (
     <div className="page-grid">
@@ -3582,32 +3588,92 @@ function Sources() {
         title="Trace every claim to evidence"
         copy="Check the source, capture date, confidence and limitation before using a claim. Platform counters are September 8, 2026 snapshots and will change."
       />
-      <section className="wide-card">
-        <div className="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Source</th>
-                <th>Claim used</th>
-                <th>Confidence</th>
-              </tr>
-            </thead>
-            <tbody>
-              {sources.map((r) => (
-                <tr key={r[0]}>
-                  <td>{r[0]}</td>
-                  <td>
-                    <External href={r[2]}>{r[1]}</External>
-                  </td>
-                  <td>{r[3]}</td>
-                  <td>
-                    <span className="confidence">{r[4]}</span>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+      <section className="source-lineage" aria-labelledby="lineage-title">
+        <header>
+          <span>HOW EVIDENCE BECOMES ACTION</span>
+          <h2 id="lineage-title">Trace the decision—not just the link</h2>
+        </header>
+        <ol>
+          {[
+            [FileSearch, 'Source', 'Open the original evidence'],
+            [Eye, 'Claim', 'Record only what is observable'],
+            [BrainCircuit, 'Interpretation', 'State the hypothesis separately'],
+            [ShieldCheck, 'Validation', 'Name the internal proof required'],
+            [Target, 'Decision', 'Assign an owner and success rule'],
+          ].map(([Icon, title, copy], index) => {
+            const StepIcon = Icon as typeof FileSearch;
+            return (
+              <li key={String(title)}>
+                <article>
+                  <StepIcon aria-hidden="true" />
+                  <span>0{index + 1}</span>
+                  <strong>{String(title)}</strong>
+                  <small>{String(copy)}</small>
+                </article>
+                {index < 4 && <ChevronRight aria-hidden="true" />}
+              </li>
+            );
+          })}
+        </ol>
+      </section>
+      <section className="wide-card source-index">
+        <header className="source-index-head">
+          <div>
+            <span>SOURCE INDEX · {sources.length} RECORDS</span>
+            <h2>Open a source to inspect its evidence boundary</h2>
+            <p>
+              The additional method, affected-tab and refresh-owner fields are a
+              proposed governance model—not Kitsch’s current internal process.
+            </p>
+          </div>
+          <span className="source-index-note">PROPOSED OPERATING METADATA</span>
+        </header>
+        <div className="source-disclosure-list">
+          {sources.map((r) => {
+            const meta = sourceOperatingMetadata(r[0], r[1], r[4]);
+            return (
+              <details key={r[0]}>
+                <summary>
+                  <span className="source-id">{r[0]}</span>
+                  <strong>{r[1]}</strong>
+                  <span className="source-claim-preview">{r[3]}</span>
+                  <span className="source-confidence">{r[4]}</span>
+                  <small>
+                    Inspect <ChevronRight aria-hidden="true" />
+                  </small>
+                </summary>
+                <div className="source-detail">
+                  <article>
+                    <span>CLAIM USED</span>
+                    <p>{r[3]}</p>
+                    <External href={r[2]}>Open original source</External>
+                  </article>
+                  <dl>
+                    <div>
+                      <dt>Capture record</dt>
+                      <dd>{meta.captured}</dd>
+                    </div>
+                    <div>
+                      <dt>Limitation</dt>
+                      <dd>{meta.limitation}</dd>
+                    </div>
+                    <div>
+                      <dt>Method</dt>
+                      <dd>{meta.method}</dd>
+                    </div>
+                    <div>
+                      <dt>Affected tabs</dt>
+                      <dd>{meta.tabs}</dd>
+                    </div>
+                    <div>
+                      <dt>Proposed refresh owner</dt>
+                      <dd>{meta.owner}</dd>
+                    </div>
+                  </dl>
+                </div>
+              </details>
+            );
+          })}
         </div>
       </section>
       <section className="principle-card">
@@ -3815,9 +3881,6 @@ export default function Home() {
           {active !== 'overview' && (
             <DashboardGuide active={active} onNavigate={navigate} />
           )}
-          {active !== 'overview' && (
-            <InsightCopilot key={active} active={active} />
-          )}
           <TabsContent value="overview">
             <Overview onNavigate={navigate} />
           </TabsContent>
@@ -3843,7 +3906,7 @@ export default function Home() {
             <Launches />
           </TabsContent>
           <TabsContent value="social">
-            <Social />
+            <SocialSystemWorkspace />
           </TabsContent>
           <TabsContent value="search">
             <SearchView />
@@ -3855,14 +3918,17 @@ export default function Home() {
             <Competitors />
           </TabsContent>
           <TabsContent value="operations">
-            <RoleOperations />
             <div className="page-grid ops-system-grid">
               <MarketingOpsSystem />
             </div>
+            <RoleOperations />
           </TabsContent>
           <TabsContent value="sources">
             <Sources />
           </TabsContent>
+          {active !== 'overview' && (
+            <InsightCopilot key={active} active={active} />
+          )}
         </div>
       </main>
     </Tabs>

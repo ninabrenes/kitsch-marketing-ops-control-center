@@ -103,6 +103,10 @@ const decisions = [
     owner: 'Marketing Ops + Finance',
     due: 'Proposed · Sep 11',
     status: 'DRAFT',
+    evidence:
+      'Finance-approved contribution, acquisition-spend perimeter and distinct new-customer count.',
+    nextStep:
+      'Ratify the metric contract, then publish one weekly exception view.',
     tab: 'performance' as DashboardTab,
     action: 'Review definitions',
   },
@@ -112,6 +116,10 @@ const decisions = [
     owner: 'Marketing Leader + Product',
     due: 'Proposed · Sep 15',
     status: 'PROPOSED',
+    evidence:
+      'One launch calendar with inventory, creative, retail, site, CRM and measurement gates.',
+    nextStep:
+      'Choose the priority rule and the owner who can change scope or date.',
     tab: 'launches' as DashboardTab,
     action: 'Review launches',
   },
@@ -121,6 +129,10 @@ const decisions = [
     owner: 'Partnerships + Finance',
     due: 'Proposed · Sep 18',
     status: 'PROPOSED',
+    evidence:
+      'Creator contract, content, cost, attributed order and mature cohort identifiers.',
+    nextStep:
+      'Pilot the join on one creator cohort before changing renewal decisions.',
     tab: 'creators' as DashboardTab,
     action: 'Review creators',
   },
@@ -356,7 +368,11 @@ export function ExecutiveSpotlight({
           <span>MARKETING OPERATIONS</span>
           <strong>Decision Flow Desk</strong>
         </div>
-        <div className="executive-command-period" aria-label="Reporting period">
+        <div
+          className="executive-command-period"
+          aria-label="Demo reporting-period selector; this does not change the source data"
+        >
+          <span>DEMO PERIOD</span>
           {(['Week', 'Month', 'Quarter', 'YoY'] as Period[]).map((item) => (
             <button
               type="button"
@@ -411,7 +427,9 @@ export function ExecutiveSpotlight({
 
       <div className="executive-command-hero">
         <div>
-          <span>TUESDAY, SEPTEMBER 8, 2026 · {period.toUpperCase()}</span>
+          <span>
+            DEMO VIEW · TUESDAY, SEPTEMBER 8, 2026 · {period.toUpperCase()}
+          </span>
           <h1>
             Clarity today. <em>Compounding tomorrow.</em>
           </h1>
@@ -464,11 +482,12 @@ export function ExecutiveSpotlight({
                 <span className="executive-outcome-icon">
                   <Icon aria-hidden="true" />
                 </span>
-                <b>ILLUSTRATIVE DEMO</b>
+                <b>DEMO · NOT ACTUAL</b>
               </header>
               <h3>{item.name}</h3>
               <p>{item.question}</p>
               <div className="executive-demo-metric">
+                <span>ILLUSTRATIVE VALUE</span>
                 <strong>{item.demoValue}</strong>
                 <small>{item.demoDelta}</small>
               </div>
@@ -506,18 +525,37 @@ export function ExecutiveSpotlight({
           </header>
           <div className="executive-decision-rows">
             {decisions.map((item) => (
-              <article key={item.priority}>
-                <span>{item.priority}</span>
-                <div>
+              <details key={item.priority}>
+                <summary>
+                  <span>{item.priority}</span>
                   <strong>{item.title}</strong>
-                  <small>{item.owner}</small>
+                  <b>{item.status} · DEMO</b>
+                  <ChevronDown aria-hidden="true" />
+                </summary>
+                <div className="executive-decision-contract">
+                  <dl>
+                    <div>
+                      <dt>Proposed owner</dt>
+                      <dd>{item.owner}</dd>
+                    </div>
+                    <div>
+                      <dt>Proposed due date</dt>
+                      <dd>{item.due}</dd>
+                    </div>
+                    <div>
+                      <dt>Evidence required</dt>
+                      <dd>{item.evidence}</dd>
+                    </div>
+                    <div>
+                      <dt>Next action</dt>
+                      <dd>{item.nextStep}</dd>
+                    </div>
+                  </dl>
+                  <button type="button" onClick={() => onNavigate(item.tab)}>
+                    {item.action} <ArrowRight />
+                  </button>
                 </div>
-                <time>{item.due}</time>
-                <b>{item.status}</b>
-                <button type="button" onClick={() => onNavigate(item.tab)}>
-                  {item.action} <ArrowRight />
-                </button>
-              </article>
+              </details>
             ))}
           </div>
         </section>

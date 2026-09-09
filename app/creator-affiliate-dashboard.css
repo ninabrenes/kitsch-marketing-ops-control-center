@@ -6,6 +6,8 @@
   --creator-wine: #713f2a;
   --creator-ink: #231f20;
   --creator-muted: #665a54;
+  container-type: inline-size;
+  overflow-x: clip;
 }
 .creator-workspace > * {
   grid-column: 1/-1;
@@ -645,6 +647,12 @@
   grid-column: 3;
   letter-spacing: 0.05em;
 }
+.creator-smart-insight small {
+  grid-column: 3;
+  color: #756962;
+  font-size: 8px;
+  line-height: 1.45;
+}
 .creator-scorecard-section {
   background: var(--creator-surface);
   border: 1px solid var(--creator-line);
@@ -741,14 +749,88 @@
   margin: 28px 0 5px;
 }
 .creator-scorecards h3 {
+  align-items: center;
+  display: flex;
+  gap: 6px;
   font-size: 12px;
   margin: 0;
+}
+.creator-help {
+  display: inline-grid;
+  flex: 0 0 auto;
+  cursor: help;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  color: var(--creator-wine);
+  background: transparent;
+  border: 0;
+}
+.creator-help:focus-visible {
+  border-radius: 50%;
+  outline: 2px solid var(--creator-wine);
+  outline-offset: 2px;
+}
+.creator-scorecards h3 svg {
+  flex: 0 0 auto;
+  width: 13px;
+  color: var(--creator-wine);
 }
 .creator-scorecards p {
   color: var(--creator-muted);
   font-size: 10px;
   line-height: 1.45;
   margin: auto 0 0;
+}
+.creator-demo-okr {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.75fr) minmax(0, 1.25fr);
+  gap: 16px 24px;
+  margin-top: 16px;
+  padding: 18px;
+  background: #e8f0ee;
+  border: 1px solid #b8ceca;
+  border-radius: 20px;
+}
+.creator-demo-okr header {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.creator-demo-okr header > svg {
+  flex: 0 0 auto;
+  width: 19px;
+  color: var(--creator-wine);
+}
+.creator-demo-okr span {
+  color: var(--creator-wine);
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+}
+.creator-demo-okr strong {
+  display: block;
+  margin-top: 6px;
+  font:
+    400 19px/1.15 var(--font-kitsch-display),
+    Georgia,
+    serif;
+}
+.creator-demo-okr ul {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding-left: 18px;
+  color: var(--creator-muted);
+  font-size: 9px;
+  line-height: 1.45;
+}
+.creator-demo-okr > p {
+  grid-column: 2;
+  margin: 0;
+  color: var(--creator-muted);
+  font-size: 8px;
 }
 .creator-decision-strip {
   align-items: center;
@@ -1112,6 +1194,15 @@
   .creator-smart-insight b {
     grid-column: auto;
   }
+  .creator-smart-insight small {
+    grid-column: auto;
+  }
+  .creator-demo-okr {
+    grid-template-columns: 1fr;
+  }
+  .creator-demo-okr > p {
+    grid-column: auto;
+  }
   .creator-public-read {
     grid-template-columns: 1fr;
   }
@@ -1141,6 +1232,75 @@
   }
   .creator-hero h1 {
     font-size: 42px;
+  }
+}
+
+@container (max-width: 430px) {
+  .creator-workspace,
+  .creator-workspace
+    :where(section, article, aside, div, header, nav, details) {
+    min-width: 0;
+    max-width: 100%;
+  }
+  .creator-workspace :where(h1, h2, h3, h4, p, strong, small, dd, li, a) {
+    overflow-wrap: anywhere;
+  }
+  .creator-hero,
+  .creator-intelligence,
+  .creator-scorecard-section,
+  .creator-decision-strip {
+    padding: 17px;
+    border-radius: 22px;
+  }
+  .creator-hero h1 {
+    font-size: 38px;
+    line-height: 1;
+  }
+  .creator-platforms {
+    gap: 7px;
+  }
+  .creator-public-read {
+    padding: 17px;
+  }
+  .creator-public-read nav,
+  .creator-source-actions,
+  .creator-card-links {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+  .creator-public-read a,
+  .creator-source-actions a,
+  .creator-card-links a,
+  .creator-youtube-evidence > a {
+    justify-content: center;
+    min-height: 44px;
+    width: 100%;
+  }
+  .creator-public-signals article,
+  .creator-scorecards article,
+  .creator-tier-grid article {
+    min-height: 0;
+  }
+  .creator-youtube-evidence dl {
+    grid-template-columns: 1fr;
+  }
+  .creator-youtube-evidence dl > div {
+    border-left: 0;
+    border-top: 1px solid var(--creator-line);
+    padding: 10px 0 0;
+  }
+  .creator-smart-insight,
+  .creator-demo-okr {
+    padding: 15px;
+  }
+  .creator-disclosure > summary,
+  .creator-disclosure-body {
+    padding: 17px;
+  }
+  .creator-table-wrap {
+    overscroll-behavior-inline: contain;
+    -webkit-overflow-scrolling: touch;
   }
 }
 

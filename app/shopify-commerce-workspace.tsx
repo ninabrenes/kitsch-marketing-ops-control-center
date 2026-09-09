@@ -20,6 +20,7 @@ import {
   Users,
 } from 'lucide-react';
 import { useMemo, useState } from 'react';
+import { PlatformBrandIcon } from './platform-brand-icon';
 import './shopify-commerce-workspace.css';
 
 type EvidenceMode = 'public' | 'connected';
@@ -217,6 +218,17 @@ const actions = [
   },
 ];
 
+const commerceMetricHelp: Record<string, string> = {
+  'Net revenue':
+    'Gross sales after discounts, cancellations and refunds, using the finance-approved tax and shipping perimeter.',
+  'Realized contribution':
+    'Net revenue after product, fulfillment, payment, platform and variable media costs.',
+  '90-day second order':
+    'The share of eligible first-time customers who place another net order within 90 days.',
+  'Product evidence':
+    'Official product pages used to frame questions; this is not a product-sales ranking.',
+};
+
 function EvidencePill({
   children,
   tone = 'internal',
@@ -253,7 +265,7 @@ export function ShopifyCommerceWorkspace() {
         <div>
           <span className="scw-eyebrow">COMMERCE INTELLIGENCE WORKSPACE</span>
           <h2 id="commerce-workspace-title">
-            From Shopify order to portfolio decision.
+            Commerce decisions, grounded in order economics.
           </h2>
           <p>
             A Shopify-inspired operating view—not a replica of Shopify Admin.
@@ -261,6 +273,10 @@ export function ShopifyCommerceWorkspace() {
             Klaviyo, media and finance data is required to calculate Kitsch
             performance.
           </p>
+          <div className="scw-platforms" aria-label="Commerce systems in scope">
+            <PlatformBrandIcon name="Shopify" size="small" />
+            <PlatformBrandIcon name="TikTok Shop" size="small" />
+          </div>
         </div>
         <div className="scw-mode" aria-label="Evidence mode">
           <button
@@ -349,7 +365,9 @@ export function ShopifyCommerceWorkspace() {
           ],
         ].map(([name, value, label]) => (
           <article key={name}>
-            <span>{name}</span>
+            <span>
+              <abbr title={commerceMetricHelp[name]}>{name}</abbr>
+            </span>
             <strong>{value}</strong>
             <EvidencePill tone={label === 'PUBLIC' ? 'public' : 'internal'}>
               {label}
@@ -357,6 +375,47 @@ export function ShopifyCommerceWorkspace() {
           </article>
         ))}
       </div>
+
+      <section className="scw-rule-read" aria-labelledby="scw-rule-read-title">
+        <header>
+          <Compass aria-hidden="true" />
+          <div>
+            <span>RULE-BASED READ · ILLUSTRATIVE</span>
+            <h3 id="scw-rule-read-title">What the current evidence allows</h3>
+          </div>
+          <EvidencePill tone="illustrative">NOT LIVE AI</EvidencePill>
+        </header>
+        <div className="scw-rule-read-grid">
+          <article>
+            <span>OBSERVE</span>
+            <strong>Products and channel presence are public.</strong>
+            <p>Orders, costs, returns and customer cohorts are not.</p>
+          </article>
+          <article>
+            <span>INTERPRET</span>
+            <strong>Portfolio roles are hypotheses—not sales ranks.</strong>
+            <p>Do not reallocate spend from public assortment signals.</p>
+          </article>
+          <article>
+            <span>ACT</span>
+            <strong>Reconcile one complete order month first.</strong>
+            <p>Then publish net revenue, contribution and repeat.</p>
+          </article>
+        </div>
+        <aside className="scw-demo-okr">
+          <div>
+            <span>DEMO OKR · PROCESS EXAMPLE</span>
+            <strong>Establish one trusted commerce source of truth.</strong>
+          </div>
+          <ul>
+            <li>
+              100% of pilot order lines mapped to product and customer IDs
+            </li>
+            <li>Finance variance documented and approved before publication</li>
+            <li>Every KPI assigned a formula, owner and refresh rule</li>
+          </ul>
+        </aside>
+      </section>
 
       <div className="scw-layout">
         <section
@@ -366,7 +425,7 @@ export function ShopifyCommerceWorkspace() {
           <div className="scw-panel-head">
             <div>
               <span>DATA READINESS</span>
-              <h3 id="scw-source-title">What the commerce engine needs</h3>
+              <h3 id="scw-source-title">Connect the decision layer</h3>
             </div>
             <EvidencePill tone="internal">6 INTERNAL · 2 JOINS</EvidencePill>
           </div>
@@ -403,9 +462,7 @@ export function ShopifyCommerceWorkspace() {
         >
           <FileKey aria-hidden="true" />
           <span>FIRST DATA CONTRACT</span>
-          <h3 id="scw-contract-title">
-            One row per order line. One definition per number.
-          </h3>
+          <h3 id="scw-contract-title">One order-line contract.</h3>
           <p>
             Minimum viable extract to reconcile a pilot month before investing
             in automation.
@@ -444,9 +501,7 @@ export function ShopifyCommerceWorkspace() {
         <div className="scw-panel-head">
           <div>
             <span>DEPENDENCY MAP</span>
-            <h3 id="scw-unlock-title">
-              The metric is only as strong as the join beneath it
-            </h3>
+            <h3 id="scw-unlock-title">Metric joins, made visible</h3>
           </div>
           <Link2 aria-hidden="true" />
         </div>
@@ -509,9 +564,7 @@ export function ShopifyCommerceWorkspace() {
         <div className="scw-panel-head">
           <div>
             <span>PRODUCT OPERATING VIEW</span>
-            <h3 id="scw-products-title">
-              Read the product as a role, not only a sales rank
-            </h3>
+            <h3 id="scw-products-title">Give every product a portfolio job</h3>
             <p>
               Choose a product to see the public evidence, the operational
               question and the exact fields needed to answer it.
@@ -601,7 +654,7 @@ export function ShopifyCommerceWorkspace() {
           <div>
             <span>PRIORITIZED ACTION QUEUE</span>
             <h3 id="scw-actions-title">
-              Four moves from dashboard to operating system
+              Four moves to a trusted commerce read
             </h3>
             <p>
               Priority reflects measurement dependency and decision leverage—not

@@ -9,6 +9,7 @@ import {
   CheckCircle2,
   ChevronRight,
   CircleAlert,
+  CircleHelp,
   ClipboardCheck,
   ExternalLink,
   Eye,
@@ -443,7 +444,7 @@ export function CreatorAffiliateDashboard() {
           <span className="creator-eyebrow">
             CREATOR + AFFILIATE OPERATING SYSTEM
           </span>
-          <h1>Run creators from contract to cohort.</h1>
+          <h1>Run creators as a portfolio.</h1>
           <p>
             A governed workspace for roster health, content delivery, fully
             loaded investment, customer quality and renewal decisions—without
@@ -525,7 +526,7 @@ export function CreatorAffiliateDashboard() {
           <div>
             <span>PUBLIC CREATOR INTELLIGENCE · 2025–2026</span>
             <h2 id="creator-intelligence-title">
-              The creator engine is visible. Its economics are not.
+              Scale is visible. Economics are not.
             </h2>
             <p>
               Third-party collaboration tracking indicates a TikTok-heavy,
@@ -568,7 +569,7 @@ export function CreatorAffiliateDashboard() {
             <PlatformBrandIcon name="YouTube" size="large" />
             <div>
               <span>YOUTUBE SPONSORSHIP FOOTPRINT</span>
-              <h3>Repeat sponsorships are visible across named channels</h3>
+              <h3>Repeat sponsorships, named and source-linked</h3>
               <p>
                 SponsorRadar currently surfaces 96 Kitsch sponsorships across 79
                 YouTube creators. This is public sponsorship evidence—not Kitsch
@@ -656,9 +657,7 @@ export function CreatorAffiliateDashboard() {
         <div className="creator-roster-head">
           <div>
             <span>PUBLICLY SURFACED COLLABORATIONS</span>
-            <h3>
-              {publicCreators.length} sourced profiles for the review queue
-            </h3>
+            <h3>{publicCreators.length} examples to verify</h3>
           </div>
           <p>
             Inclusion means a public collaboration was surfaced—not that the
@@ -717,9 +716,9 @@ export function CreatorAffiliateDashboard() {
         <aside className="creator-smart-insight">
           <div>
             <Repeat2 />
-            <span>SMART INSIGHT</span>
+            <span>RULE-BASED READ · ILLUSTRATIVE</span>
           </div>
-          <strong>Stop evaluating one post at a time.</strong>
+          <strong>Evaluate the relationship, not one post.</strong>
           <p>
             With 16% of tracked collaborators posting across three or more
             months, the operating opportunity is a cohort view: first post →
@@ -730,6 +729,10 @@ export function CreatorAffiliateDashboard() {
             INTERNAL NEXT STEP · Join creator ID, content ID, code/link, order
             and customer cohort.
           </b>
+          <small>
+            This recommendation follows the displayed repeat-partner rule. It is
+            not live AI and does not use private Kitsch data.
+          </small>
         </aside>
       </section>
 
@@ -737,7 +740,7 @@ export function CreatorAffiliateDashboard() {
         <header className="creator-section-head">
           <div>
             <span>PROGRAM SCORECARD</span>
-            <h2>One view from activity to customer quality</h2>
+            <h2>Activity → customer quality</h2>
           </div>
           <p>
             Use the period and campaign filters only after the data model is
@@ -766,11 +769,40 @@ export function CreatorAffiliateDashboard() {
                 <span>INTERNAL DATA REQUIRED</span>
               </header>
               <strong>{value}</strong>
-              <h3>{name}</h3>
+              <h3>
+                {name}
+                <button
+                  type="button"
+                  className="creator-help"
+                  aria-label={`Definition: ${question}`}
+                  title={question}
+                >
+                  <CircleHelp aria-hidden="true" />
+                </button>
+              </h3>
               <p>{question}</p>
             </article>
           ))}
         </div>
+        <aside className="creator-demo-okr">
+          <header>
+            <ClipboardCheck aria-hidden="true" />
+            <div>
+              <span>DEMO OKR · PROCESS EXAMPLE</span>
+              <strong>Make every creator renewal evidence-ready.</strong>
+            </div>
+          </header>
+          <ul>
+            <li>100% of live deliverables linked to creator and content IDs</li>
+            <li>
+              100% of renewal candidates have fully loaded cost reconciled
+            </li>
+            <li>Renewal decisions wait for the approved maturity window</li>
+          </ul>
+          <p>
+            Illustrative operating thresholds—not Kitsch targets or performance.
+          </p>
+        </aside>
       </section>
 
       <section className="creator-decision-strip">
@@ -789,7 +821,7 @@ export function CreatorAffiliateDashboard() {
         <summary>
           <div>
             <span>CREATOR PORTFOLIO DESIGN</span>
-            <strong>Tier by the job the creator performs</strong>
+            <strong>Tier creators by portfolio job</strong>
           </div>
           <ChevronRight />
         </summary>
@@ -825,9 +857,7 @@ export function CreatorAffiliateDashboard() {
         <summary>
           <div>
             <span>CAMPAIGN + CONTENT LEDGER</span>
-            <strong>
-              Every deliverable needs a traceable commercial identity
-            </strong>
+            <strong>Give each deliverable a commercial ID</strong>
           </div>
           <ChevronRight />
         </summary>
@@ -952,9 +982,7 @@ export function CreatorAffiliateDashboard() {
         <summary>
           <div>
             <span>WORKFLOW + GOVERNANCE</span>
-            <strong>
-              Move from creator discovery to a closed learning loop
-            </strong>
+            <strong>Close the creator learning loop</strong>
           </div>
           <ChevronRight />
         </summary>

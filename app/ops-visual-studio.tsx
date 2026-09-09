@@ -299,6 +299,24 @@ export function OpsVisualStudio() {
         </div>
       </header>
 
+      <div className="ops-how-to-read" aria-label="How to use this diagram">
+        <span>
+          <CircleDotDashed aria-hidden="true" />
+          <b>1. Choose a loop</b>
+          <small>Cadence, OKRs, launches, Asana, meetings or metrics</small>
+        </span>
+        <span>
+          <ArrowRight aria-hidden="true" />
+          <b>2. Follow left to right</b>
+          <small>Each card is a handoff with an owner or proof point</small>
+        </span>
+        <span>
+          <BookOpenCheck aria-hidden="true" />
+          <b>3. Open “How to run this”</b>
+          <small>Use the note as the meeting or workflow instruction</small>
+        </span>
+      </div>
+
       <nav className="ops-system-tabs" aria-label="Operating system views">
         {visualSystems.map((system) => (
           <button

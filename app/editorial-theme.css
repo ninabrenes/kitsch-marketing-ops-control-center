@@ -12,9 +12,13 @@
 .section-head h2 {
   margin: 0;
   font-family: var(--font-kitsch-display), Georgia, serif;
-  font-size: clamp(30px, 4vw, 48px);
+  font-size: clamp(29px, 3.4vw, 44px);
   font-weight: 400;
   letter-spacing: -0.035em;
+}
+
+.hero-panel h1 {
+  font-size: clamp(44px, 5.2vw, 70px);
 }
 
 /* Final light editorial pass: eliminate legacy dark blocks and add depth without noise. */
@@ -140,7 +144,9 @@ body {
 }
 
 .wordmark > a {
-  display: block;
+  display: flex;
+  min-height: 44px;
+  align-items: center;
   width: 146px;
 }
 
@@ -1146,9 +1152,13 @@ summary:focus-visible {
     min-height: 44px;
   }
 
+  .mobile-menu {
+    min-width: 44px;
+  }
+
   .section-head h1,
   .section-head h2 {
-    font-size: clamp(29px, 10vw, 40px);
+    font-size: clamp(28px, 9vw, 36px);
   }
 
   .hero-panel {
@@ -1158,7 +1168,7 @@ summary:focus-visible {
   }
 
   .hero-panel h1 {
-    font-size: clamp(40px, 13vw, 58px);
+    font-size: clamp(38px, 12vw, 52px);
   }
   .yoy-score-grid {
     grid-template-columns: 1fr;

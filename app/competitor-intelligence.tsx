@@ -1,14 +1,19 @@
 import {
   ArrowUpRight,
+  ChevronDown,
   CircleAlert,
   Database,
   ExternalLink,
+  FlaskConical,
+  Layers3,
   Megaphone,
   Radio,
+  ShieldCheck,
   ShoppingBag,
   Target,
 } from 'lucide-react';
 import { EvidenceToAction } from './evidence-to-action';
+import './competitor-intelligence.css';
 
 const brands = [
   {
@@ -213,6 +218,8 @@ const sourceMap: Record<string, string> = {
 const enc = (s: string) => encodeURIComponent(s);
 const BrandLogo = ({ brand, domain }: { brand: string; domain: string }) => (
   <span className="competitor-logo">
+    {/* Remote favicons are decorative identity cues, not content images. */}
+    {/* oxlint-disable-next-line next/no-img-element */}
     <img
       src={`https://www.google.com/s2/favicons?sz=128&domain_url=https://${domain}`}
       alt=""
@@ -246,7 +253,7 @@ export function CompetitorIntelligence() {
       <section className="competitor-hero">
         <div>
           <p>U.S. MARKET · COMPETITOR MAP</p>
-          <h1>Nine rivals. Four lanes. Clear Kitsch choices.</h1>
+          <h1>Know the pressure. Choose the response.</h1>
           <span>
             U.S.-relevant brands selected for direct product, price, customer,
             retail or attention overlap. Snapshot: September 8, 2026.
@@ -285,6 +292,57 @@ export function CompetitorIntelligence() {
             exclude Amazon, Sephora, Ulta, Target and wholesale. “Meta active”
             and ad longevity show pressure—not spend, ROAS or success.
           </p>
+        </div>
+      </section>
+      <section
+        className="wide-card comp-choice-board"
+        aria-labelledby="comp-choice-title"
+      >
+        <header>
+          <div>
+            <p>THREE DECISIONS THIS MAP SUPPORTS</p>
+            <h2 id="comp-choice-title">Defend, differentiate, test</h2>
+          </div>
+          <span className="signal hypothesis">HYPOTHESES TO VALIDATE</span>
+        </header>
+        <div>
+          <article>
+            <ShieldCheck aria-hidden="true" />
+            <span>DEFEND</span>
+            <strong>Accessible sleep + protection</strong>
+            <p>
+              Protect price clarity and retail reach while strengthening
+              material proof and routine education.
+            </p>
+            <small>
+              Next: compare conversion, margin and repeat by protection entry
+              product.
+            </small>
+          </article>
+          <article>
+            <Layers3 aria-hidden="true" />
+            <span>DIFFERENTIATE</span>
+            <strong>Fragrance as a portfolio gateway</strong>
+            <p>
+              Make discovery, odor technology and cross-category ritual more
+              useful than prestige storytelling alone.
+            </p>
+            <small>
+              Next: measure first fragrance order → second-category purchase.
+            </small>
+          </article>
+          <article>
+            <FlaskConical aria-hidden="true" />
+            <span>TEST</span>
+            <strong>A simpler way to shop the range</strong>
+            <p>
+              Organize accessories and care by customer job, hair type and
+              occasion—not only by product format.
+            </p>
+            <small>
+              Next: test one guided collection against the current path.
+            </small>
+          </article>
         </div>
       </section>
       <section className="comp-lanes">
@@ -353,28 +411,34 @@ export function CompetitorIntelligence() {
                   TikTok <b>{b.tt}</b>
                 </a>
               </div>
-              <dl>
-                <dt>Visible pricing</dt>
-                <dd>{b.price}</dd>
-                <dt>E-commerce footprint</dt>
-                <dd>{b.commerce}</dd>
-                <dt>Revenue signal</dt>
-                <dd>
-                  <strong>{b.revenue}</strong>
-                  <small>
-                    {b.revenueNote}{' '}
-                    <a
-                      href={sourceMap[b.name]}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Evidence <ExternalLink />
-                    </a>
-                  </small>
-                </dd>
-                <dt>Communication strategy</dt>
-                <dd>{b.message}</dd>
-              </dl>
+              <details className="comp-details">
+                <summary>
+                  View market evidence
+                  <ChevronDown aria-hidden="true" />
+                </summary>
+                <dl>
+                  <dt>Visible pricing</dt>
+                  <dd>{b.price}</dd>
+                  <dt>E-commerce footprint</dt>
+                  <dd>{b.commerce}</dd>
+                  <dt>Revenue signal</dt>
+                  <dd>
+                    <strong>{b.revenue}</strong>
+                    <small>
+                      {b.revenueNote}{' '}
+                      <a
+                        href={sourceMap[b.name]}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Evidence <ExternalLink />
+                      </a>
+                    </small>
+                  </dd>
+                  <dt>Communication strategy</dt>
+                  <dd>{b.message}</dd>
+                </dl>
+              </details>
               <div className="comp-ads">
                 <div>
                   <span>GOOGLE ARCHIVE</span>
@@ -400,14 +464,17 @@ export function CompetitorIntelligence() {
           ))}
         </div>
       </section>
-      <section className="wide-card">
-        <div className="comp-title">
-          <div>
-            <p>MESSAGE + MEDIA READOUT</p>
-            <h2>What competitor messages emphasize</h2>
+      <details className="wide-card comp-analysis-details">
+        <summary>
+          <div className="comp-title">
+            <div>
+              <p>MESSAGE + MEDIA READOUT</p>
+              <h2>What competitor messages emphasize</h2>
+            </div>
+            <span className="signal estimate">DIRECTIONAL</span>
           </div>
-          <span className="signal estimate">DIRECTIONAL</span>
-        </div>
+          <ChevronDown aria-hidden="true" />
+        </summary>
         <div className="comp-media-matrix">
           {[
             [
@@ -451,11 +518,14 @@ export function CompetitorIntelligence() {
             </article>
           ))}
         </div>
-      </section>
+      </details>
       <section className="two-col">
-        <article className="wide-card">
-          <ShoppingBag />
-          <h3 className="paid-subhead">Commercial pressure map</h3>
+        <details className="wide-card comp-operating-details">
+          <summary>
+            <ShoppingBag aria-hidden="true" />
+            <span>Open commercial pressure map</span>
+            <ChevronDown aria-hidden="true" />
+          </summary>
           <ul className="commerce-list">
             <li>
               <b>Mass/value:</b> GIMME and Kitsch overlap most directly on
@@ -474,10 +544,13 @@ export function CompetitorIntelligence() {
               Grace and invisibobble own focused mechanisms.
             </li>
           </ul>
-        </article>
-        <article className="wide-card">
-          <Database />
-          <h3 className="paid-subhead">Monthly operating cadence</h3>
+        </details>
+        <details className="wide-card comp-operating-details">
+          <summary>
+            <Database aria-hidden="true" />
+            <span>Open monthly operating cadence</span>
+            <ChevronDown aria-hidden="true" />
+          </summary>
           <ol className="number-list">
             <li>
               Refresh follower, price, assortment and ad-library snapshots.
@@ -495,9 +568,9 @@ export function CompetitorIntelligence() {
               stop/scale rule.
             </li>
           </ol>
-        </article>
+        </details>
       </section>
-      <section className="dark-card comp-final">
+      <section className="wide-card comp-final">
         <Megaphone />
         <h3>The strategic answer is not “copy the competitor.”</h3>
         <p>

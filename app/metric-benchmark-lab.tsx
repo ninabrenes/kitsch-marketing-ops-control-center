@@ -1,12 +1,15 @@
 import {
+  ArrowRight,
   ArrowUpRight,
   BadgeDollarSign,
   BarChart3,
   Calculator,
   CircleAlert,
+  ChevronDown,
   Clock3,
   Database,
   ExternalLink,
+  FileCheck2,
   Gauge,
   LockKeyhole,
   Mail,
@@ -266,6 +269,66 @@ const metrics: readonly Metric[] = [
   },
 ] as const;
 
+const metricGovernance: Record<
+  string,
+  { owner: string; freshness: string; approval: string; threshold: string }
+> = {
+  CAC: {
+    owner: 'Growth + Finance',
+    freshness: 'Weekly · after spend and order reconciliation',
+    approval: 'Marketing leader + Finance',
+    threshold: 'Approved CAC ceiling from contribution LTV + payback',
+  },
+  'ROAS / MER': {
+    owner: 'Growth + Finance',
+    freshness: 'Daily diagnostic · weekly governed read',
+    approval: 'Marketing leader + Finance',
+    threshold: 'Contribution break-even and approved growth plan',
+  },
+  'NET REVENUE': {
+    owner: 'E-commerce + Finance',
+    freshness: 'Daily provisional · month-end controlled',
+    approval: 'Finance controller',
+    threshold: 'Plan, prior year and like-for-like product/channel',
+  },
+  CVR: {
+    owner: 'E-commerce + Analytics',
+    freshness: 'Daily · after event-quality checks',
+    approval: 'Analytics owner + E-commerce',
+    threshold: 'Pre-set baseline, sample and commercial guardrail',
+  },
+  MARGIN: {
+    owner: 'Finance + Operations',
+    freshness: 'Weekly estimate · monthly controlled close',
+    approval: 'Finance controller',
+    threshold: 'Positive contribution and approved margin floor',
+  },
+  LTV: {
+    owner: 'CRM + Analytics + Finance',
+    freshness: 'Monthly · mature 90/180/365-day cohorts',
+    approval: 'Finance + CRM lead',
+    threshold: 'CAC ceiling and approved payback window',
+  },
+  REPEAT: {
+    owner: 'CRM + Analytics',
+    freshness: 'Monthly · mature 180-day cohorts only',
+    approval: 'CRM + E-commerce',
+    threshold: 'Cohort baseline plus contribution guardrail',
+  },
+  LIFECYCLE: {
+    owner: 'CRM + Analytics',
+    freshness: 'Weekly · after attribution and consent checks',
+    approval: 'CRM + Finance',
+    threshold: 'Revenue, contribution and unsubscribe guardrails',
+  },
+  MRR: {
+    owner: 'Finance · only if subscription exists',
+    freshness: 'Monthly close',
+    approval: 'Finance controller',
+    threshold: 'N/A until recurring contracts are verified',
+  },
+};
+
 const operationalTargets = [
   [
     'Launch on-time rate',
@@ -324,9 +387,7 @@ export function MetricBenchmarkLab() {
           <span className="mbl-kicker">
             <BarChart3 /> METRIC DECISION LAB
           </span>
-          <h2>
-            Numbers that tell the team what to do next—not just what happened.
-          </h2>
+          <h2>A metric is useful when it changes a decision.</h2>
           <p>
             Every metric has one definition, one source contract and one
             decision. Connect Shopify, Klaviyo, paid media and finance to unlock
@@ -382,101 +443,162 @@ export function MetricBenchmarkLab() {
         </p>
       </div>
 
+      <section className="mbl-lineage" aria-labelledby="mbl-lineage-title">
+        <header>
+          <span>DECISION-READY LINEAGE</span>
+          <h3 id="mbl-lineage-title">How a number earns leadership trust</h3>
+          <p>
+            Each step answers a governance question. If one is missing, keep the
+            metric in draft.
+          </p>
+        </header>
+        <ol>
+          {[
+            [Database, 'Owner', 'Who is accountable for the source?'],
+            [Clock3, 'Freshness', 'When did the latest valid load finish?'],
+            [
+              Calculator,
+              'Contract',
+              'Which formula, perimeter and grain apply?',
+            ],
+            [
+              FileCheck2,
+              'Approval',
+              'Who certifies the number for leadership?',
+            ],
+            [
+              Target,
+              'Threshold',
+              'What action changes when it crosses the line?',
+            ],
+          ].map(([Icon, label, question], index) => {
+            const StepIcon = Icon as typeof Database;
+            return (
+              <li key={label as string}>
+                <StepIcon aria-hidden="true" />
+                <div>
+                  <span>{label as string}</span>
+                  <p>{question as string}</p>
+                </div>
+                {index < 4 ? <ArrowRight aria-hidden="true" /> : null}
+              </li>
+            );
+          })}
+        </ol>
+      </section>
+
       <div className="mbl-grid">
         {metrics.map((metric) => {
           const Icon = metric.icon;
           return (
-            <article className="mbl-card" key={metric.id}>
-              <header>
-                <div className="mbl-icon">
-                  <Icon />
-                </div>
-                <div>
-                  <span>{metric.id}</span>
-                  <h3>
-                    <GlossaryText>{metric.name}</GlossaryText>
-                  </h3>
-                </div>
-                <Confidence value={metric.confidence} />
-              </header>
-              <p className="mbl-question">
-                <GlossaryText>{metric.question}</GlossaryText>
-              </p>
-              <div className="mbl-values">
-                <div className="mbl-actual">
-                  <span>INTERNAL ACTUAL</span>
-                  <strong>—</strong>
-                  <small>
-                    <LockKeyhole /> Awaiting governed data
-                  </small>
-                </div>
-                <div className="mbl-reference">
-                  <span>EXTERNAL REFERENCE</span>
-                  <strong>{metric.reference}</strong>
-                  <small>{metric.referenceLabel}</small>
-                </div>
-              </div>
-              <div className="mbl-formula">
-                <Calculator />
-                <div>
-                  <span>FORMULA</span>
-                  <p>
-                    <GlossaryText>{metric.formula}</GlossaryText>
-                  </p>
-                </div>
-              </div>
-              <div className="mbl-fields">
-                <span>
-                  <Database /> EXACT INTERNAL FIELDS
-                </span>
-                <div>
-                  {metric.fields.map((field) => (
-                    <small key={field}>
-                      <GlossaryText>{field}</GlossaryText>
+            <details className="mbl-card" key={metric.id}>
+              <summary>
+                <header>
+                  <div className="mbl-icon">
+                    <Icon />
+                  </div>
+                  <div>
+                    <span>{metric.id}</span>
+                    <h3>
+                      <GlossaryText>{metric.name}</GlossaryText>
+                    </h3>
+                  </div>
+                  <Confidence value={metric.confidence} />
+                </header>
+                <p className="mbl-question">
+                  <GlossaryText>{metric.question}</GlossaryText>
+                </p>
+                <div className="mbl-values">
+                  <div className="mbl-actual">
+                    <span>INTERNAL ACTUAL</span>
+                    <strong>—</strong>
+                    <small>
+                      <LockKeyhole /> Awaiting governed data
                     </small>
-                  ))}
+                  </div>
+                  <div className="mbl-reference">
+                    <span>EXTERNAL REFERENCE</span>
+                    <strong>{metric.reference}</strong>
+                    <small>{metric.referenceLabel}</small>
+                  </div>
                 </div>
-              </div>
-              <div className="mbl-decision">
-                <Target />
-                <div>
-                  <span>DECISION IT CHANGES</span>
-                  <p>
-                    <GlossaryText>{metric.decision}</GlossaryText>
-                  </p>
+                <span className="mbl-open-contract">
+                  Open metric contract <ChevronDown aria-hidden="true" />
+                </span>
+              </summary>
+              <div className="mbl-contract-body">
+                <div className="mbl-governance">
+                  {Object.entries(metricGovernance[metric.id]).map(
+                    ([label, value]) => (
+                      <div key={label}>
+                        <span>{label}</span>
+                        <p>{value}</p>
+                      </div>
+                    ),
+                  )}
                 </div>
+                <div className="mbl-formula">
+                  <Calculator />
+                  <div>
+                    <span>FORMULA</span>
+                    <p>
+                      <GlossaryText>{metric.formula}</GlossaryText>
+                    </p>
+                  </div>
+                </div>
+                <div className="mbl-fields">
+                  <span>
+                    <Database /> EXACT INTERNAL FIELDS
+                  </span>
+                  <div>
+                    {metric.fields.map((field) => (
+                      <small key={field}>
+                        <GlossaryText>{field}</GlossaryText>
+                      </small>
+                    ))}
+                  </div>
+                </div>
+                <div className="mbl-decision">
+                  <Target />
+                  <div>
+                    <span>DECISION IT CHANGES</span>
+                    <p>
+                      <GlossaryText>{metric.decision}</GlossaryText>
+                    </p>
+                  </div>
+                </div>
+                <div className="mbl-limit">
+                  <CircleAlert />
+                  <p>{metric.limitation}</p>
+                </div>
+                <a
+                  className="mbl-source"
+                  href={metric.source}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span>{metric.sourceLabel}</span>
+                  <ExternalLink />
+                </a>
               </div>
-              <div className="mbl-limit">
-                <CircleAlert />
-                <p>{metric.limitation}</p>
-              </div>
-              <a
-                className="mbl-source"
-                href={metric.source}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span>{metric.sourceLabel}</span>
-                <ExternalLink />
-              </a>
-            </article>
+            </details>
           );
         })}
       </div>
 
-      <section className="mbl-ops">
-        <header>
+      <details className="mbl-ops">
+        <summary>
           <div>
             <span>ILLUSTRATIVE INTERNAL TARGETS</span>
-            <h3>The operating system should measure its own reliability.</h3>
+            <h3>Open the proposed operating thresholds</h3>
             <p>
               These are proposed starting thresholds—not public beauty-industry
               benchmarks and not claims about current Kitsch performance.
               Baseline for one quarter, then ratify targets with leadership.
             </p>
           </div>
-          <Clock3 />
-        </header>
+          <ChevronDown aria-hidden="true" />
+        </summary>
         <div className="mbl-ops-grid">
           {operationalTargets.map(([name, target, formula], index) => (
             <article key={name}>
@@ -489,7 +611,7 @@ export function MetricBenchmarkLab() {
             </article>
           ))}
         </div>
-      </section>
+      </details>
 
       <footer className="mbl-footer">
         <ShieldCheck />
@@ -511,6 +633,11 @@ const styles = `
 .mbl-grid{display:grid;gap:16px;grid-template-columns:repeat(2,minmax(0,1fr))}.mbl-card{background:#fff;border:1px solid var(--line);border-radius:22px;display:flex;flex-direction:column;min-width:0;overflow:hidden;padding:22px;position:relative}.mbl-card:before{background:linear-gradient(90deg,var(--coral),#f2b3a6);content:"";height:4px;inset:0 0 auto;position:absolute}.mbl-card>header{align-items:center;display:grid;gap:12px;grid-template-columns:auto 1fr auto}.mbl-icon{align-items:center;background:var(--blush);border-radius:12px;color:var(--wine);display:flex;height:40px;justify-content:center;width:40px}.mbl-icon svg{height:19px;width:19px}.mbl-card header span{color:var(--coral);display:block;font-size:9px;font-weight:850;letter-spacing:.14em}.mbl-card h3{font-size:18px;letter-spacing:-.02em;margin:3px 0 0}.mbl-confidence{border:1px solid currentColor;border-radius:999px;font-size:8px!important;letter-spacing:.08em!important;padding:6px 8px}.mbl-confidence.is-high{color:#347058}.mbl-confidence.is-medium{color:#9a6a1d}.mbl-confidence.is-low{color:#9b554b}.mbl-question{color:var(--muted);font-size:12px;line-height:1.5;margin:14px 0}.mbl-values{display:grid;gap:8px;grid-template-columns:.8fr 1.2fr}.mbl-values>div{border-radius:14px;display:grid;min-height:112px;padding:13px}.mbl-values span,.mbl-formula span,.mbl-fields>span,.mbl-decision span{font-size:8px;font-weight:850;letter-spacing:.12em}.mbl-values strong{font-size:22px;line-height:1.05;margin:9px 0 6px}.mbl-values small{font-size:9px;line-height:1.4}.mbl-actual{background:#f2efed;color:#8b817d}.mbl-actual small{align-items:center;display:flex;gap:5px}.mbl-actual svg{height:11px;width:11px}.mbl-reference{background:var(--sage);color:#2b5946}.mbl-formula,.mbl-decision{align-items:flex-start;border-bottom:1px solid var(--line);display:grid;gap:10px;grid-template-columns:auto 1fr;padding:15px 2px}.mbl-formula svg,.mbl-decision svg{color:var(--coral);height:17px;width:17px}.mbl-formula p,.mbl-decision p{font-size:11px;line-height:1.55;margin:5px 0 0}.mbl-fields{padding:15px 2px 10px}.mbl-fields>span{align-items:center;display:flex;gap:7px}.mbl-fields>span svg{color:var(--coral);height:15px;width:15px}.mbl-fields>div{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}.mbl-fields small{background:var(--paper);border:1px solid #e9e3df;border-radius:999px;color:#635b58;font-size:9px;padding:6px 8px}.mbl-limit{align-items:flex-start;background:#fbf7f4;border-radius:10px;color:#766863;display:grid;gap:8px;grid-template-columns:auto 1fr;margin:12px 0;padding:10px}.mbl-limit svg{height:14px;width:14px}.mbl-limit p{font-size:9px;line-height:1.45;margin:0}.mbl-source{align-items:center;color:var(--wine);display:flex;font-size:9px;font-weight:800;gap:6px;margin-top:auto;text-decoration:none}.mbl-source:hover{text-decoration:underline}.mbl-source svg{height:12px;width:12px}
 .mbl-ops{background:var(--paper);border:1px solid var(--line);border-radius:24px;overflow:hidden;padding:26px}.mbl-ops>header{align-items:flex-start;display:grid;gap:20px;grid-template-columns:1fr auto;margin-bottom:18px}.mbl-ops>header span{background:#f0dfad;border-radius:999px;color:#6d5211;display:inline-block;font-size:9px;font-weight:850;letter-spacing:.12em;padding:7px 9px}.mbl-ops h3{font-size:23px;letter-spacing:-.025em;margin:12px 0 6px}.mbl-ops header p{color:var(--muted);font-size:11px;line-height:1.5;margin:0;max-width:780px}.mbl-ops>header>svg{color:var(--coral);height:34px;width:34px}.mbl-ops-grid{display:grid;gap:8px;grid-template-columns:repeat(2,minmax(0,1fr))}.mbl-ops-grid article{align-items:center;background:#fff;border:1px solid var(--line);border-radius:13px;display:grid;gap:12px;grid-template-columns:auto 1fr auto;padding:13px}.mbl-ops-grid article>span{color:#b2a7a2;font-size:10px;font-weight:850}.mbl-ops-grid h4{font-size:12px;margin:0 0 3px}.mbl-ops-grid p{color:var(--muted);font-size:9px;line-height:1.4;margin:0}.mbl-ops-grid strong{color:var(--wine);font-size:16px;white-space:nowrap}.mbl-footer{align-items:center;background:#F0E6D8;border:1px solid var(--line);border-radius:17px;color:var(--ink);display:flex;gap:12px;padding:17px 20px}.mbl-footer svg{color:var(--wine);flex:0 0 auto;height:20px;width:20px}.mbl-footer p{font-size:11px;line-height:1.5;margin:0}
 .mbl-hero{background:linear-gradient(135deg,#FFFDFC 0%,#F0E6D8 58%,#E9D5CD 100%);border:1px solid var(--line);color:var(--ink)}.mbl-hero:after{background:radial-gradient(circle,#CA9A8E80 0 2px,transparent 2.5px);opacity:.35}.mbl-kicker{color:var(--wine)}.mbl-hero p{color:var(--muted)}.mbl-hero-orbit>span{background:#FFFFFF;border-color:#D9D9D6;box-shadow:0 8px 24px #713F2A10}.mbl-hero-orbit>svg{color:var(--wine)}
-@media(max-width:900px){.mbl-hero{grid-template-columns:1fr}.mbl-hero-orbit{display:none}.mbl-grid{grid-template-columns:1fr}.mbl-disclosure{grid-template-columns:auto 1fr}.mbl-disclosure>span{grid-column:2;justify-self:start}.mbl-toolbar{grid-template-columns:repeat(3,1fr)}.mbl-toolbar p{grid-column:1/-1;justify-self:start}.mbl-ops-grid{grid-template-columns:1fr}}
-@media(max-width:560px){.mbl-hero{padding:26px}.mbl-disclosure{grid-template-columns:1fr}.mbl-disclosure>span{grid-column:1;white-space:normal}.mbl-toolbar{grid-template-columns:1fr}.mbl-toolbar>div{border-bottom:1px solid var(--line);border-right:0;padding-bottom:9px}.mbl-toolbar p{grid-column:1}.mbl-card{padding:18px}.mbl-card>header{grid-template-columns:auto 1fr}.mbl-confidence{grid-column:2;justify-self:start}.mbl-values{grid-template-columns:1fr}.mbl-ops{padding:20px}.mbl-ops-grid article{grid-template-columns:auto 1fr}.mbl-ops-grid strong{grid-column:2}}
+.mbl-hero h2{font-size:clamp(28px,3.4vw,44px);max-width:680px}
+.mbl-lineage{background:#fff;border:1px solid var(--line);border-radius:22px;padding:22px}.mbl-lineage>header>span{color:var(--wine);font-size:9px;font-weight:850;letter-spacing:.13em}.mbl-lineage h3{font-size:21px;letter-spacing:-.025em;margin:7px 0 5px}.mbl-lineage>header p{color:var(--muted);font-size:11px;line-height:1.5;margin:0}.mbl-lineage ol{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));list-style:none;margin:18px 0 0;padding:0}.mbl-lineage li{align-items:flex-start;border-left:1px solid var(--line);display:grid;gap:8px;grid-template-columns:auto 1fr auto;min-width:0;padding:4px 12px}.mbl-lineage li:first-child{border-left:0;padding-left:0}.mbl-lineage li>svg:first-child{background:var(--blush);border-radius:10px;color:var(--wine);height:34px;padding:9px;width:34px}.mbl-lineage li>svg:last-child{align-self:center;color:var(--coral);height:14px;width:14px}.mbl-lineage li span{font-size:10px;font-weight:850;letter-spacing:.07em;text-transform:uppercase}.mbl-lineage li p{color:var(--muted);font-size:9px;line-height:1.45;margin:4px 0 0}
+.mbl-card{display:block;padding:0}.mbl-card>summary{cursor:pointer;list-style:none;padding:22px}.mbl-card>summary::-webkit-details-marker,.mbl-ops>summary::-webkit-details-marker{display:none}.mbl-card>summary>header{align-items:center;display:grid;gap:12px;grid-template-columns:auto 1fr auto}.mbl-open-contract{align-items:center;color:var(--wine);display:flex;font-size:10px;font-weight:800;gap:6px;justify-content:flex-end;margin-top:13px}.mbl-open-contract svg{height:15px;transition:transform .2s ease;width:15px}.mbl-card[open] .mbl-open-contract svg{transform:rotate(180deg)}.mbl-card[open]>summary{border-bottom:1px solid var(--line)}.mbl-contract-body{padding:0 22px 22px}.mbl-governance{display:grid;gap:8px;grid-template-columns:repeat(2,minmax(0,1fr));padding:16px 0 2px}.mbl-governance>div{background:#fbf7f4;border:1px solid #eee5df;border-radius:12px;padding:10px}.mbl-governance span{color:var(--coral);font-size:8px;font-weight:850;letter-spacing:.12em;text-transform:uppercase}.mbl-governance p{font-size:10px;line-height:1.45;margin:5px 0 0}
+.mbl-ops{padding:0}.mbl-ops>summary{align-items:flex-start;cursor:pointer;display:grid;gap:20px;grid-template-columns:1fr auto;list-style:none;padding:24px}.mbl-ops>summary span{background:#f0dfad;border-radius:999px;color:#6d5211;display:inline-block;font-size:9px;font-weight:850;letter-spacing:.12em;padding:7px 9px}.mbl-ops>summary p{color:var(--muted);font-size:11px;line-height:1.5;margin:0;max-width:780px}.mbl-ops>summary>svg{color:var(--wine);height:22px;transition:transform .2s ease;width:22px}.mbl-ops[open]>summary>svg{transform:rotate(180deg)}.mbl-ops-grid{border-top:1px solid var(--line);padding:18px 24px 24px}
+@media(max-width:900px){.mbl-hero{grid-template-columns:1fr}.mbl-hero-orbit{display:none}.mbl-grid{grid-template-columns:1fr}.mbl-disclosure{grid-template-columns:auto 1fr}.mbl-disclosure>span{grid-column:2;justify-self:start}.mbl-toolbar{grid-template-columns:repeat(3,1fr)}.mbl-toolbar p{grid-column:1/-1;justify-self:start}.mbl-lineage ol{grid-template-columns:repeat(2,minmax(0,1fr))}.mbl-lineage li{border-bottom:1px solid var(--line);border-left:0;padding:12px}.mbl-lineage li>svg:last-child{transform:rotate(90deg)}.mbl-ops-grid{grid-template-columns:1fr}}
+@media(max-width:560px){.mbl-hero{padding:26px}.mbl-disclosure{grid-template-columns:1fr}.mbl-disclosure>span{grid-column:1;white-space:normal}.mbl-toolbar{grid-template-columns:1fr}.mbl-toolbar>div{border-bottom:1px solid var(--line);border-right:0;padding-bottom:9px}.mbl-toolbar p{grid-column:1}.mbl-lineage{padding:18px}.mbl-lineage ol{grid-template-columns:1fr}.mbl-lineage li{padding:12px 0}.mbl-lineage li>svg:last-child{display:none}.mbl-card>summary{padding:18px}.mbl-card>summary>header{grid-template-columns:auto 1fr}.mbl-confidence{grid-column:2;justify-self:start}.mbl-values{grid-template-columns:1fr}.mbl-contract-body{padding:0 18px 18px}.mbl-governance{grid-template-columns:1fr}.mbl-ops>summary{grid-template-columns:1fr;padding:20px}.mbl-ops>summary>svg{justify-self:end}.mbl-ops-grid{padding:14px 20px 20px}.mbl-ops-grid article{grid-template-columns:auto 1fr}.mbl-ops-grid strong{grid-column:2}}
+@media(prefers-reduced-motion:reduce){.mbl-open-contract svg,.mbl-ops>summary>svg{transition:none}}
 `;

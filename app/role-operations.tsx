@@ -1,9 +1,13 @@
 import {
+  CalendarCheck2,
   CheckCircle2,
   CircleAlert,
+  Clock3,
   Database,
   DollarSign,
   ListChecks,
+  PackageCheck,
+  RefreshCw,
 } from 'lucide-react';
 import { OpsVisualStudio } from './ops-visual-studio';
 import { EvidenceToAction } from './evidence-to-action';
@@ -58,6 +62,44 @@ const roleBlueprint = [
     'One source of truth, fewer duplicate status asks',
     'Continuous',
   ],
+] as const;
+
+const operatingHealth = [
+  {
+    Icon: Clock3,
+    value: '3.2 days',
+    label: 'Decision cycle time',
+    read: 'Sample: request logged → decision recorded',
+    action: 'Escalate anything beyond the agreed SLA.',
+  },
+  {
+    Icon: PackageCheck,
+    value: '86%',
+    label: 'T−14 launch readiness',
+    read: 'Sample: required gates green two weeks before launch',
+    action: 'Assign recovery owners to red dependencies.',
+  },
+  {
+    Icon: DollarSign,
+    value: '+4.2%',
+    label: 'Forecast variance',
+    read: 'Sample: latest forecast versus approved plan',
+    action: 'Explain and approve material movement.',
+  },
+  {
+    Icon: CalendarCheck2,
+    value: '91%',
+    label: 'On-time follow-through',
+    read: 'Sample: commitments closed by their due date',
+    action: 'Review the oldest overdue owner and blocker.',
+  },
+  {
+    Icon: RefreshCw,
+    value: '72%',
+    label: 'Playbook adoption',
+    read: 'Sample: eligible work using the approved template',
+    action: 'Fix the workflow before blaming adoption.',
+  },
 ] as const;
 
 function Head({
@@ -124,6 +166,35 @@ export function RoleOperations() {
             <article key={x[0]}>
               <span>{x[0]}</span>
               <strong>{x[1]}</strong>
+            </article>
+          ))}
+        </div>
+      </section>
+      <section
+        className="ops-health-snapshot"
+        aria-labelledby="ops-health-title"
+      >
+        <header>
+          <div>
+            <span>ILLUSTRATIVE OPERATING SNAPSHOT</span>
+            <h2 id="ops-health-title">
+              See the exceptions before opening Asana.
+            </h2>
+            <p>
+              These sample values demonstrate the leadership layer. Replace them
+              with approved Asana, finance and launch-portfolio fields.
+            </p>
+          </div>
+          <span>DEMO DATA · NOT KITSCH ACTUALS</span>
+        </header>
+        <div>
+          {operatingHealth.map(({ Icon, ...item }) => (
+            <article key={item.label}>
+              <Icon aria-hidden="true" />
+              <strong>{item.value}</strong>
+              <h3>{item.label}</h3>
+              <p>{item.read}</p>
+              <small>{item.action}</small>
             </article>
           ))}
         </div>

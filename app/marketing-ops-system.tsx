@@ -4,17 +4,58 @@ import {
   CheckCircle2,
   ChevronRight,
   CircleAlert,
+  ChartNoAxesCombined,
   Database,
   DollarSign,
   ExternalLink,
   Fingerprint,
+  MailCheck,
   Layers3,
   ListChecks,
+  MousePointerClick,
   ShieldCheck,
+  ShoppingBag,
+  Target,
   Workflow,
 } from 'lucide-react';
-import { OkrChiefOfStaff } from './okr-chief-of-staff';
 import { DataReliabilitySpine } from './data-reliability-spine';
+import { OkrChiefOfStaff } from './okr-chief-of-staff';
+import './marketing-ops-system-enhanced.css';
+
+const weeklyExceptions = [
+  {
+    type: 'DECISION',
+    title: 'Example launch offer needs a guardrail',
+    why: 'The CRM, paid and storefront teams cannot finish their work until the offer and margin floor are approved.',
+    owner: 'Marketing leader',
+    due: 'Before the launch brief locks',
+    action: 'Review the two options and record one decision.',
+  },
+  {
+    type: 'LAUNCH RISK',
+    title: 'Example readiness gate is missing proof',
+    why: 'A verbal “done” status does not show that inventory, claims and tracking are ready for launch.',
+    owner: 'Launch owner',
+    due: 'At the T−14 readiness review',
+    action: 'Attach evidence or assign a recovery owner.',
+  },
+  {
+    type: 'DATA TRUST',
+    title: 'Commerce and finance need reconciliation',
+    why: 'Leadership should not act on revenue or ROAS until refunds, fees and timing differences are understood.',
+    owner: 'Analytics + Finance',
+    due: 'Before the weekly packet publishes',
+    action: 'Explain the variance and mark the metric trusted or held.',
+  },
+  {
+    type: 'MONEY',
+    title: 'Example invoice has no matched PO',
+    why: 'Unmatched commitments create a false view of remaining budget and month-end accruals.',
+    owner: 'Marketing Ops',
+    due: 'Before the weekly budget lock',
+    action: 'Match, code or escalate the invoice.',
+  },
+] as const;
 
 const stack = [
   [
@@ -134,6 +175,14 @@ const identities = [
   ],
 ] as const;
 
+const identityPresentation = [
+  [MousePointerClick, 'Capture demand', 'SESSION KEY'],
+  [ShoppingBag, 'Anchor the order', 'ORDER KEY'],
+  [MailCheck, 'Resolve consent', 'PROFILE KEY'],
+  [Database, 'Govern the joins', 'DURABLE KEYS'],
+  [ChartNoAxesCombined, 'Read economics', 'DECISION OUTPUT'],
+] as const;
+
 const workflows = [
   {
     name: 'Launch operating workflow',
@@ -217,7 +266,142 @@ export function MarketingOpsSystem() {
           <span>ONE CLOSED LOOP</span>
         </div>
       </section>
+      <section className="wide-card ops-weekly-cockpit">
+        <header className="ops-editorial-head">
+          <div>
+            <span className="ops-eyebrow">THIS WEEK</span>
+            <h2>What needs attention now?</h2>
+            <p>
+              The live version should surface only exceptions that need a
+              decision, recovery owner or deadline—not every task in motion.
+            </p>
+          </div>
+          <div className="ops-demo-notice" role="note">
+            <CircleAlert aria-hidden="true" />
+            <span>
+              <strong>DEMO WORKSPACE</strong>
+              Fictional records below show the operating logic. They are not
+              Kitsch activity or performance.
+            </span>
+          </div>
+        </header>
+        <div className="ops-exception-grid">
+          {weeklyExceptions.map((item) => (
+            <details key={item.type}>
+              <summary>
+                <span className="ops-exception-label">
+                  <span>{item.type}</span>
+                  <b>DEMO ONLY</b>
+                </span>
+                <strong>{item.title}</strong>
+                <small>
+                  Open decision brief <ChevronRight aria-hidden="true" />
+                </small>
+              </summary>
+              <div className="ops-exception-detail">
+                <p>{item.why}</p>
+                <dl>
+                  <dt>Who decides or fixes it</dt>
+                  <dd>{item.owner}</dd>
+                  <dt>When it is due</dt>
+                  <dd>{item.due}</dd>
+                  <dt>What happens next</dt>
+                  <dd>{item.action}</dd>
+                </dl>
+              </div>
+            </details>
+          ))}
+        </div>
+        <div className="ops-meaning-strip" aria-label="How to read this view">
+          <span>
+            <strong>Decision</strong> The choice leadership must make.
+          </span>
+          <span>
+            <strong>Owner</strong> The one person accountable for closure.
+          </span>
+          <span>
+            <strong>Due</strong> When delay creates downstream risk.
+          </span>
+          <span>
+            <strong>Evidence</strong> What proves completion.
+          </span>
+        </div>
+      </section>
       <DataReliabilitySpine />
+      <section className="wide-card ops-worked-okr">
+        <header className="ops-editorial-head">
+          <div>
+            <span className="ops-eyebrow">WORKED OKR EXAMPLE</span>
+            <h2>How one result becomes a weekly decision</h2>
+            <p>
+              This example shows the fields and management behavior—not a
+              proposed Kitsch target.
+            </p>
+          </div>
+          <div className="ops-demo-notice ops-demo-notice--strong" role="note">
+            <CircleAlert aria-hidden="true" />
+            <span>
+              <strong>FICTIONAL DATA · NOT KITSCH PERFORMANCE</strong>
+              Every number in this card is a demonstration value.
+            </span>
+          </div>
+        </header>
+        <div className="ops-okr-layout">
+          <article className="ops-okr-story">
+            <span>EXAMPLE OBJECTIVE</span>
+            <h3>Make launches predictable, coordinated and measurable.</h3>
+            <p>
+              <strong>Key result:</strong> Reach green cross-functional
+              readiness at T−14 for at least 90% of launches.
+            </p>
+            <div className="ops-okr-numbers" aria-label="Fictional OKR values">
+              <span>
+                <small>DEMO BASELINE</small>
+                <strong>68%</strong>
+              </span>
+              <span>
+                <small>DEMO TARGET</small>
+                <strong>90%</strong>
+              </span>
+              <span>
+                <small>DEMO ACTUAL</small>
+                <strong>82%</strong>
+              </span>
+              <span>
+                <small>DEMO FORECAST</small>
+                <strong>88%</strong>
+              </span>
+            </div>
+            <progress
+              className="ops-okr-progress"
+              aria-label="Fictional OKR actual"
+              aria-valuetext="82 percent actual against a 90 percent fictional target"
+              max={100}
+              value={82}
+            />
+          </article>
+          <article className="ops-okr-decision">
+            <header>
+              <Target aria-hidden="true" />
+              <span>DEMO WEEKLY READ</span>
+            </header>
+            <dl>
+              <dt>Status</dt>
+              <dd>Amber · forecast is below the fictional target</dd>
+              <dt>Accountable owner</dt>
+              <dd>Marketing Operations</dd>
+              <dt>Leading signal</dt>
+              <dd>Critical dependencies complete by T−21</dd>
+              <dt>Decision needed</dt>
+              <dd>Re-resource the blocked gate or accept the forecast risk</dd>
+              <dt>Decision due</dt>
+              <dd>Before the next launch-readiness review</dd>
+              <dt>Closure evidence</dt>
+              <dd>Approved recovery task, owner, date and linked proof</dd>
+            </dl>
+          </article>
+        </div>
+      </section>
       <section className="wide-card">
         <div className="ops-system-title">
           <div>
@@ -307,20 +491,39 @@ export function MarketingOpsSystem() {
           </div>
           <Fingerprint />
         </div>
-        <div className="identity-spine">
-          {identities.map((x, i) => (
-            <div key={x[1]}>
-              <article>
-                <span>
-                  {x[0]} · {x[1]}
-                </span>
-                <h3>{x[2]}</h3>
-                <p>{x[3]}</p>
-              </article>
-              {i < identities.length - 1 && <ArrowRight />}
-            </div>
-          ))}
-        </div>
+        <ol
+          className="identity-spine"
+          aria-label="Identity and measurement flow"
+        >
+          {identities.map((x, i) => {
+            const [IdentityIcon, title, output] = identityPresentation[i];
+            return (
+              <li key={x[1]}>
+                <article>
+                  <header>
+                    <span>
+                      <IdentityIcon aria-hidden="true" />
+                    </span>
+                    <small>{x[0]}</small>
+                  </header>
+                  <em>{x[1]}</em>
+                  <h3>{title}</h3>
+                  <p>{x[3]}</p>
+                  <details>
+                    <summary>IDs carried forward</summary>
+                    <p>{x[2]}</p>
+                  </details>
+                  <footer>{output}</footer>
+                </article>
+                {i < identities.length - 1 && (
+                  <span className="identity-spine__handoff" aria-hidden="true">
+                    <ArrowRight />
+                  </span>
+                )}
+              </li>
+            );
+          })}
+        </ol>
         <div className="identity-guardrails">
           <article>
             <ShieldCheck />

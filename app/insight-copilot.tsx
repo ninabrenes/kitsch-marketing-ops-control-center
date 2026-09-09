@@ -118,20 +118,17 @@ export function InsightCopilot({ active }: { active: DashboardTab }) {
             <BrainCircuit aria-hidden="true" />
           </span>
           <div>
-            <span>INSIGHT COPILOT</span>
-            <h2>Understand this view</h2>
+            <span>CMO ACTION BRIEF</span>
+            <h2>{help.decision}</h2>
           </div>
         </div>
-        <p>
-          A plain-language guide to what the signal means, what it cannot prove,
-          and what to do next.
-        </p>
+        <p>{help.apply}</p>
         <button
           type="button"
           onClick={() => setOpen((current) => !current)}
           aria-expanded={open}
         >
-          {open ? 'Hide explanation' : 'Explain this view'}
+          {open ? 'Hide decision brief' : 'Open decision brief'}
           {open ? <ChevronUp /> : <ChevronDown />}
         </button>
       </header>

@@ -147,7 +147,7 @@ export const tabHelp: Record<DashboardTab, TabHelp> = {
     purpose:
       'Turns customer demand and unanswered questions into a durable content backlog.',
     inspect:
-      'Separate relative demand direction from volume, ranking, traffic and sales.',
+      'Start with the visible query table: current result, intent, content gap and missing performance data.',
     decision: 'Choose one page to create, consolidate or improve.',
     apply:
       'Assign one intent cluster, canonical page, proof owner and conversion path.',
@@ -180,7 +180,7 @@ export const tabHelp: Record<DashboardTab, TabHelp> = {
     purpose:
       'Maps the role into cadence, OKRs, launches, budget, decisions, people and playbooks.',
     inspect:
-      'Start with role coverage and the 30/60/90-day rollout, then inspect the live-work templates.',
+      'Start with launch risk, overdue decisions, budget variance and blocked work; then open the workflow causing the exception.',
     decision:
       'Choose the first source-of-truth or follow-through problem to fix.',
     apply:
@@ -255,8 +255,8 @@ export function DashboardGuide({
           <strong>{help.label}</strong>
         </div>
         <div className="guide-purpose">
-          <span>IN PLAIN ENGLISH</span>
-          <p>{help.purpose}</p>
+          <span>DECISION THIS VIEW SUPPORTS</span>
+          <p>{help.decision}</p>
         </div>
         <div className="guide-actions">
           <button
