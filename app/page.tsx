@@ -130,36 +130,6 @@ const channels = [
     'A discovery audience; saves, clicks, and assisted sales are missing.',
   ],
 ] as const;
-const decisions = [
-  [
-    'P1',
-    'TikTok Shop displays 2.3M sold and hair care dominates the visible assortment.',
-    'Which TikTok product cohorts create repeat purchase beyond the first viral order?',
-    'Growth + CRM',
-    'High',
-  ],
-  [
-    'P1',
-    'Hair perfume is prominent in newness, TikTok Shop and 2026 editorial coverage.',
-    'Is fragrance an acquisition wedge, a repeat engine, or both?',
-    'Brand + Ecom',
-    'High',
-  ],
-  [
-    'P2',
-    'Bottle-free hair care leads the DTC best-seller ordering observed on Sep. 8.',
-    'Does best-seller merchandising align with contribution margin and retention?',
-    'Ecom + Finance',
-    'High',
-  ],
-  [
-    'P2',
-    'Kitsch appears in hair-perfume and heatless-curler editorial lists, less consistently for shampoo bars.',
-    'Which search category deserves the next authority-building content sprint?',
-    'SEO + Brand',
-    'Medium',
-  ],
-];
 const launches = [
   [
     'Soft Santal + Caramel Cream',
@@ -1876,7 +1846,11 @@ function Intelligence() {
   );
 }
 
-function Overview() {
+function Overview({
+  onNavigate,
+}: {
+  onNavigate: (tab: DashboardTab) => void;
+}) {
   return (
     <div className="page-grid">
       <section className="hero-panel">
@@ -1926,136 +1900,7 @@ function Overview() {
         decision="Set the leadership priority, assign an owner and define the internal proof required before funding or scaling."
         owner="Leadership"
       />
-      <Metrics />
-      <section className="wide-card">
-        <Head
-          eyebrow="Role coverage"
-          title="Eight systems this role must own"
-          copy="This overview maps directly to Kitsch’s brief: create rhythm, make numbers trustworthy and keep cross-functional work moving. These are operating capabilities—not claims about current Kitsch performance."
-        />
-        <div className="pulse-grid">
-          {[
-            [
-              CalendarDays,
-              'Operating cadence',
-              'Weekly pulse, monthly review and quarterly planning with a defined input, decision and output.',
-            ],
-            [
-              Database,
-              'Trusted KPI definitions',
-              'One governed definition, source, owner and refresh rule for CAC, ROAS, LTV, repeat and contribution.',
-            ],
-            [
-              PackageSearch,
-              'Launch control',
-              'One calendar with readiness gates, dependencies, accountable owners and a 30-day learning review.',
-            ],
-            [
-              Target,
-              'OKRs + planning',
-              'Company priorities cascade into measurable marketing outcomes, key results, initiatives and work records.',
-            ],
-            [
-              DollarSign,
-              'Budget, POs + vendors',
-              'Plan, committed spend, invoices, forecast, variance, renewal dates and vendor accountability stay visible together.',
-            ],
-            [
-              CheckCircle2,
-              'Leadership follow-through',
-              'Pre-read, decision owner, deadline, rationale and outcome close the loop after every leadership meeting.',
-            ],
-            [
-              ListChecks,
-              'Playbooks',
-              'Recurring friction becomes a tested process with an owner, service level, evidence and exception path.',
-            ],
-            [
-              Users,
-              'Cross-functional integration',
-              'Product, E-commerce, Retail, Creative, Social and Ops share dependencies and acceptance criteria.',
-            ],
-          ].map(([Icon, title, copy]) => {
-            const CoverageIcon = Icon as typeof CalendarDays;
-            return (
-              <article key={String(title)}>
-                <CoverageIcon />
-                <h3>{String(title)}</h3>
-                <p>{String(copy)}</p>
-              </article>
-            );
-          })}
-        </div>
-      </section>
-      <ExecutiveSpotlight />
-      <section className="wide-card">
-        <Head
-          eyebrow="Leadership signals"
-          title="Four questions worth resolving"
-          copy="Public evidence opens the discussion; internal data determines the decision."
-        />
-        <div className="pulse-grid">
-          <article>
-            <Radio />
-            <h3>Shop scale is observable</h3>
-            <p>
-              TikTok Shop displays 2.3M sold. The operational question is how
-              that volume translates into profitable cohorts, repeat behavior
-              and cross-channel demand.
-            </p>
-            <External href={links.tiktok}>Open source</External>
-          </article>
-          <article>
-            <Palette />
-            <h3>Fragrance is a live growth narrative</h3>
-            <p>
-              New DTC merchandising, visible Shop velocity and 2026 editorial
-              inclusion converge around hair perfume.
-            </p>
-            <External href={links.hairPerfume}>Open source</External>
-          </article>
-          <article>
-            <Globe2 />
-            <h3>Omnichannel creates a measurement job</h3>
-            <p>
-              DTC, TikTok Shop, Ulta and Target expose different demand signals.
-              Leadership needs one definition layer, not four dashboards.
-            </p>
-            <External href={links.target}>Open source</External>
-          </article>
-          <article>
-            <CircleAlert />
-            <h3>Public footprint claims differ</h3>
-            <p>
-              The supplied role brief says 32,000+ retailers / 92 countries; an
-              older site page says 20,000 / 27. Validate the current master
-              claim internally.
-            </p>
-            <Label>INTERNAL DATA REQUIRED</Label>
-          </article>
-        </div>
-      </section>
-      <section className="wide-card">
-        <Head
-          eyebrow="Leadership decision queue"
-          title="Questions that need an owner"
-          copy="Confirm the evidence, name the decision-maker and record the outcome."
-        />
-        {decisions.map((d) => (
-          <article className="decision-row" key={d[2]}>
-            <span className="priority">{d[0]}</span>
-            <div>
-              <h3>{d[2]}</h3>
-              <p>{d[1]}</p>
-            </div>
-            <div className="decision-owner">
-              <span>{d[3]}</span>
-              <small>{d[4]} confidence</small>
-            </div>
-            <ChevronRight />
-          </article>
-        ))}
-      </section>
+      <ExecutiveSpotlight onNavigate={onNavigate} />
       <section className="principle-card">
         <Lightbulb />
         <div>
@@ -4017,7 +3862,7 @@ export default function Home() {
           <DashboardGuide active={active} onNavigate={navigate} />
           <InsightCopilot key={active} active={active} />
           <TabsContent value="overview">
-            <Overview />
+            <Overview onNavigate={navigate} />
           </TabsContent>
           <TabsContent value="intelligence">
             <Intelligence />

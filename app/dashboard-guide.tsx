@@ -41,12 +41,13 @@ export const tabHelp: Record<DashboardTab, TabHelp> = {
   overview: {
     label: 'Executive overview',
     purpose:
-      'Shows the role’s eight operating systems, the strongest public signals and the questions leadership must close.',
+      'Shows business health, material changes, exceptions and decisions in the order leadership needs them.',
     inspect:
-      'Start with role coverage, then scan the leadership signals and decision queue.',
-    decision: 'Name the highest-priority question, owner and evidence gap.',
+      'Start with the four health areas, then open the priority brief that needs leadership attention.',
+    decision:
+      'Choose the decision to close, confirm its owner and name the internal evidence required.',
     apply:
-      'Use it to open the weekly leadership pulse and route work into the correct operating view.',
+      'Use it as the weekly leadership agenda; move detailed investigation into the linked specialist view.',
     next: 'intelligence',
   },
   intelligence: {
